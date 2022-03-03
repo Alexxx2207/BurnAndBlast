@@ -19,4 +19,10 @@
     <ProjectReference Include="..\BurnAndBlast.Models\BurnAndBlast.Models.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Content Update="wwwroot\favicon.ico">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
 </Project>
