@@ -1,4 +1,6 @@
 ﻿using BurnAndBlast.Web.Models;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
@@ -18,7 +20,8 @@ namespace BurnAndBlast.Web.Controllers
             return View();
         }
 
-        public IActionResult Privacy()
+        [Authorize]
+        public IActionResult IndexLoggedIn()
         {
             return View();
         }
