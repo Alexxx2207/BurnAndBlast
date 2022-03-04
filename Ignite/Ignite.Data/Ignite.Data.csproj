@@ -30,8 +30,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\BurnAndBlast.GlobalConstants\Ignite.GlobalConstants.csproj" />
-    <ProjectReference Include="..\BurnAndBlast.Models\Ignite.Models.csproj" />
+    <ProjectReference Include="..\Ignite.GlobalConstants\Ignite.GlobalConstants.csproj" />
+    <ProjectReference Include="..\Ignite.Models\Ignite.Models.csproj" />
   </ItemGroup>
 
 </Project>
