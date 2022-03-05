@@ -117,16 +117,7 @@ header {
     }
 }
 
-#logoBackground {
-    z-index: 10;
-    padding: 5px;
-    width: 140px;
-    height: 70px;
-    margin-top: 10px;
-}
-
 #logo {
-    z-index: 10;
-    width: auto;
+    width: 700px;
     height: auto;
 }

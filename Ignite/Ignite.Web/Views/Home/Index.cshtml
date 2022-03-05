@@ -21,7 +21,9 @@
     </header>
     <video id="video" src="~/HomePageCinematic.mp4" muted loop autoplay></video>
     
-    <div class="overlay"></div>
+    <div class="overlay">
+        <img id="logo" src="~/Logo.png" class="position-absolute bottom-0 end-0"/>
+    </div>
     <div class="text">
       <h2>Dare to be great</h2> 
       <h3>Be an inspiration</h3>
@@ -31,9 +33,6 @@
       <a asp-area="Identity" asp-page="/Account/Login">Log In</a>
       <a asp-area="Identity" asp-page="/Account/Register">Register</a>
     </div>
-    <div id="logoBackground d-flex flex-row-reverse" class="ali">
-        <img id="logo" src=~/Logo.png/>
-      </div>
   </section>
 </body>
 </html>
