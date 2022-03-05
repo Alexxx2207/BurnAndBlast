@@ -1,5 +1,39 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    Layout = "";
 }
 
-<p>Not Logged In Home Page</p>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/welcomePage.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/Ignite.Web.styles.css" asp-append-version="true" />
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/welcomePage.js" asp-append-version="true"></script>
+    <title>Ignite - Become Better You</title>
+</head>
+<body>
+    <section class="showcase">
+    <header>
+      <div class="toggle"></div>
+    </header>
+    <video src="~/HomePageCinematic.mp4" muted loop autoplay></video>
+    <div class="overlay"></div>
+    <div class="text">
+      <h2>Dare to be great</h2> 
+      <h3>Be an inspiration</h3>
+      <p>Fitness is not a destination it is a way of life.<br/>
+         We bring you the opportunity to become better in your personal, business and social life.</p>
+      <a asp-controller="Home" asp-action="About">Read More</a>
+      <a asp-area="Identity" asp-page="/Account/Login">Log In</a>
+      <a asp-area="Identity" asp-page="/Account/Register">Register</a>
+    </div>
+  </section>
+</body>
+</html>
+
+
+
+  
