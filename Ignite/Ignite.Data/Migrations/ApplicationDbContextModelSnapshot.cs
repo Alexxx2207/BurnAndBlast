@@ -22,7 +22,7 @@ namespace Ignite.Data.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
-            modelBuilder.Entity("Ignite.Data.Models.ApplicationUser", b =>
+            modelBuilder.Entity("Ignite.Models.ApplicationUser", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
@@ -41,8 +41,16 @@ namespace Ignite.Data.Migrations
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("bit");
 
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
+
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("bit");
@@ -67,6 +75,9 @@ namespace Ignite.Data.Migrations
                     b.Property<bool>("PhoneNumberConfirmed")
                         .HasColumnType("bit");
 
+                    b.Property<string>("ProfilePicture")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("nvarchar(max)");
 
@@ -90,7 +101,7 @@ namespace Ignite.Data.Migrations
                     b.ToTable("AspNetUsers", (string)null);
                 });
 
-            modelBuilder.Entity("Ignite.Data.Models.Article", b =>
+            modelBuilder.Entity("Ignite.Models.Article", b =>
                 {
                     b.Property<string>("Guid")
                         .HasColumnType("nvarchar(450)");
@@ -112,7 +123,7 @@ namespace Ignite.Data.Migrations
                     b.ToTable("Articles");
                 });
 
-            modelBuilder.Entity("Ignite.Data.Models.Class", b =>
+            modelBuilder.Entity("Ignite.Models.Class", b =>
                 {
                     b.Property<string>("Guid")
                         .HasColumnType("nvarchar(450)");
@@ -140,7 +151,7 @@ namespace Ignite.Data.Migrations
                     b.ToTable("Classes");
                 });
 
-            modelBuilder.Entity("Ignite.Data.Models.Event", b =>
+            modelBuilder.Entity("Ignite.Models.Event", b =>
                 {
                     b.Property<string>("Guid")
                         .HasColumnType("nvarchar(450)");
@@ -160,7 +171,7 @@ namespace Ignite.Data.Migrations
                     b.ToTable("Events");
                 });
 
-            modelBuilder.Entity("Ignite.Data.Models.Fitness", b =>
+            modelBuilder.Entity("Ignite.Models.Fitness", b =>
                 {
                     b.Property<string>("Guid")
                         .HasColumnType("nvarchar(450)");
@@ -186,12 +197,13 @@ namespace Ignite.Data.Migrations
                     b.ToTable("Fitnesses");
                 });
 
-            modelBuilder.Entity("Ignite.Data.Models.Subscription", b =>
+            modelBuilder.Entity("Ignite.Models.Subscription", b =>
                 {
                     b.Property<string>("Guid")
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<decimal>("Price")
+                        .HasPrecision(38, 5)
                         .HasColumnType("decimal(38,5)");
 
                     b.Property<int>("Type")
@@ -202,7 +214,7 @@ namespace Ignite.Data.Migrations
                     b.ToTable("Subscriptions");
                 });
 
-            modelBuilder.Entity("Ignite.Data.Models.UserClass", b =>
+            modelBuilder.Entity("Ignite.Models.UserClass", b =>
                 {
                     b.Property<string>("UserId")
                         .HasColumnType("nvarchar(450)");
@@ -217,7 +229,7 @@ namespace Ignite.Data.Migrations
                     b.ToTable("UsersClasses");
                 });
 
-            modelBuilder.Entity("Ignite.Data.Models.UserEvent", b =>
+            modelBuilder.Entity("Ignite.Models.UserEvent", b =>
                 {
                     b.Property<string>("UserId")
                         .HasColumnType("nvarchar(450)");
@@ -232,7 +244,7 @@ namespace Ignite.Data.Migrations
                     b.ToTable("UsersEvents");
                 });
 
-            modelBuilder.Entity("Ignite.Data.Models.UserSubscription", b =>
+            modelBuilder.Entity("Ignite.Models.UserSubscription", b =>
                 {
                     b.Property<string>("UserId")
                         .HasColumnType("nvarchar(450)");
@@ -398,9 +410,9 @@ namespace Ignite.Data.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("Ignite.Data.Models.Class", b =>
+            modelBuilder.Entity("Ignite.Models.Class", b =>
                 {
-                    b.HasOne("Ignite.Data.Models.Fitness", "Fitness")
+                    b.HasOne("Ignite.Models.Fitness", "Fitness")
                         .WithMany("Classes")
                         .HasForeignKey("FitnessId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -409,15 +421,15 @@ namespace Ignite.Data.Migrations
                     b.Navigation("Fitness");
                 });
 
-            modelBuilder.Entity("Ignite.Data.Models.UserClass", b =>
+            modelBuilder.Entity("Ignite.Models.UserClass", b =>
                 {
-                    b.HasOne("Ignite.Data.Models.Class", "Class")
+                    b.HasOne("Ignite.Models.Class", "Class")
                         .WithMany("UsersClasses")
                         .HasForeignKey("ClassId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Ignite.Data.Models.ApplicationUser", "User")
+                    b.HasOne("Ignite.Models.ApplicationUser", "User")
                         .WithMany("UsersClasses")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -428,15 +440,15 @@ namespace Ignite.Data.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("Ignite.Data.Models.UserEvent", b =>
+            modelBuilder.Entity("Ignite.Models.UserEvent", b =>
                 {
-                    b.HasOne("Ignite.Data.Models.Event", "Event")
+                    b.HasOne("Ignite.Models.Event", "Event")
                         .WithMany("UsersEvents")
                         .HasForeignKey("EventId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Ignite.Data.Models.ApplicationUser", "User")
+                    b.HasOne("Ignite.Models.ApplicationUser", "User")
                         .WithMany("UsersEvents")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -447,15 +459,15 @@ namespace Ignite.Data.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("Ignite.Data.Models.UserSubscription", b =>
+            modelBuilder.Entity("Ignite.Models.UserSubscription", b =>
                 {
-                    b.HasOne("Ignite.Data.Models.Subscription", "Subscription")
+                    b.HasOne("Ignite.Models.Subscription", "Subscription")
                         .WithMany("UsersSubscriptions")
                         .HasForeignKey("SubscriptionId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Ignite.Data.Models.ApplicationUser", "User")
+                    b.HasOne("Ignite.Models.ApplicationUser", "User")
                         .WithMany("UsersSubscriptions")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -477,11 +489,11 @@ namespace Ignite.Data.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("Ignite.Data.Models.ApplicationUser", null)
+                    b.HasOne("Ignite.Models.ApplicationUser", null)
                         .WithMany("Claims")
                         .HasForeignKey("ApplicationUserId");
 
-                    b.HasOne("Ignite.Data.Models.ApplicationUser", null)
+                    b.HasOne("Ignite.Models.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -490,11 +502,11 @@ namespace Ignite.Data.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("Ignite.Data.Models.ApplicationUser", null)
+                    b.HasOne("Ignite.Models.ApplicationUser", null)
                         .WithMany("Logins")
                         .HasForeignKey("ApplicationUserId");
 
-                    b.HasOne("Ignite.Data.Models.ApplicationUser", null)
+                    b.HasOne("Ignite.Models.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -503,7 +515,7 @@ namespace Ignite.Data.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
                 {
-                    b.HasOne("Ignite.Data.Models.ApplicationUser", null)
+                    b.HasOne("Ignite.Models.ApplicationUser", null)
                         .WithMany("Roles")
                         .HasForeignKey("ApplicationUserId");
 
@@ -513,7 +525,7 @@ namespace Ignite.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Ignite.Data.Models.ApplicationUser", null)
+                    b.HasOne("Ignite.Models.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -522,14 +534,14 @@ namespace Ignite.Data.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
-                    b.HasOne("Ignite.Data.Models.ApplicationUser", null)
+                    b.HasOne("Ignite.Models.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Ignite.Data.Models.ApplicationUser", b =>
+            modelBuilder.Entity("Ignite.Models.ApplicationUser", b =>
                 {
                     b.Navigation("Claims");
 
@@ -544,22 +556,22 @@ namespace Ignite.Data.Migrations
                     b.Navigation("UsersSubscriptions");
                 });
 
-            modelBuilder.Entity("Ignite.Data.Models.Class", b =>
+            modelBuilder.Entity("Ignite.Models.Class", b =>
                 {
                     b.Navigation("UsersClasses");
                 });
 
-            modelBuilder.Entity("Ignite.Data.Models.Event", b =>
+            modelBuilder.Entity("Ignite.Models.Event", b =>
                 {
                     b.Navigation("UsersEvents");
                 });
 
-            modelBuilder.Entity("Ignite.Data.Models.Fitness", b =>
+            modelBuilder.Entity("Ignite.Models.Fitness", b =>
                 {
                     b.Navigation("Classes");
                 });
 
-            modelBuilder.Entity("Ignite.Data.Models.Subscription", b =>
+            modelBuilder.Entity("Ignite.Models.Subscription", b =>
                 {
                     b.Navigation("UsersSubscriptions");
                 });

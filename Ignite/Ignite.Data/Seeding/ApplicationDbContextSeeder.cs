@@ -25,6 +25,7 @@ namespace Ignite.Data.Seeding
             var seeders = new List<ISeeder>
                           {
                               new RoleSeeder(),
+                              new UsersSeeder(),
                           };
 
             foreach (var seeder in seeders)

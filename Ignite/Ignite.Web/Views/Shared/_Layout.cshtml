@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/Ignite.Web.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.0.0/css/all.css" />
 </head>
 <body>
     <header>
@@ -20,9 +21,32 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-
+                    <ul class="navbar-nav flex-grow-1 flex-container space-evenly">
+                        <a class="flex-item" asp-area="" asp-controller="Fitnesses" asp-action="All">GYMS</a>
+                        <a class="flex-item" asp-area="" asp-controller="Events" asp-action="All">EVENTS</a>
+                        <a class="flex-item" asp-area="" asp-controller="Subscriptions" asp-action="All">PRICING</a>
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <a class="flex-item" asp-area="" asp-controller="Classes" asp-action="All">CLASSES</a>
+                            <a class="flex-item" asp-area="" asp-controller="Events" asp-action="All">
+                                <i class="fa-solid fa-cart-shopping fa-lg"></i>
+                            </a>
+                        }
                     </ul>
+                    @if (User.Identity.IsAuthenticated && User.IsInRole("Administrator"))
+                    {
+                        <div class="dropdown">
+                          <a class="btn btn-warning dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                            Administrator
+                          </a>
+
+                          <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                            <li><a class="dropdown-item" asp-area="Administration" asp-controller="Admins" asp-action="AddFitness">Add Fitness</a></li>
+                            <li><a class="dropdown-item" asp-area="Administration" asp-controller="Admins" asp-action="AddClass">Add Class</a></li>
+                            <li><a class="dropdown-item" asp-area="Administration" asp-controller="Admins" asp-action="AddEvent">Add Event</a></li>
+                          </ul>
+                        </div>
+                    }
                     <partial name="_LoginPartial" />
                 </div>
             </div>
@@ -36,7 +60,7 @@
 
     <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; @DateTime.UtcNow.Year - Ignite - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            &copy; @DateTime.UtcNow.Year - Ignite
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>

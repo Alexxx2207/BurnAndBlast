@@ -100,6 +100,9 @@ header {
 
 .text a:hover {
     letter-spacing: 6px;
+    color: white;
+    background-color: #0000007c;
+    transition: all 0.3s ease;
 }
 
 @media (max-width: 991px) {

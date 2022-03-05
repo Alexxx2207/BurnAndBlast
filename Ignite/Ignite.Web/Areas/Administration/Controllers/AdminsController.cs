@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace Ignite.Web.Areas.Administration.Controllers
 {
     [Authorize(Roles = "Administrator")]
+    [Area("Administration")]
     public class AdminsController : Controller
     {
         private readonly ILogger<AdminsController> _logger;

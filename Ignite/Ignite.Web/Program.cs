@@ -3,6 +3,7 @@ using Ignite.Data;
 using Ignite.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Mvc.Razor;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,6 +15,14 @@ builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
 builder.Services.AddDefaultIdentity<ApplicationUser>(IdentityOptionsProvider.GetIdentityOptions)
                 .AddRoles<IdentityRole>().AddEntityFrameworkStores<ApplicationDbContext>();
+
+builder.Services.Configure<RazorViewEngineOptions>(options =>
+{
+    options.AreaViewLocationFormats.Clear();
+    options.AreaViewLocationFormats.Add("Areas/{2}/Views/{1}/{0}.cshtml");
+    options.AreaViewLocationFormats.Add("Areas/{2}/Views/Shared/{0}.cshtml");
+    options.AreaViewLocationFormats.Add("Areas/{2}/Views/Shared/{0}.cshtml");
+});
 
 builder.Services.AddControllersWithViews();
 
@@ -46,9 +55,17 @@ app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
 
+app.MapAreaControllerRoute(
+    name: "Administration",
+    areaName: "Administration",
+    pattern: "Administration/{controller=Home}/{action=Index}/{id?}");
+
+
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
+
+
 app.MapRazorPages();
 
 app.Run();
