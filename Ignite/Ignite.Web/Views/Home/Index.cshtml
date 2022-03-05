@@ -7,6 +7,7 @@
 <html lang="en">
 <head>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" />
     <link rel="stylesheet" href="~/css/welcomePage.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/Ignite.Web.styles.css" asp-append-version="true" />
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
@@ -19,6 +20,7 @@
       <div class="toggle"></div>
     </header>
     <video id="video" src="~/HomePageCinematic.mp4" muted loop autoplay></video>
+    
     <div class="overlay"></div>
     <div class="text">
       <h2>Dare to be great</h2> 
@@ -29,7 +31,20 @@
       <a asp-area="Identity" asp-page="/Account/Login">Log In</a>
       <a asp-area="Identity" asp-page="/Account/Register">Register</a>
     </div>
+    
   </section>
+  <div class="boxx">
+    <div class="unmuted toggle-sound" href="#">
+    <div class="tooltip--left sound" data-tooltip="Turn On/Off Sound">
+      <div class="sound--icon fa fa-volume-off"></div>
+      <div class="sound--wave sound--wave_one"></div>
+      <div class="sound--wave sound--wave_two"></div>
+      <div class="sound--wave sound--wave_three"></div>
+    </div>
+    </div>
+    </div>
+
+    <script src="~/js/welcome.js" asp-append-version="true"></script>
 </body>
 </html>
 
