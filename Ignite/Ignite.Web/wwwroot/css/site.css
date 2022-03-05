@@ -1,7 +1,8 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Smooch+Sans:wght@500&display=swap');
+
 
 * {
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Smooch Sans', sans-serif;
 }
 
 html {
@@ -33,12 +34,23 @@ body {
     transition: all 0.3s ease-in-out;
 }
 
-#logo {
-    width: 140px;
-    margin-left: 100px;
+#logoName {
+    width: 20%;
+    margin-left: 130px;
+    letter-spacing: 8px;
+    text-decoration: none;
+    color: white;
+    font-weight: 500;
+    font-size: 28px;
 }
 
 .nav-link {
     font-size: 21px;
+    letter-spacing: 4px;
+}
+
+#navBarToggler {
+    width: 150px;
+    height: 150px;
 }
 
