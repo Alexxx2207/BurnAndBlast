@@ -22,6 +22,7 @@ html {
 
 body {
   margin-bottom: 60px;
+  background-color: rgb(24, 24, 24);
 }
 
 .scrolled-down {
@@ -34,13 +35,9 @@ body {
     transition: all 0.3s ease-in-out;
 }
 
-#logoName {
-    margin-left: 80px;
-    letter-spacing: 5px;
-    text-decoration: none;
-    color: white;
-    font-weight: 500;
-    font-size: 24px;
+.navbar {
+    padding: 0px;
+    padding-top: 10px; 
 }
 
 .nav-link {
@@ -53,21 +50,33 @@ body {
     justify-content: space-evenly;
 }
 
-.navbar-nav a {
-    font-size: 16px;
-    letter-spacing: 1px;
-    text-decoration: none;
-    color: white;
-}
+    .navbar-nav a {
+        font-size: 16px;
+        letter-spacing: 3px;
+        text-decoration: none;
+        color: white;
+    }
 
 #navBarToggler {
     width: 200px;
     height: 200px;
 }
 
-#dropdownMenuLink {
-    text-decoration: none;
-    color: black; 
-    margin-right: 30px;
+.dropdown:hover .dropdown-menu {
+    display: block;
+    margin-top: 0;
 }
 
+#dropdownMenuLink {
+    text-decoration: none;
+    color: white;
+    margin-right: 30px;
+    letter-spacing: 3px;
+    font-family: 'Arimo', sans-serif;
+}
+
+
+#logoName {
+    margin-left: 80px;
+    width: 130px;
+}

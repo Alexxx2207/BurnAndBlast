@@ -93,17 +93,19 @@ header {
     text-decoration: none;
     font-weight: 500;
     margin-top: 10px;
+    margin-right: 10px;
     color: #111;
     letter-spacing: 2px;
     transition: 0.2s;
+    border-radius: 7%;
 }
 
-.text a:hover {
-    letter-spacing: 6px;
+/*.text a:hover {
+    letter-spacing: 10px;
     color: white;
-    background-color: #0000007c;
-    transition: all 0.3s ease;
-}
+    background-color: #00000073;
+    transition: all 0.8s ease;
+}*/
 
 @media (max-width: 991px) {
     .showcase,
@@ -121,6 +123,75 @@ header {
 }
 
 #logo {
-    width: 40%;
+    width: 50%;
     height: auto;
 }
+
+
+
+
+.btn {
+    background-color: var(--background-color);
+    color: #222;
+    padding: .5em 1em;
+    border: none;
+    outline: none;
+    position: relative;
+    cursor: pointer;
+    --background-color: #E3E3E3;
+    --border-size: 2px;
+    --accent-color: #fa8e00;
+}
+
+    .btn.btn-border-pop::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: -1;
+        border: var(--border-size) solid var(--background-color);
+        transition: top, left, right, bottom, 100ms ease-in-out;
+    }
+
+    .btn.btn-border-pop:hover::before,
+    .btn.btn-border-pop:focus::before {
+        top: calc(var(--border-size) * -2);
+        left: calc(var(--border-size) * -2);
+        right: calc(var(--border-size) * -2);
+        bottom: calc(var(--border-size) * -2);
+    }
+
+
+
+
+    .btn.btn-background-slide::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        z-index: -1;
+        background-color: var(--accent-color);
+        transition: transform 400ms ease-in-out;
+        transform: scaleX(0);
+        transform-origin: left;
+    }
+
+    .btn.btn-background-slide:hover::before,
+    .btn.btn-background-slide:focus::before {
+        transform: scaleX(1);
+    }
+
+    .btn.btn-background-slide {
+        transition: color 400ms ease-in-out;
+        z-index: 1;
+    }
+
+
+        .btn.btn-background-slide:hover,
+        .btn.btn-background-slide:focus {
+            color: white;
+        }

@@ -3,7 +3,7 @@
 @inject SignInManager<ApplicationUser> SignInManager
 @inject UserManager<ApplicationUser> UserManager
 
-<ul class="navbar-nav">
+<ul class="navbar-nav" id="loginPartial">
 @if (SignInManager.IsSignedIn(User))
 {
     <li class="nav-item">
@@ -25,3 +25,9 @@ else
     </li>
 }
 </ul>
+
+<style>
+    #loginPartial{
+        justify-content: space-evenly;
+    }
+</style>

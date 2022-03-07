@@ -3,83 +3,151 @@
 
 @{
     ViewData["Title"] = "Log in";
+    Layout = "";
 }
 
-<h1>@ViewData["Title"]</h1>
-<div class="row">
-    <div class="col-md-4">
-        <section>
-            <form id="account" method="post">
-                <h2>Use a local account to log in.</h2>
-                <hr />
-                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                <div class="form-floating">
-                    <input asp-for="Input.Email" class="form-control" autocomplete="username" aria-required="true" />
-                    <label asp-for="Input.Email" class="form-label"></label>
-                    <span asp-validation-for="Input.Email" class="text-danger"></span>
-                </div>
-                <div class="form-floating">
-                    <input asp-for="Input.Password" class="form-control" autocomplete="current-password" aria-required="true" />
-                    <label asp-for="Input.Password" class="form-label"></label>
-                    <span asp-validation-for="Input.Password" class="text-danger"></span>
-                </div>
-                <div>
-                    <div class="checkbox">
-                        <label asp-for="Input.RememberMe" class="form-label">
-                            <input class="form-check-input" asp-for="Input.RememberMe" />
-                            @Html.DisplayNameFor(m => m.Input.RememberMe)
-                        </label>
-                    </div>
-                </div>
-                <div>
-                    <button id="login-submit" type="submit" class="w-100 btn btn-lg btn-primary">Log in</button>
-                </div>
-                <div>
-                    <p>
-                        <a id="forgot-password" asp-page="./ForgotPassword">Forgot your password?</a>
-                    </p>
-                    <p>
-                        <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">Register as a new user</a>
-                    </p>
-                    <p>
-                        <a id="resend-confirmation" asp-page="./ResendEmailConfirmation">Resend email confirmation</a>
-                    </p>
-                </div>
-            </form>
-        </section>
-    </div>
-    <div class="col-md-6 col-md-offset-2">
-        <section>
-            <h3>Use another service to log in.</h3>
-            <hr />
-            @{
-                if ((Model.ExternalLogins?.Count ?? 0) == 0)
-                {
-                    <div>
-                        <p>
-                            There are no external authentication services configured. See this <a href="https://go.microsoft.com/fwlink/?LinkID=532715">article
-                            about setting up this ASP.NET application to support logging in via external services</a>.
-                        </p>
-                    </div>
-                }
-                else
-                {
-                    <form id="external-account" asp-page="./ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post" class="form-horizontal">
-                        <div>
-                            <p>
-                                @foreach (var provider in Model.ExternalLogins)
-                                {
-                                    <button type="submit" class="btn btn-primary" name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account">@provider.DisplayName</button>
-                                }
-                            </p>
-                        </div>
-                    </form>
-                }
-            }
-        </section>
-    </div>
-</div>
 
 @section Scripts {
-    <partial name="_ValidationScriptsPartial" />
+<partial name="_ValidationScriptsPartial" />
 }
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Ignite - Become Better You</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/Ignite.Web.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.0.0/css/all.css" />
+    <link rel="stylesheet" href="~/css/Login.css" />
+</head>
+<body>
+    <nav class="navbar autohide fixed-top navbar-expand-sm navbar-toggleable-sm navbar-dark box-shadow shadow-5-strong">
+        <div class="container-fluid">
+            <a asp-area="" asp-controller="Home" asp-action="Index">
+                <img id="logoName" src="~/Logo.png" />
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                <ul class="navbar-nav flex-grow-1 flex-container space-evenly">
+                    <a class="flex-item" asp-area="" asp-controller="Fitnesses" asp-action="All">GYMS</a>
+                    <a class="flex-item" asp-area="" asp-controller="Events" asp-action="All">EVENTS</a>
+                    <a class="flex-item" asp-area="" asp-controller="Subscriptions" asp-action="All">PRICING</a>
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <a class="flex-item" asp-area="" asp-controller="Classes" asp-action="All">CLASSES</a>
+                        <a class="flex-item" asp-area="" asp-controller="Events" asp-action="All">
+                            <i class="fa-solid fa-cart-shopping fa-lg"></i>
+                        </a>
+                    }
+                </ul>
+                @if (User.Identity.IsAuthenticated && User.IsInRole("Administrator"))
+                {
+                    <div class="dropdown">
+                        <a class="btn dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                            ADMINISTRATION
+                        </a>
+
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                            <li><a class="dropdown-item" asp-area="Administration" asp-controller="Admins" asp-action="AddFitness">Gyms</a></li>
+                            <li><a class="dropdown-item" asp-area="Administration" asp-controller="Admins" asp-action="AddClass">Classes</a></li>
+                            <li><a class="dropdown-item" asp-area="Administration" asp-controller="Admins" asp-action="AddEvent">Events</a></li>
+                        </ul>
+                    </div>
+                }
+                <partial name="_LoginPartial" />
+            </div>
+        </div>
+    </nav>
+    <section class="showcase">
+        <header>
+            <div class="toggle"></div>
+        </header>
+        <img id="background" src="~/Images/LoginBackground.jpg" />
+
+        <div class="overlay"></div>
+
+        <form id="account" class="col-6" method="post">
+            <h2 id="loginHeading">LOG IN</h2>
+
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div>
+                <label asp-for="Input.Email" class="form-label" hidden id="emailLabel"></label>
+                <input asp-for="Input.Email" id="emailControl" class="form-control" autocomplete="off" aria-required="true" placeholder="Email" />
+                <span asp-validation-for="Input.Email" class="text-danger"></span>
+            </div>
+            <div>
+                <label asp-for="Input.Password" class="form-label" hidden id="passwordLabel"></label>
+                <input asp-for="Input.Password" id="passwordControl" class="form-control" autocomplete="current-password" aria-required="true" placeholder="Password" />
+                <span asp-validation-for="Input.Password" class="text-danger"></span>
+            </div>
+            <div>
+                <div class="checkbox">
+                    <label asp-for="Input.RememberMe" class="form-label" id="rememberMe">
+                        <input class="form-check-input" asp-for="Input.RememberMe" />
+                        @Html.DisplayNameFor(m => m.Input.RememberMe)
+                    </label>
+                </div>
+            </div>
+            <div>
+                <button id="login-submit" type="submit" class="w-100 btn btn-background-slide btn-lg btn-primary">Log in</button>
+            </div>
+<p id="quote">“Our greatest weakness lies in giving up.<br /> The most certain way to succeed is always to try just one more time.”</p>
+
+            <div id="additionalLinks">
+                <p>
+                    <a id="forgot-password" asp-page="./ForgotPassword">Forgot your password?</a>
+                </p>
+                <p>
+                    <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">Register as a new user</a>
+                </p>
+                <p>
+                    <a id="resend-confirmation" asp-page="./ResendEmailConfirmation">Resend email confirmation</a>
+                </p>
+            </div>
+        </form>
+
+    </section>
+</body>
+</html>
+
+<script>
+
+    const inputEmail = document.getElementById('emailControl');
+    const labelmail = document.getElementById('emailLabel');
+
+    const inputPassword = document.getElementById('passwordControl');
+    const labelPassword = document.getElementById('passwordLabel');
+    
+    inputEmail.addEventListener('input', updateValueEmail);
+    inputPassword.addEventListener('input', updateValuePassword);
+    
+    function updateValueEmail(e) {
+    if(e.target.value.length > 0)
+        {
+            labelmail.hidden = false;
+        }
+        else
+        {
+            labelmail.hidden = true;
+        }
+    }
+    
+    function updateValuePassword(e) {
+    if(e.target.value.length > 0)
+        {
+            labelPassword.hidden = false;
+        }
+        else
+        {
+            labelPassword.hidden = true;
+        }
+    }
+</script>

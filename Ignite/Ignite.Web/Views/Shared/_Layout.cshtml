@@ -11,10 +11,10 @@
 </head>
 <body>
     <header>
-        <nav class="navbar autohide fixed-top navbar-expand-sm navbar-toggleable-sm navbar-dark bg-black border-bottom box-shadow mb-3">
+        <nav class="navbar autohide fixed-top navbar-expand-sm navbar-toggleable-sm navbar-dark box-shadow shadow-5-strong">
             <div class="container-fluid">
-                <a id="logoName" asp-area="" asp-controller="Home" asp-action="Index">
-                    IGNITE
+                <a asp-area="" asp-controller="Home" asp-action="Index">
+                     <img id="logoName" src="~/Logo.png" />
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
@@ -36,14 +36,14 @@
                     @if (User.Identity.IsAuthenticated && User.IsInRole("Administrator"))
                     {
                         <div class="dropdown">
-                          <a class="btn btn-warning dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-                            Administrator
+                          <a class="btn dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                            ADMINISTRATION
                           </a>
 
                           <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                            <li><a class="dropdown-item" asp-area="Administration" asp-controller="Admins" asp-action="AddFitness">Add Fitness</a></li>
-                            <li><a class="dropdown-item" asp-area="Administration" asp-controller="Admins" asp-action="AddClass">Add Class</a></li>
-                            <li><a class="dropdown-item" asp-area="Administration" asp-controller="Admins" asp-action="AddEvent">Add Event</a></li>
+                            <li><a class="dropdown-item" asp-area="Administration" asp-controller="Admins" asp-action="AddFitness">Fitnesses</a></li>
+                            <li><a class="dropdown-item" asp-area="Administration" asp-controller="Admins" asp-action="AddClass">Classes</a></li>
+                            <li><a class="dropdown-item" asp-area="Administration" asp-controller="Admins" asp-action="AddEvent">Events</a></li>
                           </ul>
                         </div>
                     }
@@ -52,11 +52,8 @@
             </div>
         </nav>
     </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
-    </div>
+
+        @RenderBody()
 
     <footer class="border-top footer text-muted">
         <div class="container">
