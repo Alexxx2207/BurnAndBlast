@@ -71,6 +71,15 @@ namespace Ignite.Web.Areas.Identity.Pages.Account
         /// </summary>
         public class InputModel
         {
+
+            [Required(ErrorMessage = "The First Name field is required.")]
+            [Display(Name = "FirstName")]
+            public string FirstName { get; set; }
+
+            [Required(ErrorMessage = "The Last Name field is required.")]
+            [Display(Name = "LastName")]
+            public string LastName { get; set; }
+
             /// <summary>
             ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
             ///     directly from your code. This API may change or be removed in future releases.
@@ -110,10 +119,14 @@ namespace Ignite.Web.Areas.Identity.Pages.Account
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
             returnUrl ??= Url.Content("~/");
+
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             if (ModelState.IsValid)
             {
                 var user = CreateUser();
+
+                user.FirstName = this.Input.FirstName;
+                user.LastName = this.Input.LastName;
 
                 await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
                 await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
@@ -122,6 +135,11 @@ namespace Ignite.Web.Areas.Identity.Pages.Account
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User created a new account with password.");
+
+                    if (returnUrl == "/")
+                    { 
+                        return Redirect("/Identity/Account/Login");
+                    }
 
                     var userId = await _userManager.GetUserIdAsync(user);
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
@@ -147,9 +165,16 @@ namespace Ignite.Web.Areas.Identity.Pages.Account
                 }
                 foreach (var error in result.Errors)
                 {
+                    if (error.Code == "DuplicateUserName")
+                    {
+                        error.Description = "Email 'qa@qa.qa' is already taken.";
+                    }
+
                     ModelState.AddModelError(string.Empty, error.Description);
                 }
             }
+
+
 
             // If we got this far, something failed, redisplay form
             return Page();

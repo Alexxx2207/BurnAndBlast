@@ -13,14 +13,14 @@
     <header>
         <nav class="navbar autohide fixed-top navbar-expand-sm navbar-toggleable-sm navbar-dark box-shadow shadow-5-strong">
             <div class="container-fluid">
-                <a asp-area="" asp-controller="Home" asp-action="Index">
-                     <img id="logoName" src="~/Logo.png" />
+                <a id="logoName" asp-area="" asp-controller="Home" asp-action="Index">
+                     HOME
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-evenly">
                     <ul class="navbar-nav flex-grow-1 flex-container space-evenly">
                         <a class="flex-item" asp-area="" asp-controller="Fitnesses" asp-action="All">GYMS</a>
                         <a class="flex-item" asp-area="" asp-controller="Events" asp-action="All">EVENTS</a>

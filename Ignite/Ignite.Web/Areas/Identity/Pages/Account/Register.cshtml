@@ -1,33 +1,118 @@
 ﻿@page
 @model RegisterModel
+
 @{
     ViewData["Title"] = "Register";
+    Layout = "";
 }
 
-<h1>@ViewData["Title"]</h1>
-
-<form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post">
-            <h2>Create a new account.</h2>
-            <hr />
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-floating">
-                <input asp-for="Input.Email" class="form-control" autocomplete="username" aria-required="true" />
-                <label asp-for="Input.Email"></label>
-                <span asp-validation-for="Input.Email" class="text-danger"></span>
-            </div>
-            <div class="form-floating">
-                <input asp-for="Input.Password" class="form-control" autocomplete="new-password" aria-required="true" />
-                <label asp-for="Input.Password"></label>
-                <span asp-validation-for="Input.Password" class="text-danger"></span>
-            </div>
-            <div class="form-floating">
-                <input asp-for="Input.ConfirmPassword" class="form-control" autocomplete="new-password" aria-required="true" />
-                <label asp-for="Input.ConfirmPassword"></label>
-                <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
-            </div>
-            <button id="registerSubmit" type="submit" class="w-100 btn btn-lg btn-primary">Register</button>
-        </form>
 
 @section Scripts {
-    <partial name="_ValidationScriptsPartial" />
+<partial name="_ValidationScriptsPartial" />
 }
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Ignite - Become Better You</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/Ignite.Web.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.0.0/css/all.css" />
+    <link rel="stylesheet" href="~/css/Register.css" />
+</head>
+<body>
+    <nav class="navbar autohide fixed-top navbar-expand-sm navbar-toggleable-sm navbar-dark box-shadow shadow-5-strong">
+        <div class="container-fluid">
+            <a id="logoName" asp-area="" asp-controller="Home" asp-action="Index">
+                HOME
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                <ul class="navbar-nav flex-grow-1 flex-container space-evenly">
+                    <a class="flex-item" asp-area="" asp-controller="Fitnesses" asp-action="All">GYMS</a>
+                    <a class="flex-item" asp-area="" asp-controller="Events" asp-action="All">EVENTS</a>
+                    <a class="flex-item" asp-area="" asp-controller="Subscriptions" asp-action="All">PRICING</a>
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <a class="flex-item" asp-area="" asp-controller="Classes" asp-action="All">CLASSES</a>
+                        <a class="flex-item" asp-area="" asp-controller="Events" asp-action="All">
+                            <i class="fa-solid fa-cart-shopping fa-lg"></i>
+                        </a>
+                    }
+                </ul>
+                @if (User.Identity.IsAuthenticated && User.IsInRole("Administrator"))
+                {
+                    <div class="dropdown">
+                        <a class="btn dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                            ADMINISTRATION
+                        </a>
+
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                            <li><a class="dropdown-item" asp-area="Administration" asp-controller="Admins" asp-action="AddFitness">Gyms</a></li>
+                            <li><a class="dropdown-item" asp-area="Administration" asp-controller="Admins" asp-action="AddClass">Classes</a></li>
+                            <li><a class="dropdown-item" asp-area="Administration" asp-controller="Admins" asp-action="AddEvent">Events</a></li>
+                        </ul>
+                    </div>
+                }
+                <partial name="_LoginPartial" />
+            </div>
+        </div>
+    </nav>
+    <section class="showcase">
+        <header>
+            <div class="toggle"></div>
+        </header>
+        <img id="background" src="~/Images/RegisterBackground.jpg" />
+
+        <div class="overlay">
+            </div>
+
+
+        <img id="logo" src="~/Logo.png" class="position-absolute bottom-0 end-0"/>
+
+        <form id="account" class="col-5" method="post">
+            <h2 id="loginHeading">REGISTER</h2>
+
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div>
+                <label asp-for="Input.FirstName" class="form-label" hidden id="emailLabel"></label>
+                <input asp-for="Input.FirstName" id="emailControl" class="form-control" autocomplete="off" aria-required="true" placeholder="First Name" />
+                <span asp-validation-for="Input.FirstName" class="text-danger"></span>
+            </div>
+            <div>
+                <label asp-for="Input.LastName" class="form-label" hidden id="emailLabel"></label>
+                <input asp-for="Input.LastName" id="emailControl" class="form-control" autocomplete="off" aria-required="true" placeholder="Last Name" />
+                <span asp-validation-for="Input.LastName" class="text-danger"></span>
+            </div>
+            <div>
+                <label asp-for="Input.Email" class="form-label" hidden id="emailLabel"></label>
+                <input asp-for="Input.Email" id="emailControl" class="form-control" autocomplete="off" aria-required="true" placeholder="Email" />
+                <span asp-validation-for="Input.Email" class="text-danger"></span>
+            </div>
+            <div>
+                <label asp-for="Input.Password" class="form-label" hidden id="passwordLabel"></label>
+                <input asp-for="Input.Password" id="passwordControl" class="form-control" autocomplete="current-password" aria-required="true" placeholder="Password" />
+                <span asp-validation-for="Input.Password" class="text-danger"></span>
+            </div>
+            <div>
+                <label asp-for="Input.ConfirmPassword" class="form-label" hidden id="passwordLabel"></label>
+                <input asp-for="Input.ConfirmPassword" id="passwordControl" class="form-control" autocomplete="current-password" aria-required="true" placeholder="Confirm Password" />
+                <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+            </div>
+            <div>
+                <button id="login-submit" type="submit" class="w-100 btn btn-background-slide btn-lg btn-primary">REGISTER</button>
+            </div>
+        </form>
+
+    </section>
+</body>
+</html>

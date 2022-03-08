@@ -28,8 +28,8 @@
 <body>
     <nav class="navbar autohide fixed-top navbar-expand-sm navbar-toggleable-sm navbar-dark box-shadow shadow-5-strong">
         <div class="container-fluid">
-            <a asp-area="" asp-controller="Home" asp-action="Index">
-                <img id="logoName" src="~/Logo.png" />
+            <a id="logoName" asp-area="" asp-controller="Home" asp-action="Index">
+                HOME
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                     aria-expanded="false" aria-label="Toggle navigation">
@@ -72,9 +72,12 @@
         </header>
         <img id="background" src="~/Images/LoginBackground.jpg" />
 
-        <div class="overlay"></div>
+        <div class="overlay">            
+        </div>
 
-        <form id="account" class="col-6" method="post">
+        <img id="logo" src="~/Logo.png" class="position-absolute bottom-0 end-0"/>
+
+        <form id="account" class="col-5" method="post">
             <h2 id="loginHeading">LOG IN</h2>
 
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
@@ -97,19 +100,12 @@
                 </div>
             </div>
             <div>
-                <button id="login-submit" type="submit" class="w-100 btn btn-background-slide btn-lg btn-primary">Log in</button>
+                <button id="login-submit" type="submit" class="w-100 btn btn-background-slide btn-lg btn-primary">LOG IN</button>
             </div>
-<p id="quote">“Our greatest weakness lies in giving up.<br /> The most certain way to succeed is always to try just one more time.”</p>
 
             <div id="additionalLinks">
                 <p>
-                    <a id="forgot-password" asp-page="./ForgotPassword">Forgot your password?</a>
-                </p>
-                <p>
                     <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">Register as a new user</a>
-                </p>
-                <p>
-                    <a id="resend-confirmation" asp-page="./ResendEmailConfirmation">Resend email confirmation</a>
                 </p>
             </div>
         </form>
@@ -117,37 +113,3 @@
     </section>
 </body>
 </html>
-
-<script>
-
-    const inputEmail = document.getElementById('emailControl');
-    const labelmail = document.getElementById('emailLabel');
-
-    const inputPassword = document.getElementById('passwordControl');
-    const labelPassword = document.getElementById('passwordLabel');
-    
-    inputEmail.addEventListener('input', updateValueEmail);
-    inputPassword.addEventListener('input', updateValuePassword);
-    
-    function updateValueEmail(e) {
-    if(e.target.value.length > 0)
-        {
-            labelmail.hidden = false;
-        }
-        else
-        {
-            labelmail.hidden = true;
-        }
-    }
-    
-    function updateValuePassword(e) {
-    if(e.target.value.length > 0)
-        {
-            labelPassword.hidden = false;
-        }
-        else
-        {
-            labelPassword.hidden = true;
-        }
-    }
-</script>

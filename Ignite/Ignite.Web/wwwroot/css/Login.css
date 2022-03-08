@@ -80,12 +80,6 @@ header {
     color: white;
 }
 
-#quote {
-    color: white;
-    text-align: center;
-    font-style: italic;
-}
-
 #loginHeading {
     letter-spacing: 5px;
 }
@@ -119,7 +113,7 @@ header {
     }
 
 #login-submit {
-    letter-spacing: 2px;
+    letter-spacing: 3px;
     background-color: white;
     color: black;
     border: 2px solid white;
@@ -128,73 +122,10 @@ header {
 
     #login-submit:hover {
         color: white;
+        letter-spacing: 7px;
+        transition: 500ms;
     }
 
-    @media (max-width: 2000px) {
-        #account {
-        padding: 30px;
-        margin-top: 15px;
-    }
-
-    #quote {
-        font-size: 21px;
-    }
-
-    #loginHeading {
-        font-size: 31px;
-    }
-
-    #account * {
-        margin-bottom: 15px;
-    }
-
-    .form-control {
-        font-size: 24px;
-    }
-
-    #additionalLinks a {
-        font-size: 18px;
-    }
-
-    #login-submit {
-        font-size: 26px;
-    }
-}
-
-@media (max-width: 1500px) {
-    .showcase, .showcase header {
-        padding: 40px;
-    }
-
-    #account {
-        padding: 30px;
-        margin-top: 15px;
-    }
-
-    #quote {
-        font-size: 16px;
-    }
-
-    #loginHeading {
-        font-size: 26px;
-    }
-
-    #account * {
-        margin-bottom: 10px;
-    }
-
-    .form-control {
-        font-size: 16px;
-    }
-
-    #additionalLinks a {
-        font-size: 16px;
-    }
-
-    #login-submit {
-        font-size: 21px;
-    }
-}
 
 .navbar .container-fluid #logoName {
     margin-left: 80px;
@@ -268,3 +199,104 @@ header {
             color: white;
         }
 
+
+#logoName {
+    font-size: 21px;
+    letter-spacing: 3px;
+    text-decoration: none;
+    color: white;
+    font-weight: 600;
+}
+
+#logo {
+    width: 30%;
+    height: auto;
+}
+
+.nav {
+    font-size: 21px;
+    letter-spacing: 3px;
+}
+
+.navbar-nav a {
+    font-size: 21px;
+    letter-spacing: 3px;
+    text-decoration: none;
+    color: white;
+    font-weight: 700;
+}
+
+@media (max-width: 2000px) {
+    #account {
+        padding: 30px;
+    }
+
+    #loginHeading {
+        font-size: 31px;
+    }
+
+    #account * {
+        margin-bottom: 24px;
+    }
+
+    .form-control {
+        font-size: 24px;
+    }
+
+    #additionalLinks a {
+        font-size: 18px;
+    }
+
+    #login-submit {
+        font-size: 26px;
+    }
+
+    #rememberMe {
+        font-size: 18px;
+        letter-spacing: 2px;
+    }
+}
+
+@media (max-width: 1500px) {
+    .showcase, .showcase header {
+        padding: 50px;
+    }
+
+    #account {
+        padding: 15px 30px 30px 30px;
+        margin-top: 15px;
+    }
+
+        #account * {
+            margin-bottom: 20px;
+        }
+
+    #loginHeading {
+        font-size: 26px;
+        margin-bottom: 20px;
+    }
+
+    .form-control {
+        font-size: 16px;
+    }
+
+    #additionalLinks a {
+        font-size: 16px;
+    }
+
+    #login-submit {
+        font-size: 21px;
+    }
+}
+
+@media (max-width: 700px) {
+
+    #loginHeading {
+        font-size: 21px;
+        margin-bottom: 20px;
+    }
+
+    #login-submit {
+        font-size: 16px;
+    }
+}
