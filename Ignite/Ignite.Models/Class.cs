@@ -31,6 +31,8 @@
 
         public virtual Fitness Fitness { get; set; }
 
+        public bool IsDeleted { get; set; }
+
         public virtual ICollection<UserClass> UsersClasses { get; set; }
     }
 }

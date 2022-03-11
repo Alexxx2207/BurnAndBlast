@@ -1,3 +1,12 @@
-﻿
+﻿@using Ignite.Models.ViewModels.Fitnesses
+@model List<GetFitnessViewModel>
 
-<p>List all fitnesses and info about them</p>
+<link rel="stylesheet" href="~/css/FitnessesAll.css" />
+
+@foreach (var fitness in Model)
+{
+    <div class="fitnessWidget col-8">
+        <h2>@fitness.Name</h2>
+        <h4>@fitness.Address</h4>
+    </div>
+}

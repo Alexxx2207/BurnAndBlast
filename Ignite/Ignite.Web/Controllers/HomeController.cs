@@ -17,16 +17,16 @@ namespace Ignite.Web.Controllers
 
         public IActionResult Index()
         {
+            if (User.Identity.IsAuthenticated)
+            {
+                return this.Redirect("/Home/IndexLoggedIn");
+            }
+
             return View();
         }
 
         [Authorize]
         public IActionResult IndexLoggedIn()
-        {
-            return View();
-        }
-        
-        public IActionResult About()
         {
             return View();
         }

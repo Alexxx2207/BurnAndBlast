@@ -25,6 +25,8 @@
         [Required]
         public string Longitude { get; set; }
 
+        public bool IsDeleted { get; set; }
+
         public virtual ICollection<Class> Classes { get; set; }
     }
 }

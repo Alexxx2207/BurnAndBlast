@@ -15,5 +15,8 @@ namespace Ignite.Models
 
         [Required]
         public string Link { get; set; }
+
+        public bool IsDeleted { get; set; }
+
     }
 }

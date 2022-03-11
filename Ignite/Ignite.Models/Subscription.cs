@@ -18,6 +18,8 @@
 
         public decimal Price { get; set; }
 
+        public bool IsDeleted { get; set; }
+
         public virtual ICollection<UserSubscription> UsersSubscriptions { get; set; }
     }
 }

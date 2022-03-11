@@ -58,6 +58,7 @@ header {
 .text {
     position: relative;
     z-index: 10;
+    margin-bottom: 110px;
 }
 
 .text h2 {
@@ -84,9 +85,10 @@ header {
     max-width: 700px;
 }
 
-.text a {
+
+.text a{
     display: inline-block;
-    font-size: 1em;
+
     background: #fff;
     padding: 10px 30px;
     text-transform: uppercase;
@@ -99,25 +101,65 @@ header {
     transition: 0.2s;
 }
 
-/*.text a:hover {
-    letter-spacing: 10px;
-    color: white;
-    background-color: #00000073;
-    transition: all 0.8s ease;
-}*/
-
-@media (max-width: 991px) {
+@media (max-width: 2000px) {
     .showcase,
     .showcase header {
         padding: 40px;
     }
 
     .text h2 {
-        font-size: 3em;
+        font-size: 6em;
     }
 
     .text h3 {
-        font-size: 2em;
+        font-size: 4em;
+    }
+
+    .text a {
+        font-size: 25px;
+    }
+
+    dropdown:hover .dropdown-menu {
+        font-size: 16px;
+    }
+
+    #dropdownMenuLink {
+        width: 301px;
+    }
+
+    .btn {
+        width: 350px;
+    }
+}
+
+@media (max-width: 1500px) {
+    .showcase,
+    .showcase header {
+        padding: 40px;
+    }
+
+    .text h2 {
+        font-size: 5em;
+    }
+
+    .text h3 {
+        font-size: 4em;
+    }
+
+    .text a {
+        font-size: 18px;
+    }
+
+    dropdown:hover .dropdown-menu {
+        font-size: 16px;
+    }
+
+    #dropdownMenuLink {
+        width: 245px;
+    }
+
+    .btn {
+        width: 230px;
     }
 }
 
@@ -131,7 +173,7 @@ header {
 }
 
 #register {
-    --accent-color: #09273d;
+    --accent-color: #00406e;
 }
 
 .btn {
@@ -145,7 +187,7 @@ header {
     --background-color: #E3E3E3;
     --border-size: 2px;
    
-    width: 250px;
+
 }
 
     .btn.btn-border-pop::before {
@@ -201,3 +243,13 @@ header {
             transition: 400ms ease-in-out
         }
 
+
+.dropdown:hover .dropdown-menu {
+    display: block;
+    margin-top: 0;
+}
+
+
+.dropdown {
+    display: inline-block;
+}

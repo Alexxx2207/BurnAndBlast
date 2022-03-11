@@ -21,6 +21,8 @@
 
         public DateTime StartingDateTime { get; set; }
 
+        public bool IsDeleted { get; set; }
+
         public virtual ICollection<UserEvent> UsersEvents { get; set; }
     }
 }

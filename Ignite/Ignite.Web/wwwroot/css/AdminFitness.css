@@ -1,0 +1,62 @@
+﻿
+body{
+    padding-bottom: 10px;
+}
+
+#AddWidget {
+    margin: 50px;
+    background-color: #0000006a;
+    padding: 40px
+}
+
+.form-label {
+    color: white;
+}
+
+.form-control {
+    background-color: #00000001;
+    border: none;
+    border-bottom: 3px solid white;
+    color: white;
+    margin-bottom: 20px;
+}
+
+    .form-control:focus {
+        background-color: #00000001;
+        border: 3px solid white;
+        transition: all 0.7s ease-in;
+        color: white;
+    }
+
+#addTitle {
+    color: white;
+    font-weight: 600;
+    margin-bottom: 20px
+}
+
+#addButton {
+    margin-top: 20px;
+    letter-spacing: 2px;
+    font-weight: 600;
+    font-size: 21px;
+}
+
+.fitnessWidget {
+    margin: 50px;
+    padding: 40px;
+    background-color: #0000006a;
+    color: white;
+}
+
+.rowFitness {
+    display: flex;
+    justify-content: space-between;
+}
+
+img {
+    padding: 6px;
+    width: 60px;
+    height: 60px;
+    border-radius: 40%;
+    border: 2px solid #bc1e2d;
+}

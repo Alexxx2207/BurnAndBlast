@@ -1,0 +1,320 @@
+﻿
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+html, body {
+    margin: 0;
+    height: 100%;
+}
+
+header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 40px 100px;
+    z-index: 1000;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.showcase {
+    position: absolute;
+    right: 0;
+    width: 100%;
+    min-height: 100vh;
+    padding: 100px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #111;
+    transition: 0.5s;
+    z-index: 2;
+}
+
+    .showcase.active {
+        right: 300px;
+    }
+
+#background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.8;
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #404040;
+    mix-blend-mode: overlay;
+}
+
+
+
+#account {
+    position: relative;
+    z-index: 10;
+    background-color: #00000084;
+    border-radius: 5%;
+    border: 3px solid white;
+}
+
+    #account h2 {
+        color: white;
+        font-weight: 600;
+    }
+
+#rememberMe {
+    color: white;
+}
+
+#quote {
+    color: white;
+    text-align: center;
+    font-style: italic;
+}
+
+#loginHeading {
+    letter-spacing: 5px;
+}
+
+#additionalLinks {
+    justify-content: space-evenly;
+}
+
+    #additionalLinks a {
+        text-decoration: underline;
+        color: white;
+    }
+
+.form-label {
+    color: white;
+}
+
+.form-control {
+    background-color: #00000001;
+    border: none;
+    border-bottom: 3px solid white;
+    color: white;
+}
+
+    .form-control:focus {
+        background-color: #00000001;
+        border: 3px solid white;
+        transition: all 0.7s ease-in;
+        color: white;
+    }
+
+#login-submit {
+    letter-spacing: 3px;
+    background-color: white;
+    color: black;
+    border: 2px solid white;
+    font-weight: 500;
+}
+
+    #login-submit:hover {
+        color: white;
+        letter-spacing: 7px;
+        transition: 500ms;
+    }
+
+
+
+.navbar .container-fluid #logoName {
+    margin-left: 80px;
+    width: 130px;
+}
+
+
+.btn {
+    background-color: var(--background-color);
+    color: #222;
+    padding: .5em 1em;
+    border: none;
+    outline: none;
+    position: relative;
+    cursor: pointer;
+    --background-color: #E3E3E3;
+    --border-size: 2px;
+    --accent-color: #00406e;
+}
+
+    .btn.btn-border-pop::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;   
+        bottom: 0;
+        z-index: -1;
+        border: var(--border-size) solid var(--background-color);
+        transition: top, left, right, bottom, 100ms ease-in-out;
+    }
+
+    .btn.btn-border-pop:hover::before,
+    .btn.btn-border-pop:focus::before {
+        top: calc(var(--border-size) * -2);
+        left: calc(var(--border-size) * -2);
+        right: calc(var(--border-size) * -2);
+        bottom: calc(var(--border-size) * -2);
+    }
+
+
+
+
+    .btn.btn-background-slide::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        z-index: -1;
+        background-color: var(--accent-color);
+        transition: transform 300ms ease-in-out;
+        transform: scaleX(0);
+        transform-origin: left;
+    }
+
+    .btn.btn-background-slide:hover::before,
+    .btn.btn-background-slide:focus::before {
+        transform: scaleX(1);
+    }
+
+    .btn.btn-background-slide {
+        transition: color 300ms ease-in-out;
+        z-index: 1;
+    }
+
+
+        .btn.btn-background-slide:hover,
+        .btn.btn-background-slide:focus {
+            color: white;
+        }
+
+
+#logoName {
+    font-size: 21px;
+    letter-spacing: 3px;
+    text-decoration: none;
+    color: white;
+    font-weight: 600;
+}
+
+#logo {
+    width: 30%;
+    height: auto;
+}
+
+.nav {
+    font-size: 21px;
+    letter-spacing: 3px;
+}
+
+.navbar-nav a {
+    font-size: 21px;
+    letter-spacing: 3px;
+    text-decoration: none;
+    color: white;
+    font-weight: 700;
+}
+
+
+@media (max-width: 2000px) {
+    #account {
+        padding: 30px;
+    }
+
+    #quote {
+        font-size: 21px;
+    }
+
+    #loginHeading {
+        font-size: 31px;
+    }
+
+    #account input {
+        margin-bottom: 21px;
+    }
+
+    .btn {
+        margin-top: 21px;
+    }
+
+    .form-control {
+        font-size: 24px;
+    }
+
+    #additionalLinks a {
+        font-size: 18px;
+    }
+
+    #login-submit {
+        font-size: 26px;
+    }
+}
+
+@media (max-width: 1500px) {
+    .showcase, .showcase header {
+        padding: 50px;
+    }
+
+    #account {
+        padding: 15px 30px 30px 30px;
+        margin-top: 15px;
+    }
+
+    #quote {
+        font-size: 16px;
+    }
+
+    #account input {
+        margin-bottom: 16px;
+    }
+
+    .btn {
+        margin-top: 14px;
+    }
+
+    #loginHeading {
+        font-size: 26px;
+        margin-bottom: 9px;
+    }
+
+    .form-control {
+        font-size: 16px;
+    }
+
+    #additionalLinks a {
+        font-size: 16px;
+    }
+
+    #login-submit {
+        font-size: 21px;
+    }
+}
+
+@media (max-width: 700px) {
+
+    #loginHeading {
+        font-size: 21px;
+        margin-bottom: 20px;
+    }
+
+    #login-submit {
+        font-size: 16px;
+    }
+}

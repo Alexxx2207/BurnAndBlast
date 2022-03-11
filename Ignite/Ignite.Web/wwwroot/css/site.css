@@ -6,23 +6,23 @@
 }
 
 html {
-  font-size: 14px;
+    font-size: 14px;
 }
 
 @media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
+    html {
+        font-size: 16px;
+    }
 }
 
 html {
-  position: relative;
-  min-height: 100%;
+    position: relative;
+    min-height: 100%;
 }
 
 body {
-  margin-bottom: 60px;
-  background-color: rgb(24, 24, 24);
+    margin-bottom: 60px;
+    background-color: rgb(24, 24, 24);
 }
 
 .scrolled-down {
@@ -37,7 +37,7 @@ body {
 
 .navbar {
     padding: 0px;
-    padding-top: 10px; 
+    padding-top: 10px;
 }
 
 .nav-link {
@@ -51,7 +51,6 @@ body {
 }
 
     .navbar-nav a {
-        font-size: 18px;
         letter-spacing: 3px;
         text-decoration: none;
         color: white;
@@ -73,16 +72,47 @@ body {
     margin-right: 30px;
     letter-spacing: 3px;
     font-family: 'Arimo', sans-serif;
-    font-size: 18px;
     font-weight: 500;
+    
+}
+
+.dropdown-item {
+    width: 215px;
 }
 
 
 #logoName {
-    font-size: 18px;
     letter-spacing: 3px;
     text-decoration: none;
     color: white;
     font-weight: 600;
     margin-left: 100px
+}
+
+@media (max-width: 2000px) {
+    #logoName {
+        font-size: 18px;
+    }
+
+    .navbar-nav a {
+        font-size: 18px;
+    }
+
+    #dropdownMenuLink{
+        font-size: 18px;
+    }
+}
+
+@media (max-width: 1500px) {
+    #logoName {
+        font-size: 16px;
+    }
+
+    .navbar-nav a {
+        font-size: 16px;
+    }
+
+    #dropdownMenuLink {
+        font-size: 16px;
+    }
 }

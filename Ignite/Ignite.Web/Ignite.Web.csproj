@@ -21,7 +21,9 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Ignite.Data\Ignite.Data.csproj" />
+    <ProjectReference Include="..\Ignite.GlobalConstants\Ignite.GlobalConstants.csproj" />
     <ProjectReference Include="..\Ignite.Models\Ignite.Models.csproj" />
+    <ProjectReference Include="..\Ignite.Services\Ignite.Services.csproj" />
   </ItemGroup>
 
   <ItemGroup>
