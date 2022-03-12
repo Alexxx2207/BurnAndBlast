@@ -19,12 +19,6 @@
         [Required]
         public string Address { get; set; }
 
-        [Required]
-        public string Latitude { get; set; }
-
-        [Required]
-        public string Longitude { get; set; }
-
         public bool IsDeleted { get; set; }
 
         public virtual ICollection<Class> Classes { get; set; }

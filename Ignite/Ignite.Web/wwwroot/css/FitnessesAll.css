@@ -6,4 +6,29 @@
     background-color: #0000006a;
     color: white;
     margin-bottom: 40px;
+    letter-spacing: 4px;
+}
+
+#map {
+    width: 400px;
+    height: 400px;
+}
+
+
+#AllFitnessesTitle {
+    color: white;
+    margin-left: 50px;
+    margin-top: 50px;
+}
+
+#hqTitle {
+    color: white;
+    margin-left: 50px;
+    margin-top: 100px;
+}
+
+iframe {
+    margin-left: 200px;
+    margin-top: 30px;
+    margin-bottom: 40px;
 }

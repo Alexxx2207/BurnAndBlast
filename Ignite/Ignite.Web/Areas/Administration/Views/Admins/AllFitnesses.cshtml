@@ -18,14 +18,6 @@
         <input asp-for="FitnessesInputModel.Address" class="form-control" aria-required="true" placeholder="Address" />
         <span asp-validation-for="FitnessesInputModel.Address" class="text-danger"></span>
 
-        <label asp-for="FitnessesInputModel.Latitude" class="form-label" hidden></label>
-        <input asp-for="FitnessesInputModel.Latitude" class="form-control" aria-required="true" placeholder="Latitude" />
-        <span asp-validation-for="FitnessesInputModel.Latitude" class="text-danger"></span>
-
-        <label asp-for="FitnessesInputModel.Longitude" class="form-label" hidden></label>
-        <input asp-for="FitnessesInputModel.Longitude" class="form-control" aria-required="true" placeholder="Longitude" />
-        <span asp-validation-for="FitnessesInputModel.Longitude" class="text-danger"></span>
-
         <button id="addButton" type="submit" class="w-100 btn btn-background-slide btn-lg btn-primary">ADD</button>
     </form>
 </div>
@@ -34,12 +26,12 @@
 {
 <div class="fitnessWidget col-8">
     <div class="rowFitness">
-        <h2>@fitness.Name</h2>
+        <h2>Ignite - @fitness.Name</h2>
         <a href="RemoveFitness?fitnessId=@fitness.Guid">
             <img src="~/Images/RemoveRedCrossImage.jpg" />
         </a>
     </div>
-    <h4>@fitness.Address</h4>
+    <h4>Address - @fitness.Address</h4>
 </div>
 }
 

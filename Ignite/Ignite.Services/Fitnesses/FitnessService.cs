@@ -24,21 +24,11 @@ namespace Ignite.Services.Fitnesses
             {
                 throw new ArgumentException("Address must be provied!");
             }
-            else if (string.IsNullOrWhiteSpace(model.Longitude))
-            {
-                throw new ArgumentException("Longitude must be provied!");
-            }
-            else if (string.IsNullOrWhiteSpace(model.Latitude))
-            {
-                throw new ArgumentException("Latitude must be provied!");
-            }
 
             var fitness = new Fitness
             {
                 Guid = Guid.NewGuid().ToString(),
                 Name = model.Name,
-                Latitude = model.Latitude,
-                Longitude = model.Longitude,
                 Address = model.Address,
                 IsDeleted = false,
             };
@@ -55,8 +45,6 @@ namespace Ignite.Services.Fitnesses
                 {
                     Guid = fitness.Guid,
                     Address = fitness.Address,
-                    Latitude = fitness.Latitude,
-                    Longitude = fitness.Longitude,
                     Name = fitness.Name,
                 })
                 .ToList();

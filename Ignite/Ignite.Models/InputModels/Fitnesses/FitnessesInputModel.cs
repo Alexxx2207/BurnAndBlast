@@ -9,11 +9,5 @@ namespace Ignite.Models.InputModels.Fitnesses
 
         [Required]
         public string Address { get; set; }
-
-        [Required]
-        public string Latitude { get; set; }
-
-        [Required]
-        public string Longitude { get; set; }
     }
 }

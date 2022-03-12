@@ -3,10 +3,16 @@
 
 <link rel="stylesheet" href="~/css/FitnessesAll.css" />
 
+<h1 id="AllFitnessesTitle">All Fitnesses</h1>
+
 @foreach (var fitness in Model)
 {
     <div class="fitnessWidget col-8">
-        <h2>@fitness.Name</h2>
-        <h4>@fitness.Address</h4>
+        <h1>Ignite - @fitness.Name</h1>
+        <h4>Address: @fitness.Address</h4>
     </div>
 }
+
+<h1 id="hqTitle">Company Headquaters</h1>
+
+<iframe src="https://www.google.com/maps/d/u/0/embed?mid=1A3x1--y1Mor9Aii6plzJ99_L-E2JtHjq&ehbc=2E312F" width="800" height="530"></iframe>
