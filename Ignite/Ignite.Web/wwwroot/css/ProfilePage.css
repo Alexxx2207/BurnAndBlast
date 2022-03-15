@@ -1,0 +1,86 @@
+﻿
+#wholeContent {
+    margin: 90px;
+    color: white;
+}
+
+#profilePictureDiv {
+    border-radius: 40%;
+    border: 2px solid white;
+}
+
+#imageInput {
+    display: "none";
+}
+
+img {
+    width: 250px;
+    height: 250px;
+    border-radius: 39%;
+    display: inline-block;
+}
+
+#name {
+    margin-top: 25px;
+    margin-left: 40px;
+    font-size: 64px;
+    letter-spacing: 10px;
+    font-weight: 900;
+    display: inline-block;
+}
+
+#email {
+    margin-top: 5px;
+    font-size: 26px;
+    letter-spacing: 4px;
+}
+
+#saveButton {
+    border-radius: 10%;
+    width: 100px;
+    height: 40px;
+    background-color: white;
+    color: black;
+    letter-spacing: 2px;
+    font-weight: 600;
+    font-size: 18px;
+    margin-left: 5px;
+    margin-top: 20px;
+}
+
+#dismissButton {
+    border-radius: 10%;
+    width: 110px;
+    height: 40px;
+    background-color: #a80606;
+    color: white;
+    letter-spacing: 2px;
+    font-size: 16px;
+    margin-left: 25px;
+    margin-top: 20px;
+}
+
+#removeButton {
+    border-radius: 10%;
+    width: 110px;
+    height: 40px;
+    color: black;
+    letter-spacing: 2px;
+    font-size: 16px;
+    margin-left: 70px;
+    margin-top: 20px;
+    font-weight: 600;
+}
+
+.after {
+    display: none;
+    z-index: 99;
+    position: absolute;
+    top: 170px;
+}
+
+.image-container:hover .after {
+    display: block;
+    opacity: 0.8;
+    cursor: pointer;
+}
