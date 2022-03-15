@@ -6,24 +6,34 @@ using System;
 using System.ComponentModel.DataAnnotations;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
+using Ignite.Data;
 using Ignite.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 
 namespace Ignite.Web.Areas.Identity.Pages.Account.Manage
 {
+
     public class IndexModel : PageModel
     {
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
+        private readonly ApplicationDbContext db;
+        private readonly IConfiguration config;
 
         public IndexModel(
             UserManager<ApplicationUser> userManager,
-            SignInManager<ApplicationUser> signInManager)
+            SignInManager<ApplicationUser> signInManager,
+            ApplicationDbContext db,
+            IConfiguration config)
         {
             _userManager = userManager;
             _signInManager = signInManager;
+            this.db = db;
+            this.config = config;
         }
 
         /// <summary>
@@ -50,27 +60,26 @@ namespace Ignite.Web.Areas.Identity.Pages.Account.Manage
         ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
         ///     directly from your code. This API may change or be removed in future releases.
         /// </summary>
+
+        [BindProperties]
         public class InputModel
         {
             /// <summary>
             ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
             ///     directly from your code. This API may change or be removed in future releases.
             /// </summary>
-            [Phone]
-            [Display(Name = "Phone number")]
-            public string PhoneNumber { get; set; }
+            public ApplicationUser ApplicationUser { get; set; }
+
+            public IFormFile Image { get; set; }
         }
 
         private async Task LoadAsync(ApplicationUser user)
         {
             var userName = await _userManager.GetUserNameAsync(user);
-            var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
-
-            Username = userName;
 
             Input = new InputModel
             {
-                PhoneNumber = phoneNumber
+                ApplicationUser = user
             };
         }
 
@@ -100,18 +109,30 @@ namespace Ignite.Web.Areas.Identity.Pages.Account.Manage
                 return Page();
             }
 
-            var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
-            if (Input.PhoneNumber != phoneNumber)
+            if (Input.Image != null && Input.Image.Length > 0)
             {
-                var setPhoneResult = await _userManager.SetPhoneNumberAsync(user, Input.PhoneNumber);
-                if (!setPhoneResult.Succeeded)
-                {
-                    StatusMessage = "Unexpected error when trying to set phone number.";
-                    return RedirectToPage();
-                }
-            }
+                var imageName =  "d" + DateTime.UtcNow.ToString()
+                                        .Replace("/", "")
+                                        .Replace(" ", "")
+                                        .Replace(":", "") 
+                                        + Input.Image.FileName
+                                        .ToLower();
 
-            await _signInManager.RefreshSignInAsync(user);
+                using (var stream = new FileStream($"wwwroot/Profile Pics/{imageName}", FileMode.Create))
+                {
+                    await Input.Image.CopyToAsync(stream);
+
+
+                    await _signInManager.RefreshSignInAsync(user);
+                }
+                var userDB = db.Users.Find(user.Id);
+
+                userDB.ProfilePicture = imageName;
+                db.SaveChanges();
+
+
+               
+            }
             StatusMessage = "Your profile has been updated";
             return RedirectToPage();
         }

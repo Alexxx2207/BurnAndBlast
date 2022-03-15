@@ -5,26 +5,67 @@
     ViewData["ActivePage"] = ManageNavPages.Index;
 }
 
-<h3>@ViewData["Title"]</h3>
-<partial name="_StatusMessage" for="StatusMessage" />
-<div class="row">
-    <div class="col-md-6">
-        <form id="profile-form" method="post">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-floating">
-                <input asp-for="Username" class="form-control" disabled />
-                <label asp-for="Username" class="form-label"></label>
+<link rel="stylesheet" href="~/css/ProfilePage.css" />
+
+<div id="wholeContent">
+    <form method="post" enctype="multipart/form-data">
+        <div id="rowPic">
+            <label id="profilePictureDiv" for="imageInput">
+                <div class="image-container">
+                    @if (string.IsNullOrWhiteSpace(Model.Input.ApplicationUser.ProfilePicture))
+                    {
+                        <img src="~/Profile Pics/defaultProfileImage.jpg" id="profilePic" />
+                    }
+                    else
+                    {
+                        <img src="~/Profile Pics/@Model.Input.ApplicationUser.ProfilePicture" id="profilePic"/>
+                    }
+                     <img class="after" src="~/Images/Camera.jpg" \>
+                </div>
+            </label>
+            <input id="imageInput" hidden asp-for="@Model.Input.Image" onclick="ShowSave()" />
+            <div id="name">
+                @Model.Input.ApplicationUser.FirstName @Model.Input.ApplicationUser.LastName
+                <div id="email">
+                    @Model.Input.ApplicationUser.Email
+                </div>
             </div>
-            <div class="form-floating">
-                <input asp-for="Input.PhoneNumber" class="form-control" />
-                <label asp-for="Input.PhoneNumber" class="form-label"></label>
-                <span asp-validation-for="Input.PhoneNumber" class="text-danger"></span>
-            </div>
-            <button id="update-profile-button" type="submit" class="w-100 btn btn-lg btn-primary">Save</button>
-        </form>
-    </div>
+        </div>
+
+        <div>
+            <a id="removeButton" type="submit" href="/Users/RemoveProfileImage?userId=@Model.Input.ApplicationUser.Id"  class="btn btn-warning">REMOVE</a>
+        </div>
+        <button id="saveButton" type="submit" class="btn" hidden>SAVE</button>
+        <input  id="dismissButton" type="reset" class="btn" hidden onclick="HideSave()" value="DISMISS" \>
+    </form>
 </div>
 
-@section Scripts {
-    <partial name="_ValidationScriptsPartial" />
-}
+<script>
+
+    imageInput.onchange = evt => {
+      const [file] = imageInput.files
+      if (file) {
+        profilePic.src = URL.createObjectURL(file)
+      }
+    }
+
+    function ShowSave()
+    {
+        var saveButton = document.getElementById('saveButton');
+        var dismissButton = document.getElementById('dismissButton');
+
+        saveButton.hidden = false;
+        dismissButton.hidden = false;
+    }
+
+    function HideSave()
+    {
+        var saveButton = document.getElementById('saveButton');
+        var dismissButton = document.getElementById('dismissButton');
+
+        saveButton.hidden = true;
+        dismissButton.hidden = true;
+
+        location.reload();
+    }
+</script>

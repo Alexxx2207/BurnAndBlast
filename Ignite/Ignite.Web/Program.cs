@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc.Razor;
 using Ignite.Services.Fitnesses;
+using Ignite.Services.Users;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -27,13 +28,14 @@ builder.Services.Configure<RazorViewEngineOptions>(options =>
 
 builder.Services.AddControllersWithViews();
 
-builder.Services.AddRazorPages(options => 
-{
-    options.Conventions.AllowAnonymousToPage("/Identity/Account/Login");
-    options.Conventions.AllowAnonymousToPage("/Identity/Account/Register");
-});
+//builder.Services.AddRazorPages(options => 
+//{
+//    options.Conventions.AllowAnonymousToPage("/Identity/Account/Login");
+//    options.Conventions.AllowAnonymousToPage("/Identity/Account/Register");
+//});
 
 builder.Services.AddTransient<IFitnessService, FitnessService>();
+builder.Services.AddTransient<IUsersService, UsersService>();
 
 var app = builder.Build();
 
