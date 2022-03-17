@@ -1,3 +1,50 @@
-﻿
+﻿@using Ignite.Models.ViewModels.Events
+@model List<ShowEventsViewModel>
 
-<p>Page to list all events</p> 
+<link rel="stylesheet" href="~/css/EventsAll.css" />
+
+
+@if (Model.Any(e => e.UserAttends))
+{
+    <h1 id="AllFitnessesTitle">Take Part In</h1>
+}
+
+@foreach (var ev in Model.Where(e => e.UserAttends))
+{
+    <div class="eventsWidget col-8">
+        <h2>Event - @ev.Name</h2>
+        <h4>Address: @ev.Address</h4>
+        <h4>Starts: @ev.StartingDateTime.ToString("dd/MM/yyyy HH:mm")</h4>
+    </div>
+}
+
+@if (!User.Identity.IsAuthenticated)
+{
+    <h1 id="AllFitnessesTitle">All Events</h1>
+}
+else if (Model.Any(e => !e.UserAttends))
+{
+    <h1 id="AllFitnessesTitle">Other Events</h1>
+}
+
+@foreach (var ev in Model.Where(e => !e.UserAttends))
+{
+    <div class="eventsWidget col-8">
+        <div class="rowEvents">
+            <h2>Event - @ev.Name</h2>
+            <div id="ATTENDButton">
+                <a href="RemoveFitness?fitnessId=@ev.Guid" style="color: #6dcb01;">
+                    <img id="attendDot" src="~/Images/GreenDotForAttend.jpg" />ATTEND
+                </a>
+            </div>
+
+        </div>
+        <h4>Address: @ev.Address</h4>
+        <div class="rowEvents">
+            <h4>Starts: @ev.StartingDateTime.ToString("dd/MM/yyyy HH:mm")</h4>
+            <div id="peopleAttend">
+                <img id="peopleAttendImage" src="~/Images/PeopleAttendIcon.png" \> @ev.UsersCount
+            </div>
+        </div>
+    </div>
+}

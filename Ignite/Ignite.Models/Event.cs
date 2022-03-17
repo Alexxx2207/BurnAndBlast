@@ -15,9 +15,10 @@
         public string Guid { get; set; }
 
         [Required]
-        public string Address { get; set; }
+        public string Name { get; set; }
 
-        public bool IsSuspended { get; set; }
+        [Required]
+        public string Address { get; set; }
 
         public DateTime StartingDateTime { get; set; }
 

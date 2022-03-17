@@ -10,5 +10,7 @@ namespace Ignite.Services.Fitnesses
         void RemoveFitness(string fitnessId);
         
         List<GetFitnessViewModel> GetAllFitnesses();
+
+        bool CheckFitnessExist(string fitnessId);
     }
 }

@@ -1,3 +1,44 @@
-﻿
+﻿@model Ignite.Models.ParentModels.AllEventsParentModel
 
-<p>Add event admin page</p>
+<link rel="stylesheet" href="~/css/AdminEvents.css" />
+
+<div id="AddWidget" class="col-6">
+    <h2 id="addTitle">Add Event</h2>
+
+    <form action="/Administration/Admins/AddEvents" method="post">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+        <label asp-for="AddEventInputModel.Name" class="form-label" hidden></label>
+        <input asp-for="AddEventInputModel.Name" class="form-control form-control1" aria-required="true" placeholder="Name" />
+        <span asp-validation-for="AddEventInputModel.Name" class="text-danger"></span>
+
+        <label asp-for="AddEventInputModel.Address" class="form-label" hidden></label>
+        <input asp-for="AddEventInputModel.Address" class="form-control form-control1" aria-required="true" placeholder="Address" />
+        <span asp-validation-for="AddEventInputModel.Address" class="text-danger"></span>
+
+        <label asp-for="AddEventInputModel.StartingDateTime" class="form-label" hidden></label>
+        <input asp-for="AddEventInputModel.StartingDateTime" asp-format="dd/MM/yyyy HH:mm" class="form-control" value="@DateTime.Now" aria-required="true" placeholder="Date" />
+        <span asp-validation-for="AddEventInputModel.StartingDateTime" class="text-danger"></span>
+
+        <button id="addButton" type="submit" class="w-100 btn btn-background-slide btn-lg btn-primary">ADD</button>
+    </form>
+</div>
+
+@foreach (var ev in Model.ShowEventsViewModel)
+{
+    <div class="eventsWidget col-8">
+        <div class="rowEvents">
+            <h2>Ignite - @ev.Name</h2>
+            <a href="RemoveFitness?fitnessId=@ev.Guid">
+                <img id=removeButton src="~/Images/RemoveRedCrossImage.jpg" />
+            </a>
+        </div>
+        <h4>Address - @ev.Address</h4>
+        <div class="rowEvents">
+            <h4>Starts - @ev.StartingDateTime</h4>
+            <div id="peopleAttend">
+                <img id="peopleAttendImage" src="~/Images/PeopleAttendIcon.png" \> @ev.UsersCount
+            </div>
+        </div>
+    </div>
+}

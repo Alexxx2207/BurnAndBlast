@@ -18,9 +18,9 @@
                     }
                     else
                     {
-                        <img src="~/Profile Pics/@Model.Input.ApplicationUser.ProfilePicture" id="profilePic"/>
+                        <img src="~/Profile Pics/@Model.Input.ApplicationUser.ProfilePicture" id="profilePic" />
                     }
-                     <img class="after" src="~/Images/Camera.jpg" \>
+                    <img class="after" src="~/Images/Camera.jpg" \>
                 </div>
             </label>
             <input id="imageInput" hidden asp-for="@Model.Input.Image" onclick="ShowSave()" />
@@ -32,17 +32,21 @@
             </div>
         </div>
 
-        <div>
-            <a id="removeButton" type="submit" href="/Users/RemoveProfileImage?userId=@Model.Input.ApplicationUser.Id"  class="btn btn-warning">REMOVE</a>
-        </div>
+        @if (!string.IsNullOrWhiteSpace(Model.Input.ApplicationUser.ProfilePicture))
+        {
+            <div>
+                <a id="removeButton" type="submit" href="/Users/RemoveProfileImage?userId=@Model.Input.ApplicationUser.Id" class="btn btn-warning">REMOVE</a>
+            </div>
+        }
         <button id="saveButton" type="submit" class="btn" hidden>SAVE</button>
-        <input  id="dismissButton" type="reset" class="btn" hidden onclick="HideSave()" value="DISMISS" \>
+        <input id="dismissButton" type="reset" class="btn" hidden onclick="HideSave()" value="DISMISS" \>
     </form>
 </div>
 
 <script>
 
-    imageInput.onchange = evt => {
+    imageInput.onchange = evt =>
+        {
       const [file] = imageInput.files
       if (file) {
         profilePic.src = URL.createObjectURL(file)

@@ -1,25 +1,29 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using Ignite.Models;
+using Ignite.Services.Events;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace Ignite.Web.Controllers
 {
     public class EventsController : Controller
     {
         private readonly ILogger<EventsController> _logger;
+        private readonly IEventsService eventsService;
 
-        public EventsController(ILogger<EventsController> logger)
+        public EventsController(
+            ILogger<EventsController> logger,
+            IEventsService eventsService)
         {
             _logger = logger;
+            this.eventsService = eventsService;
         }
 
         public IActionResult All()
         {
-            return View();
-        }
-
-        public IActionResult Info(string eventId)
-        {
-            return View();
+            var model = eventsService.GetEvents(User.FindFirstValue(ClaimTypes.NameIdentifier));
+            return View(model);
         }
 
         // When a button Attend is clicked

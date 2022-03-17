@@ -1,0 +1,55 @@
+﻿body{
+    color: white;
+    padding-bottom: 10px;
+}
+
+a{
+    text-decoration: none;
+}
+
+#AllFitnessesTitle {
+    margin-top: 70px;
+    margin-left: 50px;
+}
+
+.eventsWidget {
+    margin: 60px;
+    padding: 40px;
+    background-color: #0000006a;
+    color: white;
+    letter-spacing: 4px;
+}
+
+.rowEvents {
+    display: flex;
+    justify-content: space-between;
+}
+
+
+#ATTENDButton {
+    color: #6dcb01;
+    border-radius: 40%;
+    border: 2px solid #6dcb01;
+    font-size: 18px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    padding-top: 5px;
+    padding-right: 15px;
+}
+
+#attendDot {
+    padding: 6px;
+    width: 37px;
+    height: 30px;
+}
+
+#peopleAttendImage {
+    width: 30px;
+    height: 30px;
+}
+
+#peopleAttend {
+    border-radius: 30%;
+    border: 3px solid white;
+    padding: 10px;
+}

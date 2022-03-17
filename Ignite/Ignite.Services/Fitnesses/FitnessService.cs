@@ -37,6 +37,11 @@ namespace Ignite.Services.Fitnesses
             db.SaveChanges();
         }
 
+        public bool CheckFitnessExist(string fitnessId)
+        {
+            return db.Fitnesses.Any(x => x.Guid == fitnessId);
+        }
+
         public List<GetFitnessViewModel> GetAllFitnesses()
         {
             return db.Fitnesses

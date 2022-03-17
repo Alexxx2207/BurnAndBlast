@@ -13,7 +13,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ignite.Web", "Ignite.Web\Ig
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ignite.GlobalConstants", "Ignite.GlobalConstants\Ignite.GlobalConstants.csproj", "{495C71B6-33F7-41E5-8D26-F9DD79F83F89}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ignite.Services", "Ignite.Services\Ignite.Services.csproj", "{3A7A705F-4A74-4DB5-A3C7-2FFE9DEEB96F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ignite.Services", "Ignite.Services\Ignite.Services.csproj", "{3A7A705F-4A74-4DB5-A3C7-2FFE9DEEB96F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ignite.Infrastructure", "Ignite.Infrastructure\Ignite.Infrastructure.csproj", "{55218996-22D3-46C8-8C89-A8C8EE29D330}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -41,6 +43,10 @@ Global
 		{3A7A705F-4A74-4DB5-A3C7-2FFE9DEEB96F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3A7A705F-4A74-4DB5-A3C7-2FFE9DEEB96F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3A7A705F-4A74-4DB5-A3C7-2FFE9DEEB96F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{55218996-22D3-46C8-8C89-A8C8EE29D330}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{55218996-22D3-46C8-8C89-A8C8EE29D330}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{55218996-22D3-46C8-8C89-A8C8EE29D330}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{55218996-22D3-46C8-8C89-A8C8EE29D330}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
