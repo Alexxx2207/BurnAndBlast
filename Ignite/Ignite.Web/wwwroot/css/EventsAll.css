@@ -28,18 +28,27 @@ a{
 
 #ATTENDButton {
     color: #6dcb01;
-    border-radius: 40%;
     border: 2px solid #6dcb01;
-    font-size: 18px;
+    font-size: 16px;
     font-weight: 600;
     letter-spacing: 2px;
-    padding-top: 5px;
+    padding-top: 7px;
+    padding-right: 15px;
+}
+
+#UNATTENDButton {
+    color: #d11d24;
+    border: 2px solid #d11d24;
+    font-size: 16px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    padding-top: 7px;
     padding-right: 15px;
 }
 
 #attendDot {
     padding: 6px;
-    width: 37px;
+    width: 35px;
     height: 30px;
 }
 

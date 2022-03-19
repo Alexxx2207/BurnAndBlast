@@ -12,9 +12,21 @@
 @foreach (var ev in Model.Where(e => e.UserAttends))
 {
     <div class="eventsWidget col-8">
-        <h2>Event - @ev.Name</h2>
+        <div class="rowEvents">
+            <h2>Event - @ev.Name</h2>
+            <div id="UNATTENDButton">
+                <a href="UnAttend?eventId=@ev.Guid" style="color: #d11d24;">
+                    <img id="attendDot" src="~/Images/RedDotForAttend.jpg" />UNSUBSCRIBE
+                </a>
+            </div>
+        </div>
         <h4>Address: @ev.Address</h4>
-        <h4>Starts: @ev.StartingDateTime.ToString("dd/MM/yyyy HH:mm")</h4>
+        <div class="rowEvents">
+            <h4>Starts: @ev.StartingDateTime.ToString("dd/MM/yyyy HH:mm")</h4>
+            <div id="peopleAttend">
+                <img id="peopleAttendImage" src="~/Images/PeopleAttendIcon.png" /> @ev.UsersCount
+            </div>
+        </div>
     </div>
 }
 
@@ -33,11 +45,10 @@ else if (Model.Any(e => !e.UserAttends))
         <div class="rowEvents">
             <h2>Event - @ev.Name</h2>
             <div id="ATTENDButton">
-                <a href="RemoveFitness?fitnessId=@ev.Guid" style="color: #6dcb01;">
-                    <img id="attendDot" src="~/Images/GreenDotForAttend.jpg" />ATTEND
+                <a href="Attend?eventId=@ev.Guid" style="color: #6dcb01;">
+                    <img id="attendDot" src="~/Images/GreenDotForAttend.jpg" />SUBSCRIBE
                 </a>
             </div>
-
         </div>
         <h4>Address: @ev.Address</h4>
         <div class="rowEvents">

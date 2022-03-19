@@ -15,9 +15,9 @@
         <label asp-for="AddEventInputModel.Address" class="form-label" hidden></label>
         <input asp-for="AddEventInputModel.Address" class="form-control form-control1" aria-required="true" placeholder="Address" />
         <span asp-validation-for="AddEventInputModel.Address" class="text-danger"></span>
-
-        <label asp-for="AddEventInputModel.StartingDateTime" class="form-label" hidden></label>
-        <input asp-for="AddEventInputModel.StartingDateTime" asp-format="dd/MM/yyyy HH:mm" class="form-control" value="@DateTime.Now" aria-required="true" placeholder="Date" />
+        <br \>
+        <label asp-for="AddEventInputModel.StartingDateTime" class="form-label">Start Date & Time</label>
+        <input asp-for="AddEventInputModel.StartingDateTime" class="form-control" value=@DateTime.Now/>
         <span asp-validation-for="AddEventInputModel.StartingDateTime" class="text-danger"></span>
 
         <button id="addButton" type="submit" class="w-100 btn btn-background-slide btn-lg btn-primary">ADD</button>
@@ -29,9 +29,14 @@
     <div class="eventsWidget col-8">
         <div class="rowEvents">
             <h2>Ignite - @ev.Name</h2>
-            <a href="RemoveFitness?fitnessId=@ev.Guid">
+            <div>
+                 <a href="ChangeEvent?eventId=@ev.Guid">
+                      <img id=changeButton src="~/Images/Wrench.png" />
+                     </a>
+                 <a href="RemoveEvent?eventId=@ev.Guid">
                 <img id=removeButton src="~/Images/RemoveRedCrossImage.jpg" />
             </a>
+            </div>
         </div>
         <h4>Address - @ev.Address</h4>
         <div class="rowEvents">

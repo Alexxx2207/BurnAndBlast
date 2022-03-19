@@ -1,0 +1,48 @@
+﻿@model Ignite.Models.ParentModels.ChangeEventsParentModel
+
+<link rel="stylesheet" href="~/css/ChangeEvent.css" />
+
+
+<div class="d-flex ChangeWidget">
+
+    <div id="ChangePart" class="col-5">
+        <h2 id="changeTitle">Change Event</h2>
+
+        <form action="/Administration/Admins/ChangeEvent" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <input asp-for="InputModel.Guid" hidden value="@Model.ViewModel.Guid" />
+
+            <div>
+                <label asp-for="InputModel.Name" class="form-label" hidden></label>
+                <input asp-for="InputModel.Name" class="form-control form-control1" aria-required="true" placeholder="@Model.ViewModel.Name" value=@Model.ViewModel.Name />
+                <span asp-validation-for="InputModel.Name" class="text-danger"></span>
+            </div>
+
+            <div>
+                <label asp-for="InputModel.Address" class="form-label" hidden></label>
+                <input asp-for="InputModel.Address" class="form-control form-control1" aria-required="true" placeholder="@Model.ViewModel.Address" value=@Model.ViewModel.Address />
+                <span asp-validation-for="InputModel.Address" class="text-danger"></span>
+            </div>
+
+            <br \>
+
+            <div>
+                <label asp-for="InputModel.StartingDateTime" id="dateLabel" class="form-label">Start Date & Time</label>
+                <input asp-for="InputModel.StartingDateTime" class="form-control" value=@DateTime.Now/>
+                <span asp-validation-for="InputModel.StartingDateTime" class="text-danger"></span>
+            </div>
+
+            <button id="changeButton" type="submit" class="w-100 btn btn-background-slide btn-lg btn-success">Change</button>
+        </form>
+    </div>
+
+    <div class="align-items-center col-5" id="OldDataPart">
+        <h2 id="OldTitle" >Old Data</h2>
+        <h4>Name: @Model.ViewModel.Name</h4>
+        <h4>Address: @Model.ViewModel.Address</h4>
+        <h4>Starts: @Model.ViewModel.StartingDateTime</h4>
+    </div>
+</div>
+
+

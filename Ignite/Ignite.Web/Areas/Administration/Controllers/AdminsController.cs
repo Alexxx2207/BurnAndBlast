@@ -7,6 +7,7 @@ using Ignite.Models.InputModels.Events;
 using Ignite.Services.Events;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
+using Ignite.Models.ViewModels.Events;
 
 namespace Ignite.Web.Areas.Administration.Controllers
 {
@@ -62,8 +63,8 @@ namespace Ignite.Web.Areas.Administration.Controllers
         }
 
         public IActionResult RemoveFitness(string fitnessId)
-        { 
-            if(fitnessService.CheckFitnessExist(fitnessId))
+        {
+            if (fitnessService.CheckFitnessExist(fitnessId))
                 fitnessService.RemoveFitness(fitnessId);
 
             return Redirect("/Administration/Admins/AllFitnesses");
@@ -84,22 +85,78 @@ namespace Ignite.Web.Areas.Administration.Controllers
         [HttpPost]
         public IActionResult AddEvents(AllEventsParentModel model)
         {
+            var parentModel = new AllEventsParentModel()
+            {
+                AddEventInputModel = new AddEventInputModel(),
+                ShowEventsViewModel = eventsService.GetEvents(User.FindFirstValue(ClaimTypes.NameIdentifier))
+            };
+
             try
             {
                 eventsService.AddEvent(model.AddEventInputModel);
             }
             catch (Exception e)
-            {
-
-                var parentModel = new AllEventsParentModel()
-                {
-                    AddEventInputModel = new AddEventInputModel(),
-                    ShowEventsViewModel = eventsService.GetEvents(User.FindFirstValue(ClaimTypes.NameIdentifier))
-                };
+            { 
 
                 return View("AllEvents", parentModel);
             }
             return Redirect("/Events/All");
+        }
+
+        public IActionResult RemoveEvent(string eventId)
+        {
+            if (eventsService.CheckEventExists(eventId))
+                eventsService.RemoveEvent(eventId);
+
+            return Redirect("/Administration/Admins/AllEvents");
+        }
+
+        public IActionResult ChangeEvent(string eventId)
+        {
+            if (!eventsService.CheckEventExists(eventId))
+                return Redirect("/Administration/Admins/AllEvents");
+
+            var ev = eventsService.GetEventByGUID(eventId);
+
+            var model = new ChangeEventsParentModel
+            {
+                InputModel = new ChangeEventInputModel(),
+                ViewModel = new ChangeEventViewModel
+                {
+                    Guid = eventId,
+                    Address = ev.Address,
+                    Name = ev.Name,
+                    StartingDateTime = ev.StartingDateTime,
+                }
+            };
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public IActionResult ChangeEvent(ChangeEventsParentModel model)
+        {
+
+            var ev = eventsService.GetEventByGUID(model.InputModel.Guid);
+
+            model.ViewModel = new ChangeEventViewModel {
+                Guid = model.InputModel.Guid,
+                Address = ev.Address,
+                Name = ev.Name,
+                StartingDateTime = ev.StartingDateTime,
+            };
+
+            try
+            {
+                eventsService.ChangeEvent(model.InputModel);
+            }
+            catch (Exception e)
+            {
+
+                return View("ChangeEvent", model);
+            }
+
+            return Redirect("/Administration/Admins/AllEvents");
         }
 
         public IActionResult AllClasses()

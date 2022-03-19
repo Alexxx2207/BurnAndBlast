@@ -1,4 +1,5 @@
-﻿using Ignite.Models.InputModels.Events;
+﻿using Ignite.Models;
+using Ignite.Models.InputModels.Events;
 using Ignite.Models.ViewModels.Events;
 using System;
 using System.Collections.Generic;
@@ -17,5 +18,13 @@ namespace Ignite.Services.Events
         void RemoveEvent(string eventId);
 
         bool CheckEventExists(string eventId);
+
+        void AddUserToEvent(string userId, string eventId);
+
+        void RemoveUserFromEvent(string userId, string eventId);
+
+        Event GetEventByGUID(string eventId);
+
+        void ChangeEvent(Models.InputModels.Events.ChangeEventInputModel model);
     }
 }

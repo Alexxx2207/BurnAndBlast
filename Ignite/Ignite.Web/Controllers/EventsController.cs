@@ -28,11 +28,31 @@ namespace Ignite.Web.Controllers
 
         // When a button Attend is clicked
         [Authorize]
-        public IActionResult Attend(string classId)
+        public IActionResult Attend(string eventId)
         {
+            try
+            {
+                eventsService.AddUserToEvent(User.FindFirstValue(ClaimTypes.NameIdentifier), eventId);
+            }
+            catch (Exception)
+            {
+                return Redirect("/Events/All");
+            }
             return Redirect("/Events/All");
         }
-
-
+        
+        [Authorize]
+        public IActionResult UnAttend(string eventId)
+        {
+            try
+            {
+                eventsService.RemoveUserFromEvent(User.FindFirstValue(ClaimTypes.NameIdentifier), eventId);
+            }
+            catch (Exception)
+            {
+                return Redirect("/Events/All");
+            }
+            return Redirect("/Events/All");
+        }
     }
 }

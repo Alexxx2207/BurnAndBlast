@@ -8,8 +8,10 @@ using System.Threading.Tasks;
 
 namespace Ignite.Models.InputModels.Events
 {
-    public class AddEventInputModel
+    public class ChangeEventInputModel
     {
+        public string Guid { get; set; }
+
         [Required]
         public string Name { get; set; }
 
