@@ -1,15 +1,23 @@
-﻿body{
+﻿
+body {
     color: white;
     padding-bottom: 10px;
 }
 
-a{
-    text-decoration: none;
+p{
+    font-size: 20px;
 }
 
-#AllEventsTitle {
-    margin-top: 70px;
-    margin-left: 50px;
+.delimiter{
+    padding: 30px;
+}
+
+#titlePart {
+    border-bottom: 2px solid white;
+}
+
+#descPart {
+    border-bottom: 2px solid white;
 }
 
 .eventsWidget {
@@ -17,12 +25,6 @@ a{
     padding: 40px;
     background-color: #0000006a;
     color: white;
-    letter-spacing: 4px;
-}
-
-.rowEvents {
-    display: flex;
-    justify-content: space-between;
 }
 
 #peopleAttendImage {
@@ -34,6 +36,10 @@ a{
     border-radius: 30%;
     border: 3px solid white;
     padding: 10px;
+}
+
+.Row {
+    justify-content: space-between;
 }
 
 .buttonn {

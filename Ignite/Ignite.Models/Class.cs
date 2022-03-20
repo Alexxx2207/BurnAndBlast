@@ -20,11 +20,13 @@
         [Required]
         public int DurationInMinutes { get; set; }
 
+        public decimal Price { get; set; }
+
         [Required]
         public int AllSeats { get; set; }
 
         [Required]
-        public bool IsSuspended { get; set; }
+        public string Description { get; set; }
 
         [Required]
         public string FitnessId { get; set; }

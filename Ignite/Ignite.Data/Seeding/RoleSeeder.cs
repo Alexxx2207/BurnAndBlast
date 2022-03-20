@@ -15,8 +15,6 @@ namespace Ignite.Data.Seeding
             var roleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
 
             await SeedRoleAsync(roleManager, GlobalConstants.GlobalConstants.AdministratorRoleName);
-
-            await SeedRoleAsync(roleManager, GlobalConstants.GlobalConstants.TrainerRoleName);
         }
 
         private static async Task SeedRoleAsync(RoleManager<IdentityRole> roleManager, string roleName)

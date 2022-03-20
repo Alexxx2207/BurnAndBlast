@@ -1,0 +1,55 @@
+﻿@model Ignite.Models.ViewModels.Events.ShowEventDetailsViewModel
+
+<link rel="stylesheet" href="~/css/EventDetails.css" \>
+
+<div class="eventsWidget">
+
+    <div id="titlePart" class="delimiter">
+        <div class="d-flex Row">
+            <div>
+                <h1>@Model.Name</h1>
+            </div>
+            <div>
+                @if (@Model.UserAttends)
+                {
+                    <a href="UnAttend?eventId=@Model.Guid" class="btn btn-danger buttonn">UNSUBSCRIBE</a>
+                }
+                else
+                {
+                    <a href="Attend?eventId=@Model.Guid" class="btn btn-success buttonn">SUBSCRIBE</a>
+                }
+            </div>
+        </div>
+        <h2>@Model.Address</h2>
+    </div>
+
+    <div id="descPart" class="delimiter">
+
+        @if (!string.IsNullOrWhiteSpace(Model.Description))
+        {
+            <p>
+                @Model.Description
+            </p>
+        }
+        else
+        {
+            <p>
+                Unfortunately, description is not provided for this event. <br \>
+                Please get in touch with our <strong>Client Support</strong> via
+                <br \><strong>+359 55 076 076</strong> OR <strong>ignite@ignite.ignite</strong>
+                for more information about this event.
+            </p>
+        }
+    </div>
+
+    <div id="footerPart" class="delimiter">
+        <div class="d-flex Row">
+            <div>
+                <p>@Model.StartingDateTime.ToString("dd/MM/yyyy HH:mm")</p>
+            </div>
+            <div id="peopleAttend">
+                <img id="peopleAttendImage" src="~/Images/PeopleAttendIcon.png" /> @Model.UsersCount
+            </div>
+        </div>
+    </div>
+</div>

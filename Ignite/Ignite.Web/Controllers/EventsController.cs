@@ -26,7 +26,7 @@ namespace Ignite.Web.Controllers
             return View(model);
         }
 
-        // When a button Attend is clicked
+        // When a button Subscribe is clicked
         [Authorize]
         public IActionResult Attend(string eventId)
         {
@@ -40,7 +40,9 @@ namespace Ignite.Web.Controllers
             }
             return Redirect("/Events/All");
         }
-        
+
+        // When a button Unsubscribe is clicked
+
         [Authorize]
         public IActionResult UnAttend(string eventId)
         {
@@ -53,6 +55,14 @@ namespace Ignite.Web.Controllers
                 return Redirect("/Events/All");
             }
             return Redirect("/Events/All");
+        }
+
+        // When a button More Details is clicked
+        public IActionResult Details(string eventId)
+        {
+            var model = eventsService.GetDetailsOfEvent(User.FindFirstValue(ClaimTypes.NameIdentifier), eventId);
+            
+            return this.View(model);
         }
     }
 }

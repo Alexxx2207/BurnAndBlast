@@ -43,6 +43,7 @@ namespace Ignite.Services.Events
                 Name = model.Name,
                 Address = model.Address,
                 StartingDateTime = model.StartingDateTime,
+                Description = model.Description,
             };
 
             db.Events.Add(ev);
@@ -92,7 +93,7 @@ namespace Ignite.Services.Events
             if(!CheckEventExists(eventId))
                 throw new ArgumentException("Invalid data.");
 
-            db.Events.Remove(db.Events.Find(eventId));
+            GetEventByGUID(eventId).IsDeleted = true;
             db.SaveChanges();
         }
 
@@ -128,20 +129,10 @@ namespace Ignite.Services.Events
 
             var ev = GetEventByGUID(model.Guid);
 
-            var evProperties = ev.GetType().GetProperties();
-            var modelProperties = model.GetType().GetProperties();
-
-            foreach (var propM in modelProperties)
-            {
-                foreach (var propE in evProperties)
-                {
-                    if (propE.PropertyType == propM.PropertyType &&
-                        propE.Name == propM.Name)
-                    {
-                        propE.SetValue(ev, propM.GetValue(model));
-                    }
-                }
-            }
+            ev.Name = model.Name;
+            ev.Address = model.Address;
+            ev.StartingDateTime = model.StartingDateTime;
+            ev.Description = model.Description;
 
             db.SaveChanges();
         }
@@ -152,6 +143,24 @@ namespace Ignite.Services.Events
                 throw new ArgumentException("Invalid data.");
 
             return db.Events.First(e => e.Guid == eventId);
+        }
+
+        public ShowEventDetailsViewModel GetDetailsOfEvent(string userId, string eventId)
+        {
+           var ev = db.Events
+               .Include(e => e.UsersEvents)
+               .First(e => e.Guid == eventId);
+
+               return  new ShowEventDetailsViewModel
+               {
+                   Guid = ev.Guid,
+                   Name = ev.Name,
+                   Address = ev.Address,
+                   StartingDateTime = ev.StartingDateTime,
+                   Description = ev.Description,
+                   UserAttends = ev.UsersEvents.Any(ue => ue.UserId == userId),
+                   UsersCount = ev.UsersEvents.Count
+               };
         }
     }
 }

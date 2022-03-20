@@ -1,73 +1,26 @@
-﻿using Ignite.Models.ParentModels;
-using Ignite.Services.Fitnesses;
-using Ignite.Models.InputModels.Fitnesses;
+﻿using Ignite.Models.InputModels.Events;
+using Ignite.Models.ParentModels;
+using Ignite.Models.ViewModels.Events;
+using Ignite.Services.Events;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Ignite.Models.InputModels.Events;
-using Ignite.Services.Events;
 using System.Security.Claims;
-using Microsoft.AspNetCore.Mvc.ModelBinding;
-using Ignite.Models.ViewModels.Events;
 
 namespace Ignite.Web.Areas.Administration.Controllers
 {
     [Authorize(Roles = "Administrator")]
     [Area("Administration")]
-    public class AdminsController : Controller
+    public class AdminEventsController : Controller
     {
-        private readonly ILogger<AdminsController> _logger;
-        private readonly IFitnessService fitnessService;
+        private readonly ILogger<AdminEventsController> _logger;
         private readonly IEventsService eventsService;
 
-        public AdminsController(
-            ILogger<AdminsController> logger,
-            IFitnessService fitnessService,
+        public AdminEventsController(
+            ILogger<AdminEventsController> logger,
             IEventsService eventsService)
         {
-            _logger = logger;
-            this.fitnessService = fitnessService;
             this.eventsService = eventsService;
-        }
 
-        public IActionResult AllFitnesses()
-        {
-            var viewModel = fitnessService.GetAllFitnesses();
-
-            var parentModel = new AllFitnessParentModel()
-            {
-                FitnessesInputModel = new FitnessesInputModel(),
-                GetFitnessViewModels = viewModel
-            };
-
-            return View(parentModel);
-        }
-
-        [HttpPost]
-        public IActionResult AddFitness(AllFitnessParentModel model)
-        {
-            try
-            {
-                fitnessService.AddFitness(model.FitnessesInputModel);
-            }
-            catch (Exception e)
-            {
-                var parentModel = new AllFitnessParentModel()
-                {
-                    FitnessesInputModel = new FitnessesInputModel(),
-                    GetFitnessViewModels = fitnessService.GetAllFitnesses()
-                };
-
-                return View("AllFitnesses", parentModel);
-            }
-            return Redirect("/Fitnesses/All");
-        }
-
-        public IActionResult RemoveFitness(string fitnessId)
-        {
-            if (fitnessService.CheckFitnessExist(fitnessId))
-                fitnessService.RemoveFitness(fitnessId);
-
-            return Redirect("/Administration/Admins/AllFitnesses");
         }
 
         public IActionResult AllEvents()
@@ -96,7 +49,7 @@ namespace Ignite.Web.Areas.Administration.Controllers
                 eventsService.AddEvent(model.AddEventInputModel);
             }
             catch (Exception e)
-            { 
+            {
 
                 return View("AllEvents", parentModel);
             }
@@ -108,13 +61,13 @@ namespace Ignite.Web.Areas.Administration.Controllers
             if (eventsService.CheckEventExists(eventId))
                 eventsService.RemoveEvent(eventId);
 
-            return Redirect("/Administration/Admins/AllEvents");
+            return Redirect("/Administration/AdminEvents/AllEvents");
         }
 
         public IActionResult ChangeEvent(string eventId)
         {
             if (!eventsService.CheckEventExists(eventId))
-                return Redirect("/Administration/Admins/AllEvents");
+                return Redirect("/Administration/AdminEvents/AllEvents");
 
             var ev = eventsService.GetEventByGUID(eventId);
 
@@ -127,6 +80,7 @@ namespace Ignite.Web.Areas.Administration.Controllers
                     Address = ev.Address,
                     Name = ev.Name,
                     StartingDateTime = ev.StartingDateTime,
+                    Description = ev?.Description,
                 }
             };
 
@@ -139,11 +93,13 @@ namespace Ignite.Web.Areas.Administration.Controllers
 
             var ev = eventsService.GetEventByGUID(model.InputModel.Guid);
 
-            model.ViewModel = new ChangeEventViewModel {
+            model.ViewModel = new ChangeEventViewModel
+            {
                 Guid = model.InputModel.Guid,
                 Address = ev.Address,
                 Name = ev.Name,
                 StartingDateTime = ev.StartingDateTime,
+                Description = ev?.Description,
             };
 
             try
@@ -156,12 +112,8 @@ namespace Ignite.Web.Areas.Administration.Controllers
                 return View("ChangeEvent", model);
             }
 
-            return Redirect("/Administration/Admins/AllEvents");
+            return Redirect("/Administration/AdminEvents/AllEvents");
         }
 
-        public IActionResult AllClasses()
-        {
-            return View();
-        }
     }
 }

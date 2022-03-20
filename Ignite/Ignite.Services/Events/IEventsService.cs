@@ -26,5 +26,7 @@ namespace Ignite.Services.Events
         Event GetEventByGUID(string eventId);
 
         void ChangeEvent(Models.InputModels.Events.ChangeEventInputModel model);
+
+        ShowEventDetailsViewModel GetDetailsOfEvent(string userId, string eventId);
     }
 }

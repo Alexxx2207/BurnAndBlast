@@ -16,10 +16,6 @@ namespace Ignite.Data.Seeding
             var userManager = serviceProvider.GetRequiredService<UserManager<ApplicationUser>>();
 
             await SeedUserAsync(userManager, "as@as.as", "as@as.as", "Mario", "Avramov", "123456", role: GlobalConstants.GlobalConstants.AdministratorRoleName);
-            await SeedUserAsync(userManager, "tisho@tisho.tisho", "tisho@tisho.tisho", "Tihomir", "Milev", "123456", role: GlobalConstants.GlobalConstants.TrainerRoleName);
-            await SeedUserAsync(userManager, "misha@misha.misha", "misha@misha.misha", "Misha", "Sergeeva", "123456", role: GlobalConstants.GlobalConstants.TrainerRoleName);
-            await SeedUserAsync(userManager, "alex@alex.alex", "alex@alex.alex", "Alexander", "Nikolov", "123456", role: GlobalConstants.GlobalConstants.TrainerRoleName);
-            await SeedUserAsync(userManager, "sandi@sandi.sandi", "sandi@sandi.sandi", "Sandra", "Krusteva", "123456", role: GlobalConstants.GlobalConstants.TrainerRoleName);
         }
 
         private static async Task SeedUserAsync(UserManager<ApplicationUser> userManager, 

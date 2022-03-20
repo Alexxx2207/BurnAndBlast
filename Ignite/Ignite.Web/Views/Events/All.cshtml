@@ -6,19 +6,15 @@
 
 @if (Model.Any(e => e.UserAttends))
 {
-    <h1 id="AllFitnessesTitle">Take Part In</h1>
+    <h1 id="AllEventsTitle">Take Part In</h1>
 }
 
 @foreach (var ev in Model.Where(e => e.UserAttends))
 {
-    <div class="eventsWidget col-8">
+    <div class="eventsWidget">
         <div class="rowEvents">
             <h2>Event - @ev.Name</h2>
-            <div id="UNATTENDButton">
-                <a href="UnAttend?eventId=@ev.Guid" style="color: #d11d24;">
-                    <img id="attendDot" src="~/Images/RedDotForAttend.jpg" />UNSUBSCRIBE
-                </a>
-            </div>
+            <a href="UnAttend?eventId=@ev.Guid" class="btn btn-danger buttonn">UNSUBSCRIBE</a>
         </div>
         <h4>Address: @ev.Address</h4>
         <div class="rowEvents">
@@ -27,28 +23,28 @@
                 <img id="peopleAttendImage" src="~/Images/PeopleAttendIcon.png" /> @ev.UsersCount
             </div>
         </div>
+        
+        <a class="btn btn-primary" href="/Events/Details?eventId=@ev.Guid">
+            MORE DETAILS
+        </a>
     </div>
 }
 
 @if (!User.Identity.IsAuthenticated)
 {
-    <h1 id="AllFitnessesTitle">All Events</h1>
+    <h1 id="AllEventsTitle">All Events</h1>
 }
 else if (Model.Any(e => !e.UserAttends))
 {
-    <h1 id="AllFitnessesTitle">Other Events</h1>
+    <h1 id="AllEventsTitle">Other Events</h1>
 }
 
 @foreach (var ev in Model.Where(e => !e.UserAttends))
 {
-    <div class="eventsWidget col-8">
+    <div class="eventsWidget">
         <div class="rowEvents">
             <h2>Event - @ev.Name</h2>
-            <div id="ATTENDButton">
-                <a href="Attend?eventId=@ev.Guid" style="color: #6dcb01;">
-                    <img id="attendDot" src="~/Images/GreenDotForAttend.jpg" />SUBSCRIBE
-                </a>
-            </div>
+             <a href="Attend?eventId=@ev.Guid" class="btn btn-success buttonn">SUBSCRIBE</a>
         </div>
         <h4>Address: @ev.Address</h4>
         <div class="rowEvents">
@@ -57,5 +53,9 @@ else if (Model.Any(e => !e.UserAttends))
                 <img id="peopleAttendImage" src="~/Images/PeopleAttendIcon.png" \> @ev.UsersCount
             </div>
         </div>
+
+        <a class="btn btn-primary" href="/Events/Details?eventId=@ev.Guid">
+            MORE DETAILS
+        </a>
     </div>
 }

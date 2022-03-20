@@ -18,6 +18,8 @@ namespace Ignite.Models.InputModels.Events
         [Required]
         public string Address { get; set; }
 
+        public string? Description { get; set; }
+
         [Required]
         [EventDateTimeValidation]
         public DateTime StartingDateTime { get; set; }
