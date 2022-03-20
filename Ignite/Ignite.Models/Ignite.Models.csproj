@@ -11,6 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Ignite.GlobalConstants\Ignite.GlobalConstants.csproj" />
     <ProjectReference Include="..\Ignite.Infrastructure\Ignite.Infrastructure.csproj" />
   </ItemGroup>
 

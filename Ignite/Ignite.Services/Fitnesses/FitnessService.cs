@@ -2,6 +2,7 @@
 using Ignite.Models;
 using Ignite.Models.InputModels.Fitnesses;
 using Ignite.Models.ViewModels.Fitnesses;
+using Microsoft.AspNetCore.Http;
 
 namespace Ignite.Services.Fitnesses
 {
@@ -16,15 +17,6 @@ namespace Ignite.Services.Fitnesses
 
         public void AddFitness(FitnessesInputModel model)
         {
-            if (string.IsNullOrWhiteSpace(model.Name))
-            {
-                throw new ArgumentException("Name must be provied!");
-            }
-            else if (string.IsNullOrWhiteSpace(model.Address))
-            {
-                throw new ArgumentException("Address must be provied!");
-            }
-
             var fitness = new Fitness
             {
                 Guid = Guid.NewGuid().ToString(),
@@ -53,6 +45,11 @@ namespace Ignite.Services.Fitnesses
                     Name = fitness.Name,
                 })
                 .ToList();
+        }
+
+        public bool IsNameAvailable(string name)
+        {
+            return !db.Fitnesses.Any(f => f.Name.ToLower() == name.ToLower() && !f.IsDeleted);
         }
 
         public void RemoveFitness(string fitnessId)

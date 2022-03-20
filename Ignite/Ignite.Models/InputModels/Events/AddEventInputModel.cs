@@ -18,8 +18,7 @@ namespace Ignite.Models.InputModels.Events
 
         public string? Description { get; set; }
 
-        [Required]
-        [EventDateTimeValidation]
-        public DateTime StartingDateTime { get; set; }
+        [DateTimeValidation(ErrorMessage = "Date & Time must be today or in the future.")]
+        public DateTime? StartingDateTime { get; set; }
     }
 }

@@ -38,36 +38,45 @@ namespace Ignite.Web.Areas.Administration.Controllers
         [HttpPost]
         public IActionResult AddEvents(AllEventsParentModel model)
         {
-            var parentModel = new AllEventsParentModel()
-            {
-                AddEventInputModel = new AddEventInputModel(),
-                ShowEventsViewModel = eventsService.GetEvents(User.FindFirstValue(ClaimTypes.NameIdentifier))
-            };
+            ModelState.Remove("ShowEventsViewModel");
 
-            try
+            if (!string.IsNullOrWhiteSpace(model.AddEventInputModel.Name) && !eventsService.IsNameAvailable(model.AddEventInputModel.Name))
             {
-                eventsService.AddEvent(model.AddEventInputModel);
+                ModelState.AddModelError("nameExists", $"Event with name '{model.AddEventInputModel.Name}' already exists!");
             }
-            catch (Exception e)
+            if (model.AddEventInputModel.StartingDateTime == null)
             {
+                ModelState.AddModelError("dateMissing", $"A starting Date & Time is required.");
+            }
+
+            if (!ModelState.IsValid)
+            {
+                var parentModel = new AllEventsParentModel()
+                {
+                    AddEventInputModel = model.AddEventInputModel,
+                    ShowEventsViewModel = eventsService.GetEvents(User.FindFirstValue(ClaimTypes.NameIdentifier))
+                };
 
                 return View("AllEvents", parentModel);
+
             }
+
+            eventsService.AddEvent(model.AddEventInputModel);
+
             return Redirect("/Events/All");
         }
 
         public IActionResult RemoveEvent(string eventId)
         {
             if (eventsService.CheckEventExists(eventId))
-                eventsService.RemoveEvent(eventId);
+                eventsService.RemoveEvent(User.FindFirstValue(ClaimTypes.NameIdentifier), eventId);
 
             return Redirect("/Administration/AdminEvents/AllEvents");
         }
 
         public IActionResult ChangeEvent(string eventId)
         {
-            if (!eventsService.CheckEventExists(eventId))
-                return Redirect("/Administration/AdminEvents/AllEvents");
+
 
             var ev = eventsService.GetEventByGUID(eventId);
 
@@ -90,27 +99,35 @@ namespace Ignite.Web.Areas.Administration.Controllers
         [HttpPost]
         public IActionResult ChangeEvent(ChangeEventsParentModel model)
         {
+            ModelState.Remove("ViewModel");
 
-            var ev = eventsService.GetEventByGUID(model.InputModel.Guid);
-
-            model.ViewModel = new ChangeEventViewModel
+            if (!string.IsNullOrWhiteSpace(model.InputModel.Name) && !eventsService.IsNameAvailable(model.InputModel.Name))
             {
-                Guid = model.InputModel.Guid,
-                Address = ev.Address,
-                Name = ev.Name,
-                StartingDateTime = ev.StartingDateTime,
-                Description = ev?.Description,
-            };
-
-            try
-            {
-                eventsService.ChangeEvent(model.InputModel);
+                ModelState.AddModelError("nameExists", $"Event with name '{model.InputModel.Name}' already exists!");
             }
-            catch (Exception e)
+            if (model.InputModel.StartingDateTime == null)
             {
+                ModelState.AddModelError("dateMissing", $"A starting Date & Time is required.");
+            }
+
+            if(!ModelState.IsValid)
+            {
+                var ev = eventsService.GetEventByGUID(model.InputModel.Guid);
+
+                model.ViewModel = new ChangeEventViewModel
+                {
+                    Guid = model.InputModel.Guid,
+                    Address = ev.Address,
+                    Name = ev.Name,
+                    StartingDateTime = ev.StartingDateTime,
+                    Description = ev?.Description,
+                };
 
                 return View("ChangeEvent", model);
             }
+
+            eventsService.ChangeEvent(model.InputModel);
+
 
             return Redirect("/Administration/AdminEvents/AllEvents");
         }

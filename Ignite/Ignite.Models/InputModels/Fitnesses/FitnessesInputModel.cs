@@ -9,5 +9,6 @@ namespace Ignite.Models.InputModels.Fitnesses
 
         [Required]
         public string Address { get; set; }
+
     }
 }

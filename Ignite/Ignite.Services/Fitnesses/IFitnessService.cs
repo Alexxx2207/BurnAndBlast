@@ -12,5 +12,7 @@ namespace Ignite.Services.Fitnesses
         List<GetFitnessViewModel> GetAllFitnesses();
 
         bool CheckFitnessExist(string fitnessId);
+
+        bool IsNameAvailable(string name);
     }
 }

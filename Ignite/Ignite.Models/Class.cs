@@ -15,6 +15,9 @@
         public string Guid { get; set; }
 
         [Required]
+        public string Name { get; set; }
+
+        [Required]
         public DateTime StartingDateTime { get; set; }
 
         [Required]

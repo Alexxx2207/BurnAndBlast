@@ -6,28 +6,23 @@
     <h2 id="addTitle">Add Event</h2>
 
     <form action="/Administration/AdminEvents/AddEvents" method="post">
-        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div asp-validation-summary="All" class="text-danger"></div>
 
         <label asp-for="AddEventInputModel.Name" class="form-label" hidden></label>
         <input asp-for="AddEventInputModel.Name" class="form-control form-control1" aria-required="true" placeholder="Name" />
-        <span asp-validation-for="AddEventInputModel.Name" class="text-danger"></span>
 
         <label asp-for="AddEventInputModel.Address" class="form-label" hidden></label>
         <input asp-for="AddEventInputModel.Address" class="form-control form-control1" aria-required="true" placeholder="Address" />
-        <span asp-validation-for="AddEventInputModel.Address" class="text-danger"></span>
 
         <br \>
 
         <label asp-for="AddEventInputModel.Description" class="form-label"></label>
         <br \>
         <textarea asp-for="AddEventInputModel.Description" class="form-control form-control1"></textarea>
-        <span asp-validation-for="AddEventInputModel.Description" class="text-danger"></span>
-
         <br \>
 
         <label asp-for="AddEventInputModel.StartingDateTime" class="form-label">Start Date & Time</label>
         <input asp-for="AddEventInputModel.StartingDateTime" class="form-control" value=@DateTime.Now />
-        <span asp-validation-for="AddEventInputModel.StartingDateTime" class="text-danger"></span>
 
         <button id="addButton" type="submit" class="w-100 btn btn-background-slide btn-lg btn-primary">ADD</button>
     </form>

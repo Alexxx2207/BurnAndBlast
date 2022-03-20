@@ -8,32 +8,28 @@
         <h2 id="changeTitle">Change Event</h2>
 
         <form action="/Administration/AdminEvents/ChangeEvent" method="post">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div asp-validation-summary="All" class="text-danger"></div>
 
             <input asp-for="InputModel.Guid" hidden value="@Model.ViewModel.Guid" />
 
             <div>
                 <label asp-for="InputModel.Name" class="form-label" hidden></label>
-                <input asp-for="InputModel.Name" class="form-control form-control1" aria-required="true" />
-                <span asp-validation-for="InputModel.Name" class="text-danger"></span>
+                <input asp-for="InputModel.Name" class="form-control form-control1" aria-required="true" placeholder="Name" />
             </div>
 
             <div>
                 <label asp-for="InputModel.Address" class="form-label" hidden></label>
-                <input asp-for="InputModel.Address" class="form-control form-control1" aria-required="true" />
-                <span asp-validation-for="InputModel.Address" class="text-danger"></span>
+                <input asp-for="InputModel.Address" class="form-control form-control1" aria-required="true" placeholder="Address" />
             </div>
 
             <div>
                 <label asp-for="InputModel.Description" class="form-label"></label>
                 <textarea asp-for="InputModel.Description" class="form-control form-control1"></textarea>
-                <span asp-validation-for="InputModel.Description" class="text-danger"></span>
             </div>
 
             <div>
                 <label asp-for="InputModel.StartingDateTime" id="dateLabel" class="form-label">Start Date & Time</label>
                 <input asp-for="InputModel.StartingDateTime" class="form-control" id="picker" value=@DateTime.Now />
-                <span asp-validation-for="InputModel.StartingDateTime" class="text-danger"></span>
             </div>
 
             <button id="changeButton" type="submit" class="w-100 btn btn-background-slide btn-lg btn-success">Change</button>

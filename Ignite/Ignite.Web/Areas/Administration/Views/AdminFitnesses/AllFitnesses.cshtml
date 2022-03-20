@@ -8,15 +8,13 @@
     <h2 id="addTitle">Add Fitness</h2>
 
     <form action="/Administration/AdminFitnesses/AddFitness" method="post">
-        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div asp-validation-summary="All" class="text-danger"></div>
 
         <label asp-for="FitnessesInputModel.Name" class="form-label" hidden></label>
         <input asp-for="FitnessesInputModel.Name" class="form-control" aria-required="true" placeholder="Name" />
-        <span asp-validation-for="FitnessesInputModel.Name" class="text-danger"></span>
 
         <label asp-for="FitnessesInputModel.Address" class="form-label" hidden></label>
         <input asp-for="FitnessesInputModel.Address" class="form-control" aria-required="true" placeholder="Address" />
-        <span asp-validation-for="FitnessesInputModel.Address" class="text-danger"></span>
 
         <button id="addButton" type="submit" class="w-100 btn btn-background-slide btn-lg btn-primary">ADD</button>
     </form>
@@ -24,15 +22,15 @@
 
 @foreach (var fitness in Model.GetFitnessViewModels)
 {
-<div class="fitnessWidget col-8">
-    <div class="rowFitness">
-        <h2>Ignite - @fitness.Name</h2>
-        <a href="RemoveFitness?fitnessId=@fitness.Guid">
-            <img src="~/Images/RemoveRedCrossImage.jpg" />
-        </a>
+    <div class="fitnessWidget col-8">
+        <div class="rowFitness">
+            <h2>Ignite - @fitness.Name</h2>
+            <a href="RemoveFitness?fitnessId=@fitness.Guid">
+                <img src="~/Images/RemoveRedCrossImage.jpg" />
+            </a>
+        </div>
+        <h4>Address - @fitness.Address</h4>
     </div>
-    <h4>Address - @fitness.Address</h4>
-</div>
 }
 
 

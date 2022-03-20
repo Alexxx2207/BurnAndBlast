@@ -42,20 +42,25 @@ namespace Ignite.Web.Areas.Administration.Controllers
         [HttpPost]
         public IActionResult AddFitness(AllFitnessParentModel model)
         {
-            try
+            if(!string.IsNullOrWhiteSpace(model.FitnessesInputModel.Name) && !fitnessService.IsNameAvailable(model.FitnessesInputModel.Name))
             {
-                fitnessService.AddFitness(model.FitnessesInputModel);
+                ModelState.AddModelError("nameExists", $"Fitness with name '{model.FitnessesInputModel.Name}' already exists!");
             }
-            catch (Exception e)
+
+            ModelState.Remove("GetFitnessViewModels");
+
+            if (!ModelState.IsValid)
             {
                 var parentModel = new AllFitnessParentModel()
                 {
-                    FitnessesInputModel = new FitnessesInputModel(),
+                    FitnessesInputModel = model.FitnessesInputModel,
                     GetFitnessViewModels = fitnessService.GetAllFitnesses()
                 };
 
                 return View("AllFitnesses", parentModel);
             }
+
+            fitnessService.AddFitness(model.FitnessesInputModel);
             return Redirect("/Fitnesses/All");
         }
 

@@ -29,12 +29,6 @@ builder.Services.Configure<RazorViewEngineOptions>(options =>
 
 builder.Services.AddControllersWithViews();
 
-//builder.Services.AddRazorPages(options => 
-//{
-//    options.Conventions.AllowAnonymousToPage("/Identity/Account/Login");
-//    options.Conventions.AllowAnonymousToPage("/Identity/Account/Register");
-//});
-
 builder.Services.AddTransient<IFitnessService, FitnessService>();
 builder.Services.AddTransient<IUsersService, UsersService>();
 builder.Services.AddTransient<IEventsService, EventsService>();

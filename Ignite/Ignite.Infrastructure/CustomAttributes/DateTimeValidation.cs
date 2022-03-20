@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 namespace Ignite.Infrastructure.CustomAttributes
 {
     [AttributeUsage(AttributeTargets.Property)]
-    public class EventDateTimeValidation : ValidationAttribute
+    public class DateTimeValidation : ValidationAttribute
     {
         private readonly DateTime startDateTime;
 
-        public EventDateTimeValidation()
+        public DateTimeValidation()
         {
             startDateTime = DateTime.Now;
         }
@@ -26,7 +26,7 @@ namespace Ignite.Infrastructure.CustomAttributes
 
             if ((DateTime)value < startDateTime)
             {
-                ErrorMessage = "Date & Time must be today or in the future.";
+               
                 return false;
             }
             return true;

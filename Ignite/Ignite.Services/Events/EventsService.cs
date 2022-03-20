@@ -24,25 +24,12 @@ namespace Ignite.Services.Events
 
         public void AddEvent(AddEventInputModel model)
         {
-            if (string.IsNullOrWhiteSpace(model.Name))
-            {
-                throw new ArgumentException("Name must be provied!");
-            }
-            else if (string.IsNullOrWhiteSpace(model.Address))
-            {
-                throw new ArgumentException("Address must be provied!");
-            }
-            else if (model.StartingDateTime < DateTime.Now)
-            {
-                throw new ArgumentException("Invalid Date & Time!");
-            }
-
             var ev = new Event()
             {
                 Guid = Guid.NewGuid().ToString(),
                 Name = model.Name,
                 Address = model.Address,
-                StartingDateTime = model.StartingDateTime,
+                StartingDateTime = model.StartingDateTime.Value,
                 Description = model.Description,
             };
 
@@ -67,7 +54,7 @@ namespace Ignite.Services.Events
         }
 
         public bool CheckEventExists(string eventId)
-        {
+        { 
             return db.Events.Any(x => x.Guid == eventId);
         }
 
@@ -75,7 +62,6 @@ namespace Ignite.Services.Events
         {
             return db.Events
                 .Where(e => !e.IsDeleted)
-                .Include(e => e.UsersEvents)
                 .Select(e => new ShowEventsViewModel
                 {
                     Guid = e.Guid,
@@ -88,10 +74,11 @@ namespace Ignite.Services.Events
                 .ToList();
         }
 
-        public void RemoveEvent(string eventId)
+        public void RemoveEvent(string userId, string eventId)
         {
-            if(!CheckEventExists(eventId))
-                throw new ArgumentException("Invalid data.");
+            var userEvents = db.UsersEvents.Where(ue => ue.UserId == userId && ue.EventId == eventId).ToList();
+
+            db.UsersEvents.RemoveRange(userEvents);
 
             GetEventByGUID(eventId).IsDeleted = true;
             db.SaveChanges();
@@ -131,7 +118,7 @@ namespace Ignite.Services.Events
 
             ev.Name = model.Name;
             ev.Address = model.Address;
-            ev.StartingDateTime = model.StartingDateTime;
+            ev.StartingDateTime = model.StartingDateTime.Value;
             ev.Description = model.Description;
 
             db.SaveChanges();
@@ -161,6 +148,11 @@ namespace Ignite.Services.Events
                    UserAttends = ev.UsersEvents.Any(ue => ue.UserId == userId),
                    UsersCount = ev.UsersEvents.Count
                };
+        }
+
+        public bool IsNameAvailable(string name)
+        {
+            return !db.Events.Any(f => f.Name.ToLower() == name.ToLower() && !f.IsDeleted);
         }
     }
 }
