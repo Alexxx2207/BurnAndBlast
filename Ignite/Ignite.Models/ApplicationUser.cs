@@ -15,7 +15,6 @@ namespace Ignite.Models
             Roles = new HashSet<IdentityUserRole<string>>();
             Claims = new HashSet<IdentityUserClaim<string>>();
             Logins = new HashSet<IdentityUserLogin<string>>();
-            UsersSubscriptions = new HashSet<UserSubscription>();
             UsersEvents = new HashSet<UserEvent>();
             UsersClasses = new HashSet<UserClass>();
         }
@@ -35,8 +34,6 @@ namespace Ignite.Models
         public virtual ICollection<IdentityUserClaim<string>> Claims { get; set; }
 
         public virtual ICollection<IdentityUserLogin<string>> Logins { get; set; }
-
-        public virtual ICollection<UserSubscription> UsersSubscriptions { get; set; }
 
         public virtual ICollection<UserEvent> UsersEvents { get; set; }
 

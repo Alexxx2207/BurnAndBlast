@@ -1,5 +1,6 @@
 ﻿using Ignite.Models;
 using Ignite.Models.InputModels.Classes;
+using Ignite.Models.ViewModels.Classes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,9 +13,9 @@ namespace Ignite.Services.Classes
     {
         void AddClasses(AddClassInputModel model);
 
-        //List<AllClassesViewModel> GetAllClasses();
+        List<AllClassesViewModel> GetAllClasses(string userId);
 
-        void RemoveClass(string classId);
+        void RemoveClass(string userId, string classId);
 
         bool CheckClassExists(string classId);
 
@@ -22,9 +23,9 @@ namespace Ignite.Services.Classes
 
         Class GetClassByGUID(string classId);
 
-        //void ChangeClass(ChangeClassInputModel model);
+        void ChangeClass(ChangeClassInputModel model);
 
-        //ShowClassDetailsViewModel GetDetailsOfClass(string userId, string classId);
+        ShowClassDetailsViewModel GetDetailsOfClass(string userId, string classId);
 
     }
 }

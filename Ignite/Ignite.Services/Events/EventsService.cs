@@ -98,22 +98,6 @@ namespace Ignite.Services.Events
 
         public void ChangeEvent(Models.InputModels.Events.ChangeEventInputModel model)
         {
-            if (!CheckEventExists(model.Guid))
-                throw new ArgumentException("Invalid data.");
-
-            if (string.IsNullOrWhiteSpace(model.Name))
-            {
-                throw new ArgumentException("Name must be provied!");
-            }
-            else if (string.IsNullOrWhiteSpace(model.Address))
-            {
-                throw new ArgumentException("Address must be provied!");
-            }
-            else if (model.StartingDateTime < DateTime.Now)
-            {
-                throw new ArgumentException("Invalid Date & Time!");
-            }
-
             var ev = GetEventByGUID(model.Guid);
 
             ev.Name = model.Name;

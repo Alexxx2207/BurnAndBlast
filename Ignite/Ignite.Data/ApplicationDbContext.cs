@@ -29,15 +29,12 @@ namespace Ignite.Data
 
         public DbSet<UserEvent> UsersEvents { get; set; }
 
-        public DbSet<UserSubscription> UsersSubscriptions { get; set; }
-
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
 
             builder.Entity<UserClass>().HasKey(k => new { k.UserId, k.ClassId });
             builder.Entity<UserEvent>().HasKey(k => new { k.UserId, k.EventId });
-            builder.Entity<UserSubscription>().HasKey(k => new { k.UserId, k.SubscriptionId });
 
             builder.Entity<Subscription>().Property(p => p.Price).HasColumnType("decimal").HasPrecision(38, 5);
         }

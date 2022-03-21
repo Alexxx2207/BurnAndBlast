@@ -4,6 +4,7 @@ using Ignite.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Ignite.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220321075628_RemoveFitnessAddAddressToClasses")]
+    partial class RemoveFitnessAddAddressToClasses
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -266,6 +268,24 @@ namespace Ignite.Data.Migrations
                     b.ToTable("UsersEvents");
                 });
 
+            modelBuilder.Entity("Ignite.Models.UserSubscription", b =>
+                {
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("SubscriptionId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime>("ExpirationDate")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("UserId", "SubscriptionId");
+
+                    b.HasIndex("SubscriptionId");
+
+                    b.ToTable("UsersSubscriptions");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
                     b.Property<string>("Id")
@@ -459,6 +479,25 @@ namespace Ignite.Data.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("Ignite.Models.UserSubscription", b =>
+                {
+                    b.HasOne("Ignite.Models.Subscription", "Subscription")
+                        .WithMany("UsersSubscriptions")
+                        .HasForeignKey("SubscriptionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Ignite.Models.ApplicationUser", "User")
+                        .WithMany("UsersSubscriptions")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Subscription");
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -533,6 +572,8 @@ namespace Ignite.Data.Migrations
                     b.Navigation("UsersClasses");
 
                     b.Navigation("UsersEvents");
+
+                    b.Navigation("UsersSubscriptions");
                 });
 
             modelBuilder.Entity("Ignite.Models.Class", b =>
@@ -548,6 +589,11 @@ namespace Ignite.Data.Migrations
             modelBuilder.Entity("Ignite.Models.Fitness", b =>
                 {
                     b.Navigation("Classes");
+                });
+
+            modelBuilder.Entity("Ignite.Models.Subscription", b =>
+                {
+                    b.Navigation("UsersSubscriptions");
                 });
 #pragma warning restore 612, 618
         }

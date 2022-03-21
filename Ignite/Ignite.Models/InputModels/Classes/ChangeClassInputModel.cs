@@ -1,5 +1,4 @@
-﻿using Ignite.GlobalConstants;
-using Ignite.Infrastructure.CustomAttributes;
+﻿using Ignite.Infrastructure.CustomAttributes;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -9,8 +8,10 @@ using System.Threading.Tasks;
 
 namespace Ignite.Models.InputModels.Classes
 {
-    public class AddClassInputModel
+    public class ChangeClassInputModel
     {
+        public string Guid { get; set; }
+
         [Required]
         public string? Name { get; set; }
 

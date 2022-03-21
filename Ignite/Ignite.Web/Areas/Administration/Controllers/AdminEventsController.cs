@@ -76,8 +76,6 @@ namespace Ignite.Web.Areas.Administration.Controllers
 
         public IActionResult ChangeEvent(string eventId)
         {
-
-
             var ev = eventsService.GetEventByGUID(eventId);
 
             var model = new ChangeEventsParentModel

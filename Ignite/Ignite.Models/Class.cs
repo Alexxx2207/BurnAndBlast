@@ -18,6 +18,9 @@
         public string Name { get; set; }
 
         [Required]
+        public string Address { get; set; }
+
+        [Required]
         public DateTime StartingDateTime { get; set; }
 
         [Required]
@@ -30,11 +33,6 @@
 
         [Required]
         public string Description { get; set; }
-
-        [Required]
-        public string FitnessId { get; set; }
-
-        public virtual Fitness Fitness { get; set; }
 
         public bool IsDeleted { get; set; }
 

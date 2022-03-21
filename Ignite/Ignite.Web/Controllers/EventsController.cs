@@ -30,14 +30,8 @@ namespace Ignite.Web.Controllers
         [Authorize]
         public IActionResult Attend(string eventId)
         {
-            try
-            {
-                eventsService.AddUserToEvent(User.FindFirstValue(ClaimTypes.NameIdentifier), eventId);
-            }
-            catch (Exception)
-            {
-                return Redirect("/Events/All");
-            }
+            eventsService.AddUserToEvent(User.FindFirstValue(ClaimTypes.NameIdentifier), eventId);
+
             return Redirect("/Events/All");
         }
 
@@ -46,14 +40,8 @@ namespace Ignite.Web.Controllers
         [Authorize]
         public IActionResult UnAttend(string eventId)
         {
-            try
-            {
-                eventsService.RemoveUserFromEvent(User.FindFirstValue(ClaimTypes.NameIdentifier), eventId);
-            }
-            catch (Exception)
-            {
-                return Redirect("/Events/All");
-            }
+            eventsService.RemoveUserFromEvent(User.FindFirstValue(ClaimTypes.NameIdentifier), eventId);
+
             return Redirect("/Events/All");
         }
 
