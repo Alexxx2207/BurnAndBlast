@@ -1,8 +1,9 @@
-﻿@model Ignite.Models.ViewModels.Events.ShowEventDetailsViewModel
+﻿
+@model Ignite.Models.ViewModels.Classes.ShowClassDetailsViewModel
 
-<link rel="stylesheet" href="~/css/EventDetails.css" \>
+<link rel="stylesheet" href="~/css/ClassesDetails.css" \>
 
-<div class="eventsWidget">
+<div class="classesWidget">
 
     <div id="titlePart" class="delimiter">
         <div class="d-flex Row">
@@ -12,11 +13,11 @@
             <div>
                 @if (@Model.UserAttends)
                 {
-                    <a href="UnAttend?eventId=@Model.Guid" class="btn btn-danger buttonn">UNSUBSCRIBE</a>
+                    <h4 id="subscribedLabel">SUBSCRIBED</h4>
                 }
                 else
                 {
-                    <a href="Attend?eventId=@Model.Guid" class="btn btn-success buttonn">SUBSCRIBE</a>
+                    <a href="Attend?classId=@Model.Guid" class="btn btn-success buttonn">SUBSCRIBE</a>
                 }
             </div>
         </div>

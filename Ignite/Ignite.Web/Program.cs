@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Razor;
 using Ignite.Services.Fitnesses;
 using Ignite.Services.Users;
 using Ignite.Services.Events;
+using Ignite.Services.Classes;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -32,6 +33,7 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddTransient<IFitnessService, FitnessService>();
 builder.Services.AddTransient<IUsersService, UsersService>();
 builder.Services.AddTransient<IEventsService, EventsService>();
+builder.Services.AddTransient<IClassesService, ClassesService>();
 
 var app = builder.Build();
 

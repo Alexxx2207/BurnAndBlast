@@ -23,7 +23,7 @@
                 <img id="peopleAttendImage" src="~/Images/PeopleAttendIcon.png" /> @ev.UsersCount
             </div>
         </div>
-        
+
         <a class="btn btn-primary" href="/Events/Details?eventId=@ev.Guid">
             MORE DETAILS
         </a>
@@ -44,7 +44,7 @@ else if (Model.Any(e => !e.UserAttends))
     <div class="eventsWidget">
         <div class="rowEvents">
             <h2>Event - @ev.Name</h2>
-             <a href="Attend?eventId=@ev.Guid" class="btn btn-success buttonn">SUBSCRIBE</a>
+            <a href="Attend?eventId=@ev.Guid" class="btn btn-success buttonn">SUBSCRIBE</a>
         </div>
         <h4>Address: @ev.Address</h4>
         <div class="rowEvents">

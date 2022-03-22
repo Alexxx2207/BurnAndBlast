@@ -1,3 +1,53 @@
-﻿
+﻿@*@model Ignite.Models.ParentModels.AllEventsParentModel
 
-<p>Add class admin page</p>
+<link rel="stylesheet" href="~/css/AdminClasses.css" />
+
+<div id="AddWidget" class="col-6">
+    <h2 id="addTitle">Add Class</h2>
+
+    <form action="/Administration/AdminClasses/AddClass" method="post">
+        <div asp-validation-summary="All" class="text-danger"></div>
+
+        <label asp-for="AddEventInputModel.Name" class="form-label" hidden></label>
+        <input asp-for="AddEventInputModel.Name" class="form-control form-control1" aria-required="true" placeholder="Name" />
+
+        <label asp-for="AddEventInputModel.Address" class="form-label" hidden></label>
+        <input asp-for="AddEventInputModel.Address" class="form-control form-control1" aria-required="true" placeholder="Address" />
+
+        <br \>
+
+        <label asp-for="AddEventInputModel.Description" class="form-label"></label>
+        <br \>
+        <textarea asp-for="AddEventInputModel.Description" class="form-control form-control1"></textarea>
+        <br \>
+
+        <label asp-for="AddEventInputModel.StartingDateTime" class="form-label">Start Date & Time</label>
+        <input asp-for="AddEventInputModel.StartingDateTime" class="form-control" value=@DateTime.Now />
+
+        <button id="addButton" type="submit" class="w-100 btn btn-background-slide btn-lg btn-primary">ADD</button>
+    </form>
+</div>
+
+@foreach (var classs in Model.ShowEventsViewModel)
+{
+    <div class="classesWidget col-8">
+        <div class="rowClasses">
+            <h2>Class - @classs.Name</h2>
+            <div>
+                <a href="ChangeClass?classId=@classs.Guid">
+                    <img id=changeButton src="~/Images/Wrench.png" />
+                </a>
+                <a href="RemoveClass?classId=@classs.Guid">
+                    <img id=removeButton src="~/Images/RemoveRedCrossImage.jpg" />
+                </a>
+            </div>
+        </div>
+        <h4>Address - @classs.Address</h4>
+        <div class="rowClasses">
+            <h4>Starts - @classs.StartingDateTime</h4>
+            <div id="peopleAttend">
+                <img id="peopleAttendImage" src="~/Images/PeopleAttendIcon.png" \> @classs.UsersCount
+            </div>
+        </div>
+    </div>
+}*@

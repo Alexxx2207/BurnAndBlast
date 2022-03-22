@@ -5,11 +5,6 @@
 
     public class Fitness
     {
-        public Fitness()
-        {
-            Classes = new HashSet<Class>();
-        }
-
         [Key]
         public string Guid { get; set; }
 
@@ -20,7 +15,5 @@
         public string Address { get; set; }
 
         public bool IsDeleted { get; set; }
-
-        public virtual ICollection<Class> Classes { get; set; }
     }
 }

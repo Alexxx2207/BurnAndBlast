@@ -1,3 +1,68 @@
-﻿
+﻿@using Ignite.Models.ViewModels.Classes
+@model List<AllClassesViewModel>
 
-<p>Page to list all classes</p>
+<link rel="stylesheet" href="~/css/ClassesAll.css" />
+
+
+@if (Model.Any(c => c.UserAttends))
+{
+    <h1 id="AllClassesTitle">Take Part In *Paid*</h1>
+}
+
+@foreach (var classes in Model.Where(c => c.UserAttends))
+{
+    <div class="classesWidget">
+        <h2>Class - @classes.Name</h2>
+        <h4>Address: @classes.Address</h4>
+        <div class="rowClasses">
+            <h4>Starts: @classes.StartingDateTime.ToString("dd/MM/yyyy HH:mm")</h4>
+            <div id="peopleAttend">
+                <img id="peopleAttendImage" src="~/Images/PeopleAttendIcon.png" /> @classes.UsersCount
+            </div>
+            <div>
+                <div id="allSeats">
+                    SEATS LEFT: <strong>@(classes.AllSeats - classes.UsersCount)</strong>
+                </div>
+            </div>
+        </div>
+
+        <a class="btn btn-primary" href="/Classes/Details?classId=@classes.Guid">
+            MORE DETAILS
+        </a>
+    </div>
+}
+
+@if (!User.Identity.IsAuthenticated)
+{
+    <h1 id="AllClassesTitle">All Events</h1>
+}
+else if (Model.Any(e => !e.UserAttends))
+{
+    <h1 id="AllClassesTitle">Other Events</h1>
+}
+
+@foreach (var classs in Model.Where(c => !c.UserAttends))
+{
+    <div class="classesWidget">
+        <div class="rowClasses">
+            <h2>Event - @classs.Name</h2>
+            <a href="Attend?classId=@classs.Guid" class="btn btn-success buttonn">SUBSCRIBE</a>
+        </div>
+        <h4>Address: @classs.Address</h4>
+        <div class="rowClasses">
+            <h4>Starts: @classs.StartingDateTime.ToString("dd/MM/yyyy HH:mm")</h4>
+            <div id="peopleAttend">
+                <img id="peopleAttendImage" src="~/Images/PeopleAttendIcon.png" \> @classs.UsersCount
+            </div>
+            <div>
+                <div id="allSeats">
+                    SEATS LEFT: <strong>@(classs.AllSeats - classs.UsersCount)</strong>
+                </div>
+            </div>
+        </div>
+
+        <a class="btn btn-primary" href="/Classes/Details?classId=@classs.Guid">
+            MORE DETAILS
+        </a>
+    </div>
+}
