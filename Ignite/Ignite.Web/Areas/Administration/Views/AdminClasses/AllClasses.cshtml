@@ -1,4 +1,4 @@
-﻿@*@model Ignite.Models.ParentModels.AllEventsParentModel
+﻿@model Ignite.Models.ParentModels.AllClassesParentModel
 
 <link rel="stylesheet" href="~/css/AdminClasses.css" />
 
@@ -8,27 +8,38 @@
     <form action="/Administration/AdminClasses/AddClass" method="post">
         <div asp-validation-summary="All" class="text-danger"></div>
 
-        <label asp-for="AddEventInputModel.Name" class="form-label" hidden></label>
-        <input asp-for="AddEventInputModel.Name" class="form-control form-control1" aria-required="true" placeholder="Name" />
+        <label asp-for="AddClassInputModel.Name" class="form-label" ></label>
+        <input asp-for="AddClassInputModel.Name" class="form-control form-control1" aria-required="true" placeholder="Name" />
 
-        <label asp-for="AddEventInputModel.Address" class="form-label" hidden></label>
-        <input asp-for="AddEventInputModel.Address" class="form-control form-control1" aria-required="true" placeholder="Address" />
+        <label asp-for="AddClassInputModel.Address" class="form-label" ></label>
+        <input asp-for="AddClassInputModel.Address" class="form-control form-control1" aria-required="true" placeholder="Address" />
 
         <br \>
 
-        <label asp-for="AddEventInputModel.Description" class="form-label"></label>
+        <label asp-for="AddClassInputModel.Description" class="form-label"></label>
         <br \>
-        <textarea asp-for="AddEventInputModel.Description" class="form-control form-control1"></textarea>
+        <textarea asp-for="AddClassInputModel.Description" class="form-control form-control1"></textarea>
         <br \>
 
-        <label asp-for="AddEventInputModel.StartingDateTime" class="form-label">Start Date & Time</label>
-        <input asp-for="AddEventInputModel.StartingDateTime" class="form-control" value=@DateTime.Now />
+        <label asp-for="AddClassInputModel.StartingDateTime" class="form-label">Start Date & Time</label>
+        <input asp-for="AddClassInputModel.StartingDateTime" class="form-control" value=@DateTime.Now />
+
+        <br \>
+
+        <label asp-for="AddClassInputModel.DurationInMinutes" class="form-label" ></label>
+        <input asp-for="AddClassInputModel.DurationInMinutes" class="form-control form-control1" aria-required="true" placeholder="Duration (in minutes)" />
+        
+        <label asp-for="AddClassInputModel.Price" class="form-label" ></label>
+        <input asp-for="AddClassInputModel.Price" class="form-control form-control1" aria-required="true" placeholder="Price" />
+        
+        <label asp-for="AddClassInputModel.AllSeats" class="form-label"></label>
+        <input asp-for="AddClassInputModel.AllSeats" class="form-control form-control1" aria-required="true" placeholder="Price" />
 
         <button id="addButton" type="submit" class="w-100 btn btn-background-slide btn-lg btn-primary">ADD</button>
     </form>
 </div>
 
-@foreach (var classs in Model.ShowEventsViewModel)
+@foreach (var classs in Model.ShowClassesViewModel)
 {
     <div class="classesWidget col-8">
         <div class="rowClasses">
@@ -50,4 +61,4 @@
             </div>
         </div>
     </div>
-}*@
+}

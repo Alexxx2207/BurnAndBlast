@@ -18,6 +18,9 @@ namespace Ignite.Models.InputModels.Classes
         public string? Address { get; set; }
 
         [Required]
+        public string? Description { get; set; }
+
+        [Required]
         [DateTimeValidation]
         public DateTime? StartingDateTime { get; set; }
 
@@ -31,7 +34,6 @@ namespace Ignite.Models.InputModels.Classes
         [Range(1, GlobalConstants.GlobalConstants.ClassMaxSeats)]
         public int? AllSeats { get; set; }
 
-        [Required]
-        public string? Description { get; set; }
+
     }
 }

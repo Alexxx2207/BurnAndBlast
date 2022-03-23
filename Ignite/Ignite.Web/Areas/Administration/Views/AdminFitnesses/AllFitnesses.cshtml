@@ -10,10 +10,10 @@
     <form action="/Administration/AdminFitnesses/AddFitness" method="post">
         <div asp-validation-summary="All" class="text-danger"></div>
 
-        <label asp-for="FitnessesInputModel.Name" class="form-label" hidden></label>
+        <label asp-for="FitnessesInputModel.Name" class="form-label"></label>
         <input asp-for="FitnessesInputModel.Name" class="form-control" aria-required="true" placeholder="Name" />
 
-        <label asp-for="FitnessesInputModel.Address" class="form-label" hidden></label>
+        <label asp-for="FitnessesInputModel.Address" class="form-label"></label>
         <input asp-for="FitnessesInputModel.Address" class="form-control" aria-required="true" placeholder="Address" />
 
         <button id="addButton" type="submit" class="w-100 btn btn-background-slide btn-lg btn-primary">ADD</button>
