@@ -14,8 +14,12 @@
     <div class="classesWidget">
         <h2>Class - @classes.Name</h2>
         <h4>Address: @classes.Address</h4>
+        <h4>Starts: @classes.StartingDateTime.ToString("dd/MM/yyyy HH:mm")</h4>
+
         <div class="rowClasses">
-            <h4>Starts: @classes.StartingDateTime.ToString("dd/MM/yyyy HH:mm")</h4>
+            <a class="btn btn-primary moreInfo" href="/Classes/Details?classId=@classes.Guid">
+                MORE DETAILS
+            </a>
             <div id="peopleAttend">
                 <img id="peopleAttendImage" src="~/Images/PeopleAttendIcon.png" /> @classes.UsersCount
             </div>
@@ -26,31 +30,29 @@
             </div>
         </div>
 
-        <a class="btn btn-primary" href="/Classes/Details?classId=@classes.Guid">
-            MORE DETAILS
-        </a>
+
     </div>
 }
 
-@if (!User.Identity.IsAuthenticated)
+@if (Model.Any(e => !e.UserAttends))
 {
-    <h1 id="AllClassesTitle">All Events</h1>
-}
-else if (Model.Any(e => !e.UserAttends))
-{
-    <h1 id="AllClassesTitle">Other Events</h1>
+    <h1 id="AllClassesTitle">Other Classes</h1>
 }
 
 @foreach (var classs in Model.Where(c => !c.UserAttends))
 {
     <div class="classesWidget">
         <div class="rowClasses">
-            <h2>Event - @classs.Name</h2>
+            <h2>Class - @classs.Name</h2>
             <a href="Attend?classId=@classs.Guid" class="btn btn-success buttonn">SUBSCRIBE</a>
         </div>
         <h4>Address: @classs.Address</h4>
+        <h4>Starts: @classs.StartingDateTime.ToString("dd/MM/yyyy HH:mm")</h4>
+
         <div class="rowClasses">
-            <h4>Starts: @classs.StartingDateTime.ToString("dd/MM/yyyy HH:mm")</h4>
+            <a class="btn btn-primary moreInfo" href="/Classes/Details?classId=@classs.Guid">
+                MORE DETAILS
+            </a>
             <div id="peopleAttend">
                 <img id="peopleAttendImage" src="~/Images/PeopleAttendIcon.png" \> @classs.UsersCount
             </div>
@@ -61,8 +63,6 @@ else if (Model.Any(e => !e.UserAttends))
             </div>
         </div>
 
-        <a class="btn btn-primary" href="/Classes/Details?classId=@classs.Guid">
-            MORE DETAILS
-        </a>
+
     </div>
 }

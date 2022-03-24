@@ -117,13 +117,14 @@ header {
     background-color: white;
     color: black;
     border: 2px solid white;
-    font-weight: 500;
+    font-weight: 600;
 }
 
     #login-submit:hover {
         color: white;
         letter-spacing: 7px;
         transition: 500ms;
+        font-weight: 700;
     }
 
 
@@ -224,6 +225,13 @@ header {
     text-decoration: none;
     color: white;
     font-weight: 700;
+}
+
+#errorDiv {
+    background-color: #00000080;
+    font-size: 16px;
+    letter-spacing: 1px;
+    font-weight: 600;
 }
 
 @media (max-width: 2000px) {

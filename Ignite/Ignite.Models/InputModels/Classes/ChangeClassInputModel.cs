@@ -19,20 +19,22 @@ namespace Ignite.Models.InputModels.Classes
         public string? Address { get; set; }
 
         [Required]
-        [DateTimeValidation]
+        public string? Description { get; set; }
+
+        [DateTimeValidation(ErrorMessage = "Date & Time must be today or in the future.")]
         public DateTime? StartingDateTime { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "The Duration field is required.")]
+        [Range(5, GlobalConstants.GlobalConstants.ClassMaxSeats)]
         public int? DurationInMinutes { get; set; }
 
+        [Required(ErrorMessage = "The Price field is required.")]
         [Range(1, GlobalConstants.GlobalConstants.ClassMaxPrice)]
-        public decimal Price { get; set; }
+        public decimal? Price { get; set; }
 
-        [Required]
-        [Range(1, GlobalConstants.GlobalConstants.ClassMaxSeats)]
+
+        [Required(ErrorMessage = "The All Seats field is required.")]
+        [Range(GlobalConstants.GlobalConstants.ClassMinDuration, GlobalConstants.GlobalConstants.ClassMaxDuration)]
         public int? AllSeats { get; set; }
-
-        [Required]
-        public string? Description { get; set; }
     }
 }

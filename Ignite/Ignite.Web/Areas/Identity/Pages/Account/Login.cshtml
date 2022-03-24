@@ -80,7 +80,10 @@
         <form id="account" class="col-5" method="post">
             <h2 id="loginHeading">LOG IN</h2>
 
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div id="errorDiv">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            </div>
+
             <div>
                 <label asp-for="Input.Email" class="form-label" hidden id="emailLabel"></label>
                 <input asp-for="Input.Email" id="emailControl" class="form-control" autocomplete="off" aria-required="true" placeholder="Email" />

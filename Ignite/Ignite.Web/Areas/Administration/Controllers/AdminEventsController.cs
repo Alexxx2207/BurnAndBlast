@@ -40,13 +40,15 @@ namespace Ignite.Web.Areas.Administration.Controllers
         {
             ModelState.Remove("ShowEventsViewModel");
 
-            if (!string.IsNullOrWhiteSpace(model.AddEventInputModel.Name) && !eventsService.IsNameAvailable(model.AddEventInputModel.Name))
+            if (!string.IsNullOrWhiteSpace(model.AddEventInputModel.Name) &&
+                !eventsService.IsNameAvailable(model.AddEventInputModel.Name, null))
             {
                 ModelState.AddModelError("nameExists", $"Event with name '{model.AddEventInputModel.Name}' already exists!");
             }
             if (model.AddEventInputModel.StartingDateTime == null)
             {
-                ModelState.AddModelError("dateMissing", $"A starting Date & Time is required.");
+                ModelState.AddModelError("dateMissing", $"The Start Date & Time field is required.");
+                ModelState.Remove("AddEventInputModel.StartingDateTime");
             }
 
             if (!ModelState.IsValid)
@@ -99,7 +101,8 @@ namespace Ignite.Web.Areas.Administration.Controllers
         {
             ModelState.Remove("ViewModel");
 
-            if (!string.IsNullOrWhiteSpace(model.InputModel.Name) && !eventsService.IsNameAvailable(model.InputModel.Name))
+            if (!string.IsNullOrWhiteSpace(model.InputModel.Name) &&
+                !eventsService.IsNameAvailable(model.InputModel.Name, model.InputModel.Guid))
             {
                 ModelState.AddModelError("nameExists", $"Event with name '{model.InputModel.Name}' already exists!");
             }

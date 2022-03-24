@@ -30,7 +30,7 @@ namespace Ignite.Services.Classes
                 Description = model.Description,
                 DurationInMinutes = model.DurationInMinutes.Value,
                 AllSeats = model.AllSeats.Value,
-                Price = model.Price,
+                Price = model.Price.Value,
                 StartingDateTime = model.StartingDateTime.Value,
             };
 
@@ -64,7 +64,7 @@ namespace Ignite.Services.Classes
             c.Description = model.Description;
             c.DurationInMinutes = model.DurationInMinutes.Value;
             c.AllSeats = model.AllSeats.Value;
-            c.Price = model.Price;
+            c.Price = model.Price.Value;
 
             db.SaveChanges();
         }
@@ -130,6 +130,12 @@ namespace Ignite.Services.Classes
 
             GetClassByGUID(classId).IsDeleted = true;
             db.SaveChanges();
+        }
+
+        public bool IsNameAvailable(string name, string guid)
+        {
+            return !db.Classes.Any(f => f.Name.ToLower() == name.ToLower() && 
+                        !f.IsDeleted && (guid == null || f.Guid != guid));
         }
     }
 }

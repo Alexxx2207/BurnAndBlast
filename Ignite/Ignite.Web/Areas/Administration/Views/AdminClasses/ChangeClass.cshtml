@@ -1,18 +1,19 @@
-﻿@model Ignite.Models.ParentModels.ChangeEventsParentModel
+﻿@model Ignite.Models.ParentModels.ChangeClassesParentModel
 
-<link rel="stylesheet" href="~/css/ChangeEvent.css" />
+<link rel="stylesheet" href="~/css/ChangeClass.css" />
 
 <div class="ChangeWidget col-24">
+
     <div class="d-flex delimiter">
         <div>
-            <h2 id="changeTitle">Change Event</h2>
+            <h2 id="changeTitle">Change Class</h2>
         </div>
         <div>
             <h2 id="OldTitle">Old Data</h2>
         </div>
     </div>
 
-    <form action="/Administration/AdminEvents/ChangeEvent" method="post">
+    <form action="/Administration/AdminClasses/ChangeClass" method="post">
         <div asp-validation-summary="All" class="text-danger"></div>
 
         <input asp-for="InputModel.Guid" hidden value="@Model.ViewModel.Guid" />
@@ -72,8 +73,49 @@
                 </h4>
             </div>
         </div>
+        <br \>
+        <div class="d-flex delimiter">
+            <div>
+                <label asp-for="InputModel.DurationInMinutes" class="form-label">Duration (in minutes)</label>
+                <input asp-for="InputModel.DurationInMinutes" class="form-control form-control1" aria-required="true" placeholder="Duration (in minutes)" />
+            </div>
+            <div>
+                <h4>
+                    <strong>Duration(in minutes):</strong>
+                    @Model.ViewModel.DurationInMinutes
+                </h4>
+            </div>
+        </div>
+
+        <div class="d-flex delimiter">
+            <div>
+                <label asp-for="InputModel.Price" class="form-label"></label>
+                <input asp-for="InputModel.Price" class="form-control form-control1" aria-required="true" placeholder="Price" />
+            </div>
+            <div>
+                <h4>
+                    <strong>Price:</strong>
+                    $@Model.ViewModel.Price
+                </h4>
+            </div>
+        </div>
+
+        <div class="d-flex delimiter">
+            <div>
+                <label asp-for="InputModel.AllSeats" class="form-label">All Seats</label>
+                <input asp-for="InputModel.AllSeats" class="form-control form-control1" aria-required="true" placeholder="All Seats" />
+            </div>
+            <div>
+                <h4>
+                    <strong>All Seats:</strong>
+                    @Model.ViewModel.AllSeats
+                </h4>
+            </div>
+        </div>
 
         <button id="changeButton" type="submit" class="w-100 btn btn-background-slide btn-lg btn-success">Change</button>
     </form>
 </div>
+
+
 

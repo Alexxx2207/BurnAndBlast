@@ -135,7 +135,7 @@ namespace Ignite.Web.Areas.Identity.Pages.Account
                 }
                 else
                 {
-                    ModelState.AddModelError(string.Empty, "Invalid login attempt.");
+                    ModelState.AddModelError(string.Empty, "User with given credentials was not found. Try again.");
                     return Page();
                 }
             }

@@ -134,9 +134,10 @@ namespace Ignite.Services.Events
                };
         }
 
-        public bool IsNameAvailable(string name)
+        public bool IsNameAvailable(string name, string guid)
         {
-            return !db.Events.Any(f => f.Name.ToLower() == name.ToLower() && !f.IsDeleted);
+            return !db.Events.Any(f => f.Name.ToLower() == name.ToLower() &&
+                            !f.IsDeleted && (guid == null || f.Guid != guid));
         }
     }
 }

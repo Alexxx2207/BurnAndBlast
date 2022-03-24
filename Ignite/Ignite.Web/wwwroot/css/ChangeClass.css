@@ -33,6 +33,10 @@
     font-size: 20px;
 }
 
+#OldDataPart {
+    text-align: center;
+}
+
 #changeTitle {
     color: white;
     font-weight: 600;
@@ -65,11 +69,12 @@ h4 {
     border: 2px solid white;
 }
 
-.delimiter{
+.delimiter {
     justify-content: space-between;
 }
 
 @media(max-width: 2000px) {
+
     #descriptionOld {
         width: 730px;
     }

@@ -27,5 +27,6 @@ namespace Ignite.Services.Classes
 
         ShowClassDetailsViewModel GetDetailsOfClass(string userId, string classId);
 
+        public bool IsNameAvailable(string name, string guid);
     }
 }

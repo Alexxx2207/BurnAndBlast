@@ -29,7 +29,7 @@ namespace Ignite.Services.Events
 
         ShowEventDetailsViewModel GetDetailsOfEvent(string userId, string eventId);
 
-        bool IsNameAvailable(string name);
+        bool IsNameAvailable(string name, string guid);
 
     }
 }

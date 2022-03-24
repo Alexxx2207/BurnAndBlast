@@ -240,7 +240,8 @@ header {
         .btn.btn-background-slide:focus {
             color: white;
             letter-spacing: 7px;
-            transition: 400ms ease-in-out
+            transition: 400ms ease-in-out;
+            font-weight: 600;
         }
 
 

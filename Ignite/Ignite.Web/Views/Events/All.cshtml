@@ -17,16 +17,18 @@
             <a href="UnAttend?eventId=@ev.Guid" class="btn btn-danger buttonn">UNSUBSCRIBE</a>
         </div>
         <h4>Address: @ev.Address</h4>
+        <h4>Starts: @ev.StartingDateTime.ToString("dd/MM/yyyy HH:mm")</h4>
+
         <div class="rowEvents">
-            <h4>Starts: @ev.StartingDateTime.ToString("dd/MM/yyyy HH:mm")</h4>
+            <a class="btn btn-primary moreInfo" href="/Events/Details?eventId=@ev.Guid">
+                MORE DETAILS
+            </a>
             <div id="peopleAttend">
                 <img id="peopleAttendImage" src="~/Images/PeopleAttendIcon.png" /> @ev.UsersCount
             </div>
         </div>
 
-        <a class="btn btn-primary" href="/Events/Details?eventId=@ev.Guid">
-            MORE DETAILS
-        </a>
+
     </div>
 }
 
@@ -47,15 +49,17 @@ else if (Model.Any(e => !e.UserAttends))
             <a href="Attend?eventId=@ev.Guid" class="btn btn-success buttonn">SUBSCRIBE</a>
         </div>
         <h4>Address: @ev.Address</h4>
+        <h4>Starts: @ev.StartingDateTime.ToString("dd/MM/yyyy HH:mm")</h4>
+
         <div class="rowEvents">
-            <h4>Starts: @ev.StartingDateTime.ToString("dd/MM/yyyy HH:mm")</h4>
+            <a class="btn btn-primary moreInfo" href="/Events/Details?eventId=@ev.Guid">
+                MORE DETAILS
+            </a>
             <div id="peopleAttend">
                 <img id="peopleAttendImage" src="~/Images/PeopleAttendIcon.png" \> @ev.UsersCount
             </div>
         </div>
 
-        <a class="btn btn-primary" href="/Events/Details?eventId=@ev.Guid">
-            MORE DETAILS
-        </a>
+
     </div>
 }
