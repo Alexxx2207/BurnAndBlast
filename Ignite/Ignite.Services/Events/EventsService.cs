@@ -139,5 +139,23 @@ namespace Ignite.Services.Events
             return !db.Events.Any(f => f.Name.ToLower() == name.ToLower() &&
                             !f.IsDeleted && (guid == null || f.Guid != guid));
         }
+
+        public List<ShowEventsViewModel> GetTopEvents(string userId, int count)
+        {
+            return db.Events
+                .Where(e => !e.IsDeleted)
+                .OrderByDescending(e => e.UsersEvents.Count)
+                .Take(count)
+                .Select(e => new ShowEventsViewModel
+                {
+                    Guid = e.Guid,
+                    Name = e.Name,
+                    Address = e.Address,
+                    StartingDateTime = e.StartingDateTime,
+                    UserAttends = e.UsersEvents.Any(ue => ue.UserId == userId),
+                    UsersCount = e.UsersEvents.Count
+                })
+                .ToList();
+        }
     }
 }

@@ -1,0 +1,110 @@
+﻿#wholeContent {
+    margin: 50px;
+    overflow-x: hidden;
+}
+
+.title{
+    font-weight: 700;
+    letter-spacing: 3px;
+    margin-bottom: 30px;
+}
+
+.whitePart {
+    background-color: white;
+    color: black;
+    letter-spacing: 2px;
+    font-weight: 600;
+    padding: 40px;
+    margin: 30px;
+    transform: skewX(-10deg);
+}
+
+.center {
+    text-align: center;
+    font-size: 23px;
+}
+
+.TopTitle {
+    margin-top: 40px;
+    margin-left: 50px;
+    color: white;
+}
+
+.eventsWidget {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-right: 50px;
+    padding: 40px;
+    background-color: #0000009a;
+    color: white;
+    letter-spacing: 4px;
+}
+
+.rowEvents {
+    display: flex;
+    justify-content: space-between;
+}
+
+#peopleAttendImage {
+    width: 30px;
+    height: 30px;
+}
+
+#peopleAttend {
+    border: 3px solid white;
+    padding: 10px;
+}
+
+.buttonn {
+    font-size: 21px;
+    padding-top: 5px;
+    letter-spacing: 3px;
+    font-weight: 600;
+}
+
+.moreInfo {
+    margin-top: 20px;
+}
+
+.classesWidget {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-right: 50px;
+    padding: 40px;
+    background-color: #0000009a;
+    color: white;
+    letter-spacing: 4px;
+}
+
+.rowClasses {
+    display: flex;
+    justify-content: space-between;
+}
+
+#durationImage {
+    width: 30px;
+    height: 30px;
+}
+
+#duration {
+    border: 3px solid white;
+    padding: 10px;
+}
+
+#allSeats {
+    border: 3px solid white;
+    padding: 10px;
+}
+
+#subscribedLabel {
+    color: #1bde00;
+    padding: 10px;
+    border: 3px solid #1bde00;
+    letter-spacing: 3px;
+    font-weight: 600;
+}
+
+#price{
+    margin-top: 10px;
+    margin-right: 20px;
+}

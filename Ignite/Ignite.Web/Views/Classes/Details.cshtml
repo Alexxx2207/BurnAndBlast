@@ -1,5 +1,4 @@
-﻿
-@model Ignite.Models.ViewModels.Classes.ShowClassDetailsViewModel
+﻿@model Ignite.Models.ViewModels.Classes.ShowClassDetailsViewModel
 
 <link rel="stylesheet" href="~/css/ClassesDetails.css" \>
 
@@ -10,15 +9,20 @@
             <div>
                 <h1>@Model.Name</h1>
             </div>
-            <div>
-                @if (@Model.UserAttends)
-                {
-                    <h4 id="subscribedLabel">SUBSCRIBED</h4>
-                }
-                else
-                {
-                    <a href="Attend?classId=@Model.Guid" class="btn btn-success buttonn">SUBSCRIBE</a>
-                }
+            <div class="d-flex">
+                <div id="price">
+                    <h4 >$@Model.Price</h4>
+                </div>
+                <div>
+                    @if (@Model.UserAttends)
+                    {
+                        <h4 id="subscribedLabel">PURCHASED</h4>
+                    }
+                    else
+                    {
+                        <a href="Attend?classId=@Model.Guid" class="btn btn-success buttonn">SUBSCRIBE</a>
+                    }
+                </div>
             </div>
         </div>
         <h2>@Model.Address</h2>
@@ -48,8 +52,18 @@
             <div>
                 <p id="date">@Model.StartingDateTime.ToString("dd/MM/yyyy HH:mm")</p>
             </div>
+
+           <div id="duration">
+                <img id="durationImage" src="~/Images/durationClock.png" \> @Model.DurationInMinutes
+            </div>
+
             <div id="peopleAttend">
-                <img id="peopleAttendImage" src="~/Images/PeopleAttendIcon.png" /> @Model.UsersCount
+                <img id="peopleAttendImage" src="~/Images/PeopleAttendIcon.png" \> @Model.UsersCount
+            </div>
+            <div>
+                <div id="allSeats">
+                    SEATS LEFT: <strong>@(Model.AllSeats - Model.UsersCount)</strong>
+                </div>
             </div>
         </div>
     </div>

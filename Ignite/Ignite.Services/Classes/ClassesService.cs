@@ -137,5 +137,26 @@ namespace Ignite.Services.Classes
             return !db.Classes.Any(f => f.Name.ToLower() == name.ToLower() && 
                         !f.IsDeleted && (guid == null || f.Guid != guid));
         }
+
+        public List<AllClassesViewModel> GetTopClasses(string userId, int count)
+        {
+            return db.Classes
+                .Where(c => !c.IsDeleted)
+                .OrderByDescending(c => c.UsersClasses.Count)
+                .Take(count)
+                .Select(c => new AllClassesViewModel
+                {
+                    Guid = c.Guid,
+                    Name = c.Name,
+                    Address = c.Address,
+                    Price = c.Price,
+                    AllSeats = c.AllSeats,
+                    DurationInMinutes = c.DurationInMinutes,
+                    StartingDateTime = c.StartingDateTime,
+                    UserAttends = c.UsersClasses.Any(ue => ue.UserId == userId),
+                    UsersCount = c.UsersClasses.Count
+                })
+                .ToList();
+        }
     }
 }

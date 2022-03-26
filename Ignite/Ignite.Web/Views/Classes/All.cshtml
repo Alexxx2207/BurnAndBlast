@@ -12,7 +12,13 @@
 @foreach (var classes in Model.Where(c => c.UserAttends))
 {
     <div class="classesWidget">
-        <h2>Class - @classes.Name</h2>
+        <div class="rowClasses">
+            <h2>Class - @classes.Name</h2>
+            <div class="rowClasses">
+                <h4 id="price">$@classes.Price</h4>
+                <h5 id="subscribedLabel">PURCHASED</h5>
+            </div>
+        </div>
         <h4>Address: @classes.Address</h4>
         <h4>Starts: @classes.StartingDateTime.ToString("dd/MM/yyyy HH:mm")</h4>
 
@@ -20,8 +26,12 @@
             <a class="btn btn-primary moreInfo" href="/Classes/Details?classId=@classes.Guid">
                 MORE DETAILS
             </a>
+            <div id="duration">
+                <img id="durationImage" src="~/Images/durationClock.png" \> @classes.DurationInMinutes
+            </div>
+
             <div id="peopleAttend">
-                <img id="peopleAttendImage" src="~/Images/PeopleAttendIcon.png" /> @classes.UsersCount
+                <img id="peopleAttendImage" src="~/Images/PeopleAttendIcon.png" \> @classes.UsersCount
             </div>
             <div>
                 <div id="allSeats">
@@ -44,7 +54,10 @@
     <div class="classesWidget">
         <div class="rowClasses">
             <h2>Class - @classs.Name</h2>
-            <a href="Attend?classId=@classs.Guid" class="btn btn-success buttonn">SUBSCRIBE</a>
+            <div class="rowClasses">
+                <h4 id="price">$@classs.Price</h4>
+                <a href="Attend?classId=@classs.Guid" class="btn btn-success buttonn">SUBSCRIBE</a>
+            </div>
         </div>
         <h4>Address: @classs.Address</h4>
         <h4>Starts: @classs.StartingDateTime.ToString("dd/MM/yyyy HH:mm")</h4>
@@ -53,6 +66,10 @@
             <a class="btn btn-primary moreInfo" href="/Classes/Details?classId=@classs.Guid">
                 MORE DETAILS
             </a>
+            <div id="duration">
+                <img id="durationImage" src="~/Images/durationClock.png" \> @classs.DurationInMinutes
+            </div>
+
             <div id="peopleAttend">
                 <img id="peopleAttendImage" src="~/Images/PeopleAttendIcon.png" \> @classs.UsersCount
             </div>
@@ -62,7 +79,5 @@
                 </div>
             </div>
         </div>
-
-
     </div>
 }

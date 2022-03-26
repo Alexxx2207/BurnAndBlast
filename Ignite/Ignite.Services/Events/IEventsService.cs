@@ -31,5 +31,6 @@ namespace Ignite.Services.Events
 
         bool IsNameAvailable(string name, string guid);
 
+        public List<ShowEventsViewModel> GetTopEvents(string userId, int count);
     }
 }

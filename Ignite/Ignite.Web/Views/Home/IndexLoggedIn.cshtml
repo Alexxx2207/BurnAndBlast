@@ -1,5 +1,128 @@
-﻿@{
+﻿@using Ignite.Models.ParentModels
+@model LoggedInHomePageParentModel
+
+@{
     ViewData["Title"] = "Privacy Policy";
+    int count = 0;
 }
 
-<p>Logged In Home page</p>
+<link rel="stylesheet" href="~/css/HomeLoggedIn.css" asp-append-version="true" />
+
+@if (Model.TopEvents.Count > 0)
+{
+    <h1 class="TopTitle">Top Events</h1>
+}
+
+@foreach (var ev in Model.TopEvents)
+{
+    @(count++)
+
+    <div class="eventsWidget" style="margin-left:@(80*count)px;">
+        <div class="rowEvents">
+            <h2>Event - @ev.Name</h2>
+            @if (!ev.UserAttends)
+            {
+                <a href="/Events/Attend?eventId=@ev.Guid" class="btn btn-success buttonn">SUBSCRIBE</a>
+            }
+            else
+            {
+                <a href="/Events/UnAttend?eventId=@ev.Guid" class="btn btn-danger buttonn">UNSUBSCRIBE</a>
+            }
+        </div>
+        <h4>Address: @ev.Address</h4>
+        <h4>Starts: @ev.StartingDateTime.ToString("dd/MM/yyyy HH:mm")</h4>
+
+        <div class="rowEvents">
+            <a class="btn btn-primary moreInfo" href="/Events/Details?eventId=@ev.Guid">
+                MORE DETAILS
+            </a>
+
+            <div id="peopleAttend">
+                <img id="peopleAttendImage" src="~/Images/PeopleAttendIcon.png" \> @ev.UsersCount
+            </div>
+        </div>
+
+
+    </div>
+}
+
+@(count=0)
+
+@if (Model.TopClasses.Count > 0)
+{
+    <h1 class="TopTitle">Top Classes</h1>
+}
+
+@foreach (var classs in Model.TopClasses)
+{
+    @(count++)
+    <div class="classesWidget" style="margin-left:@(80*count)px;">
+        <div class="rowClasses">
+            <h2>Class - @classs.Name</h2>
+            <div class="rowClasses">
+                <h4 id="price">$@classs.Price</h4>
+                @if (!classs.UserAttends)
+                {
+                    <a href="/Classes/Attend?classId=@classs.Guid" class="btn btn-success buttonn">SUBSCRIBE</a>
+                }
+                else
+                {
+                    <h5 id="subscribedLabel">PURCHASED</h5>
+                }
+            </div>
+        </div>
+        <h4>Address: @classs.Address</h4>
+        <h4>Starts: @classs.StartingDateTime.ToString("dd/MM/yyyy HH:mm")</h4>
+
+        <div class="rowClasses">
+            <a class="btn btn-primary moreInfo" href="/Classes/Details?classId=@classs.Guid">
+                MORE DETAILS
+            </a>
+
+            <div id="duration">
+                <img id="durationImage" src="~/Images/durationClock.png" \> @classs.DurationInMinutes
+            </div>
+
+            <div id="peopleAttend">
+                <img id="peopleAttendImage" src="~/Images/PeopleAttendIcon.png" \> @classs.UsersCount
+            </div>
+            <div>
+                <div id="allSeats">
+                    SEATS LEFT: <strong>@(classs.AllSeats - classs.UsersCount)</strong>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<div id="wholeContent">
+
+    <div id="aboutUs" class="whitePart">
+        <h2 class="center title">
+            ABOUT US
+        </h2>
+
+        <p class="center">
+            We are helping people to get in shape, commit to a healthier lifestyle and clean their mind.
+            <br \>
+            Our mission is to deliver easily accessible classes, events and facilities.
+            <br \>
+            We want to make people to be happy and feel good.
+        </p>
+    </div>
+
+    <div class="whitePart">
+        <h2 class="center title">
+            As THE GREEKS SAY:
+        </h2>
+        <p class="center">
+            "Mens Sana In Corpore Sano"
+            <br \>
+            =
+            <br \>
+            "A Healthy Mind In A Healthy Body"
+        </p>
+    </div>
+
+</div>
+
