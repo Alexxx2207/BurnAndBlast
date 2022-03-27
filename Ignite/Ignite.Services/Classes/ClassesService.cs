@@ -2,6 +2,7 @@
 using Ignite.Models;
 using Ignite.Models.InputModels.Classes;
 using Ignite.Models.ViewModels.Classes;
+using Ignite.Services.Products;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -14,27 +15,40 @@ namespace Ignite.Services.Classes
     public class ClassesService : IClassesService
     {
         private readonly ApplicationDbContext db;
+        private readonly IProductsService productsService;
 
-        public ClassesService(ApplicationDbContext db)
+        public ClassesService(ApplicationDbContext db, IProductsService productsService)
         {
             this.db = db;
+            this.productsService = productsService;
         }
 
         public void AddClasses(AddClassInputModel model)
         {
+            var guid = Guid.NewGuid().ToString();
+
             var classs = new Class
             {
-                Guid = Guid.NewGuid().ToString(),
+                Guid = guid,
                 Name = model.Name,
                 Address = model.Address,
                 Description = model.Description,
                 DurationInMinutes = model.DurationInMinutes.Value,
                 AllSeats = model.AllSeats.Value,
-                Price = model.Price.Value,
                 StartingDateTime = model.StartingDateTime.Value,
             };
 
+            var product = new Product()
+            {
+                Guid = guid,
+                Name = model.Name,
+                Price = model.Price.Value,
+                ProductType = Models.Enums.ProductType.Class
+            };
+            
             db.Classes.Add(classs);
+            db.Products.Add(product);
+
             db.SaveChanges();
         }
 
@@ -64,7 +78,11 @@ namespace Ignite.Services.Classes
             c.Description = model.Description;
             c.DurationInMinutes = model.DurationInMinutes.Value;
             c.AllSeats = model.AllSeats.Value;
-            c.Price = model.Price.Value;
+
+            var p = productsService.GetProductByGUID(model.Guid);
+
+            p.Name = model.Name;
+            p.Price = model.Price.Value;
 
             db.SaveChanges();
         }
@@ -83,7 +101,6 @@ namespace Ignite.Services.Classes
                     Guid = c.Guid,
                     Name = c.Name,
                     Address = c.Address,
-                    Price = c.Price,
                     AllSeats = c.AllSeats,
                     DurationInMinutes = c.DurationInMinutes,
                     StartingDateTime = c.StartingDateTime,
@@ -107,14 +124,16 @@ namespace Ignite.Services.Classes
                .Include(c => c.UsersClasses)
                .First(c => c.Guid == classId);
 
+            var product = productsService.GetProductByGUID(classId);
+
             return new ShowClassDetailsViewModel
             {
                 Guid = classs.Guid,
                 Name = classs.Name,
                 Address = classs.Address,
+                Price = product.Price.ToString("f2"),
                 StartingDateTime = classs.StartingDateTime,
                 Description = classs.Description,
-                Price = classs.Price,
                 AllSeats = classs.AllSeats,
                 DurationInMinutes = classs.DurationInMinutes,
                 UserAttends = classs.UsersClasses.Any(ue => ue.UserId == userId),
@@ -129,6 +148,8 @@ namespace Ignite.Services.Classes
             db.UsersClasses.RemoveRange(userClasses);
 
             GetClassByGUID(classId).IsDeleted = true;
+            productsService.GetProductByGUID(classId).IsDeleted = true;
+
             db.SaveChanges();
         }
 
@@ -149,7 +170,6 @@ namespace Ignite.Services.Classes
                     Guid = c.Guid,
                     Name = c.Name,
                     Address = c.Address,
-                    Price = c.Price,
                     AllSeats = c.AllSeats,
                     DurationInMinutes = c.DurationInMinutes,
                     StartingDateTime = c.StartingDateTime,

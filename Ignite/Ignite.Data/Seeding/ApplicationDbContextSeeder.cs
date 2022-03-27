@@ -26,6 +26,7 @@ namespace Ignite.Data.Seeding
                           {
                               new RoleSeeder(),
                               new UsersSeeder(),
+                              new SubscriptionsSeeder(),
                           };
 
             foreach (var seeder in seeders)

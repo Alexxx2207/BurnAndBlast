@@ -38,5 +38,7 @@ namespace Ignite.Models
         public virtual ICollection<UserEvent> UsersEvents { get; set; }
 
         public virtual ICollection<UserClass> UsersClasses { get; set; }
+
+        public virtual ICollection<UserProduct> UsersProducts { get; set; }
     }
 }

@@ -8,6 +8,7 @@ using Ignite.Services.Fitnesses;
 using Ignite.Services.Users;
 using Ignite.Services.Events;
 using Ignite.Services.Classes;
+using Ignite.Services.Products;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -34,6 +35,7 @@ builder.Services.AddTransient<IFitnessService, FitnessService>();
 builder.Services.AddTransient<IUsersService, UsersService>();
 builder.Services.AddTransient<IEventsService, EventsService>();
 builder.Services.AddTransient<IClassesService, ClassesService>();
+builder.Services.AddTransient<IProductsService, ProductsService>();
 
 var app = builder.Build();
 

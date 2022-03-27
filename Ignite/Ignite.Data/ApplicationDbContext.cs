@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Ignite.Data
 {
@@ -23,11 +24,15 @@ namespace Ignite.Data
 
         public DbSet<Subscription> Subscriptions { get; set; }
 
+        public DbSet<Product> Products { get; set; }
+
         public DbSet<Article> Articles { get; set; }
 
         public DbSet<UserClass> UsersClasses { get; set; }
 
         public DbSet<UserEvent> UsersEvents { get; set; }
+
+        public DbSet<UserProduct> UsersProducts { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -35,8 +40,16 @@ namespace Ignite.Data
 
             builder.Entity<UserClass>().HasKey(k => new { k.UserId, k.ClassId });
             builder.Entity<UserEvent>().HasKey(k => new { k.UserId, k.EventId });
+            builder.Entity<UserProduct>().HasKey(k => new { k.UserId, k.ProductId });
 
-            builder.Entity<Subscription>().Property(p => p.Price).HasColumnType("decimal").HasPrecision(38, 5);
+            builder.Entity<Product>()
+                        .Property(p => p.Price)
+                        .HasColumnType("decimal")
+                        .HasPrecision(38, 5);
+
+            builder.Entity<Subscription>()
+                .Property(s => s.Duration)
+                .HasConversion(new TimeSpanToTicksConverter());
         }
     }
 }

@@ -4,6 +4,7 @@ using Ignite.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Ignite.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220327143501_UsersProductstableAdded")]
+    partial class UsersProductstableAdded
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -152,6 +154,9 @@ namespace Ignite.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<decimal>("Price")
+                        .HasColumnType("decimal(18,2)");
+
                     b.Property<DateTime>("StartingDateTime")
                         .HasColumnType("datetime2");
 
@@ -208,44 +213,17 @@ namespace Ignite.Data.Migrations
                     b.ToTable("Fitnesses");
                 });
 
-            modelBuilder.Entity("Ignite.Models.Product", b =>
-                {
-                    b.Property<string>("Guid")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<decimal>("Price")
-                        .HasPrecision(38, 5)
-                        .HasColumnType("decimal(38,5)");
-
-                    b.Property<int>("ProductType")
-                        .HasColumnType("int");
-
-                    b.HasKey("Guid");
-
-                    b.ToTable("Products");
-                });
-
             modelBuilder.Entity("Ignite.Models.Subscription", b =>
                 {
                     b.Property<string>("Guid")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<long>("Duration")
-                        .HasColumnType("bigint");
-
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<decimal>("Price")
+                        .HasPrecision(38, 5)
+                        .HasColumnType("decimal(38,5)");
 
                     b.Property<int>("Type")
                         .HasColumnType("int");
@@ -299,9 +277,10 @@ namespace Ignite.Data.Migrations
                     b.Property<bool>("IsInCart")
                         .HasColumnType("bit");
 
-                    b.HasKey("UserId", "ProductId");
+                    b.Property<int>("ProductType")
+                        .HasColumnType("int");
 
-                    b.HasIndex("ProductId");
+                    b.HasKey("UserId", "ProductId");
 
                     b.ToTable("UsersProducts");
                 });
@@ -494,19 +473,11 @@ namespace Ignite.Data.Migrations
 
             modelBuilder.Entity("Ignite.Models.UserProduct", b =>
                 {
-                    b.HasOne("Ignite.Models.Product", "Product")
-                        .WithMany()
-                        .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("Ignite.Models.ApplicationUser", "User")
                         .WithMany("UsersProducts")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Product");
 
                     b.Navigation("User");
                 });

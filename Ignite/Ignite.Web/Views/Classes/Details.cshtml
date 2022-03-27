@@ -11,7 +11,7 @@
             </div>
             <div class="d-flex">
                 <div id="price">
-                    <h4 >$@Model.Price</h4>
+                    <h4>$@Model.Price</h4>
                 </div>
                 <div>
                     @if (@Model.UserAttends)
@@ -29,22 +29,9 @@
     </div>
 
     <div id="descPart" class="delimiter">
-
-        @if (!string.IsNullOrWhiteSpace(Model.Description))
-        {
-            <p>
-                @Model.Description
-            </p>
-        }
-        else
-        {
-            <p>
-                Unfortunately, description is not provided for this event. <br \>
-                Please get in touch with our <strong>Client Support</strong> via
-                <br \><strong>+359 55 076 076</strong> OR <strong>ignite@ignite.ignite</strong>
-                for more information about this event.
-            </p>
-        }
+        <p>
+            @Model.Description
+        </p>
     </div>
 
     <div id="footerPart" class="delimiter">
@@ -53,7 +40,7 @@
                 <p id="date">@Model.StartingDateTime.ToString("dd/MM/yyyy HH:mm")</p>
             </div>
 
-           <div id="duration">
+            <div id="duration">
                 <img id="durationImage" src="~/Images/durationClock.png" \> @Model.DurationInMinutes
             </div>
 

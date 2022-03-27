@@ -18,8 +18,6 @@ namespace Ignite.Models.ViewModels.Classes
 
         public int DurationInMinutes { get; set; }
 
-        public decimal Price { get; set; }
-
         public int AllSeats { get; set; }
 
         public bool UserAttends { get; set; }

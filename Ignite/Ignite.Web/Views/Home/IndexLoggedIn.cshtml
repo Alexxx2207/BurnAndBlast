@@ -59,17 +59,6 @@
     <div class="classesWidget" style="margin-left:@(80*count)px;">
         <div class="rowClasses">
             <h2>Class - @classs.Name</h2>
-            <div class="rowClasses">
-                <h4 id="price">$@classs.Price</h4>
-                @if (!classs.UserAttends)
-                {
-                    <a href="/Classes/Attend?classId=@classs.Guid" class="btn btn-success buttonn">SUBSCRIBE</a>
-                }
-                else
-                {
-                    <h5 id="subscribedLabel">PURCHASED</h5>
-                }
-            </div>
         </div>
         <h4>Address: @classs.Address</h4>
         <h4>Starts: @classs.StartingDateTime.ToString("dd/MM/yyyy HH:mm")</h4>
@@ -113,7 +102,7 @@
 
     <div class="whitePart">
         <h2 class="center title">
-            As THE GREEKS SAY:
+            AS THE GREEKS SAY:
         </h2>
         <p class="center">
             "Mens Sana In Corpore Sano"

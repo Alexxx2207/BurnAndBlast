@@ -2,6 +2,7 @@
 using Ignite.Models.ParentModels;
 using Ignite.Models.ViewModels.Classes;
 using Ignite.Services.Classes;
+using Ignite.Services.Products;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
@@ -14,13 +15,16 @@ namespace Ignite.Web.Areas.Administration.Controllers
     {
         private readonly ILogger<AdminFitnessesController> _logger;
         private readonly IClassesService classesService;
+        private readonly IProductsService productsService;
 
         public AdminClassesController(
             ILogger<AdminFitnessesController> logger,
-            IClassesService classesService)
+            IClassesService classesService,
+            IProductsService productsService)
         {
             _logger = logger;
             this.classesService = classesService;
+            this.productsService = productsService;
         }
 
         public IActionResult AllClasses()
@@ -92,7 +96,7 @@ namespace Ignite.Web.Areas.Administration.Controllers
                     Description = ev.Description,
                     AllSeats = ev.AllSeats, 
                     DurationInMinutes = ev.DurationInMinutes,   
-                    Price = ev.Price
+                    Price = productsService.GetProductByGUID(classId).Price.ToString("f2")
                 }
             };
 
