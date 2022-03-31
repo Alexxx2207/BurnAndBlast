@@ -1,0 +1,59 @@
+﻿
+body{
+    overflow-x: hidden;
+}
+
+.rowExtension {
+    justify-content: space-evenly;
+}
+
+.subContainer {
+    position: relative;
+    background-color: white;
+    border: 3px solid white;
+    border-radius: 20px;
+    text-align: center;
+    margin-top: 70px;
+    margin-bottom: 50px;
+    padding: 30px;
+    letter-spacing: 2px;
+}
+
+ul {
+    list-style: none;
+}
+
+.buttonn {
+    text-decoration: none;
+    letter-spacing: 2px;
+    color: white;
+}
+
+    .buttonn:hover {
+        text-decoration: none;
+        color: white;
+        letter-spacing: 4px;
+        transition: all 0.4s ease-in-out;
+    }
+
+.listItem {
+    font-size: 21px;
+    margin-top: 20px;
+}
+
+.list {
+    margin-bottom: 100px;
+    align-content: center;
+}
+
+.purchaseButton {
+    background-color: black;
+    padding: 10px;
+    border-radius: 20px;
+    position: absolute;
+    bottom: 40px;
+}
+
+.wrapper {
+    text-align: center;
+}
