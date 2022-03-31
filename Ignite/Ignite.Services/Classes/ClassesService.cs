@@ -17,7 +17,9 @@ namespace Ignite.Services.Classes
         private readonly ApplicationDbContext db;
         private readonly IProductsService productsService;
 
-        public ClassesService(ApplicationDbContext db, IProductsService productsService)
+        public ClassesService(
+            ApplicationDbContext db,
+            IProductsService productsService)
         {
             this.db = db;
             this.productsService = productsService;
@@ -143,9 +145,11 @@ namespace Ignite.Services.Classes
 
         public void RemoveClass(string userId, string classId)
         {
-            var userClasses = db.UsersClasses.Where(ue => ue.UserId == userId && ue.ClassId == classId).ToList();
+            var userClasses = db.UsersClasses.Where(ue => ue.ClassId == classId).ToList();
+            var userProducts = db.UsersProducts.Where(up => up.ProductId == classId).ToList();
 
             db.UsersClasses.RemoveRange(userClasses);
+            db.UsersProducts.RemoveRange(userProducts);
 
             GetClassByGUID(classId).IsDeleted = true;
             productsService.GetProductByGUID(classId).IsDeleted = true;

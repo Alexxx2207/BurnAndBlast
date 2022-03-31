@@ -13,11 +13,11 @@ p {
 }
 
 #titlePart {
-    border-bottom: 2px solid white;
+    border-bottom: 2px solid black;
 }
 
 #descPart {
-    border-bottom: 2px solid white;
+    border-bottom: 2px solid black;
 }
 
 #date{
@@ -27,8 +27,8 @@ p {
 .classesWidget {
     margin: 60px;
     padding: 40px;
-    background-color: #0000006a;
-    color: white;
+    background-color: white;
+    color: black;
 }
 
 #durationImage {
@@ -37,7 +37,7 @@ p {
 }
 
 #duration {
-    border: 3px solid white;
+    border: 3px solid black;
     padding: 10px;
 }
 
@@ -47,12 +47,12 @@ p {
 }
 
 #peopleAttend {
-    border: 3px solid white;
+    border: 3px solid black;
     padding: 10px;
 }
 
 #allSeats {
-    border: 3px solid white;
+    border: 3px solid black;
     padding: 10px;
     letter-spacing: 4px;
 }
@@ -70,9 +70,9 @@ p {
 }
 
 #subscribedLabel {
-    color: #1bde00;
+    color: black;
     padding: 10px;
-    border: 3px solid #1bde00;
+    border: 3px solid black;
     letter-spacing: 3px;
     font-weight: 600;
 }

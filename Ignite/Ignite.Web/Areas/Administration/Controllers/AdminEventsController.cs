@@ -12,11 +12,9 @@ namespace Ignite.Web.Areas.Administration.Controllers
     [Area("Administration")]
     public class AdminEventsController : Controller
     {
-        private readonly ILogger<AdminEventsController> _logger;
         private readonly IEventsService eventsService;
 
         public AdminEventsController(
-            ILogger<AdminEventsController> logger,
             IEventsService eventsService)
         {
             this.eventsService = eventsService;

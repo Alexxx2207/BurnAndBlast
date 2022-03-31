@@ -13,16 +13,13 @@ namespace Ignite.Web.Areas.Administration.Controllers
     [Area("Administration")]
     public class AdminClassesController : Controller
     {
-        private readonly ILogger<AdminFitnessesController> _logger;
         private readonly IClassesService classesService;
         private readonly IProductsService productsService;
 
         public AdminClassesController(
-            ILogger<AdminFitnessesController> logger,
             IClassesService classesService,
             IProductsService productsService)
         {
-            _logger = logger;
             this.classesService = classesService;
             this.productsService = productsService;
         }

@@ -8,10 +8,10 @@
     <form action="/Administration/AdminClasses/AddClass" method="post">
         <div asp-validation-summary="All" class="text-danger"></div>
 
-        <label asp-for="AddClassInputModel.Name" class="form-label" ></label>
+        <label asp-for="AddClassInputModel.Name" class="form-label"></label>
         <input asp-for="AddClassInputModel.Name" class="form-control form-control1" aria-required="true" placeholder="Name" />
 
-        <label asp-for="AddClassInputModel.Address" class="form-label" ></label>
+        <label asp-for="AddClassInputModel.Address" class="form-label"></label>
         <input asp-for="AddClassInputModel.Address" class="form-control form-control1" aria-required="true" placeholder="Address" />
 
         <br \>
@@ -28,10 +28,10 @@
 
         <label asp-for="AddClassInputModel.DurationInMinutes" class="form-label">Duration (in minutes)</label>
         <input asp-for="AddClassInputModel.DurationInMinutes" class="form-control form-control1" aria-required="true" placeholder="Duration (in minutes)" />
-        
-        <label asp-for="AddClassInputModel.Price" class="form-label" ></label>
+
+        <label asp-for="AddClassInputModel.Price" class="form-label"></label>
         <input asp-for="AddClassInputModel.Price" class="form-control form-control1" aria-required="true" placeholder="Price" />
-        
+
         <label asp-for="AddClassInputModel.AllSeats" class="form-label">All Seats</label>
         <input asp-for="AddClassInputModel.AllSeats" class="form-control form-control1" aria-required="true" placeholder="All Seats" />
 
@@ -54,11 +54,21 @@
             </div>
         </div>
         <h4>Address - @classs.Address</h4>
+        <h4>Starts - @classs.StartingDateTime</h4>
+
         <div class="rowClasses">
-            <h4>Starts - @classs.StartingDateTime</h4>
-            <div id="peopleAttend">
-                <img id="peopleAttendImage" src="~/Images/PeopleAttendIcon.png" \> @classs.UsersCount
-            </div>
+            <div id="duration">
+                    <img id="durationImage" src="~/Images/durationClock.png" \> <strong>@classs.DurationInMinutes</strong>
+                </div>
+
+                <div id="peopleAttend">
+                    <img id="peopleAttendImage" src="~/Images/PeopleAttendIcon.png" \> <strong>@classs.UsersCount</strong>
+                </div>
+                <div>
+                    <div id="allSeats">
+                        SEATS LEFT: <strong>@(classs.AllSeats - classs.UsersCount)</strong>
+                    </div>
+                </div>
         </div>
     </div>
 }

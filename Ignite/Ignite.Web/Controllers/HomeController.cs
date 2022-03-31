@@ -12,16 +12,13 @@ namespace Ignite.Web.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
         private readonly IEventsService eventsService;
         private readonly IClassesService classesService;
 
         public HomeController(
-            ILogger<HomeController> logger,
             IEventsService eventsService,
             IClassesService classesService)
         {
-            _logger = logger;
             this.eventsService = eventsService;
             this.classesService = classesService;
         }

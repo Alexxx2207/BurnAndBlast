@@ -247,6 +247,9 @@ namespace Ignite.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("OrderInPage")
+                        .HasColumnType("int");
+
                     b.Property<int>("Type")
                         .HasColumnType("int");
 
@@ -287,10 +290,7 @@ namespace Ignite.Data.Migrations
 
             modelBuilder.Entity("Ignite.Models.UserProduct", b =>
                 {
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("ProductId")
+                    b.Property<string>("OrderItemId")
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<DateTime?>("ExpirationDate")
@@ -299,11 +299,43 @@ namespace Ignite.Data.Migrations
                     b.Property<bool>("IsInCart")
                         .HasColumnType("bit");
 
-                    b.HasKey("UserId", "ProductId");
+                    b.Property<string>("ProductId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("OrderItemId");
 
                     b.HasIndex("ProductId");
 
+                    b.HasIndex("UserId");
+
                     b.ToTable("UsersProducts");
+                });
+
+            modelBuilder.Entity("Ignite.Models.UserSubscription", b =>
+                {
+                    b.Property<string>("SubscriptionOrderId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("SubscriptionId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("SubscriptionOrderId");
+
+                    b.HasIndex("SubscriptionId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("UsersSubscriptions");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -495,7 +527,7 @@ namespace Ignite.Data.Migrations
             modelBuilder.Entity("Ignite.Models.UserProduct", b =>
                 {
                     b.HasOne("Ignite.Models.Product", "Product")
-                        .WithMany()
+                        .WithMany("UsersProducts")
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -507,6 +539,25 @@ namespace Ignite.Data.Migrations
                         .IsRequired();
 
                     b.Navigation("Product");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Ignite.Models.UserSubscription", b =>
+                {
+                    b.HasOne("Ignite.Models.Subscription", "Subscription")
+                        .WithMany()
+                        .HasForeignKey("SubscriptionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Ignite.Models.ApplicationUser", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Subscription");
 
                     b.Navigation("User");
                 });
@@ -597,6 +648,11 @@ namespace Ignite.Data.Migrations
             modelBuilder.Entity("Ignite.Models.Event", b =>
                 {
                     b.Navigation("UsersEvents");
+                });
+
+            modelBuilder.Entity("Ignite.Models.Product", b =>
+                {
+                    b.Navigation("UsersProducts");
                 });
 #pragma warning restore 612, 618
         }

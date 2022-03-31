@@ -15,14 +15,11 @@ namespace Ignite.Web.Areas.Administration.Controllers
     [Area("Administration")]
     public class AdminFitnessesController : Controller
     {
-        private readonly ILogger<AdminFitnessesController> _logger;
         private readonly IFitnessService fitnessService;
 
         public AdminFitnessesController(
-            ILogger<AdminFitnessesController> logger,
             IFitnessService fitnessService)
         {
-            _logger = logger;
             this.fitnessService = fitnessService;
         }
 

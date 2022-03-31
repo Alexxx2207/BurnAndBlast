@@ -1,3 +1,57 @@
-﻿
+﻿@using Ignite.Models.ViewModels.Subscriptions
+@model List<AllSubscriptionsViewModel>
 
-<p>Subscriptions Page</p>
+<link rel="stylesheet" href="~/css/SubscriptionPage.css" \>
+
+<div class="row rowExtension">
+    @foreach (var sub in Model)
+    {
+        <div class="subContainer col-5">
+            <h1>@sub.Name</h1>
+
+
+            <h4>@sub.Type.ToString()</h4>
+
+            <br \>
+
+            <h2><strong>$@sub.Price.ToString("f2")</strong></h2>
+
+            <br \>
+
+            <div class="list">
+                <ul>
+                    @if (sub.Type == Ignite.Models.Enums.SubscriptionType.Daily)
+                    {
+                        <li class="listItem">Works for every IGNITE fitness.</li>
+                        <li class="listItem">Valid for 24h.</li>
+                    }
+                    else if (sub.Type == Ignite.Models.Enums.SubscriptionType.Basic)
+                    {
+                        <li class="listItem">Works for every IGNITE fitness.</li>
+                        <li class="listItem">Valid for 30 days.</li>
+                    }
+                    else if (sub.Type == Ignite.Models.Enums.SubscriptionType.Premium)
+                    {
+                        <li class="listItem">Works for every IGNITE fitness.</li>
+                        <li class="listItem">Valid for 30 days.</li>
+                        <li class="listItem">Receive once in 30 days an article about healthy nutrition and training tips.</li>
+                    }
+                    else if (sub.Type == Ignite.Models.Enums.SubscriptionType.VIP)
+                    {
+                        <li class="listItem">Works for every IGNITE fitness.</li>
+                        <li class="listItem">Valid for 30 days.</li>
+                        <li class="listItem">Receive once a week an article about healthy nutrition and training tips.</li>
+                    }
+                </ul>
+            </div>
+
+            <br \>
+
+            <div class="wrapper">
+                <div class="purchaseButton col-4">
+                    <a class="buttonn" href="Buy?subId=@sub.Guid">PURCHASE</a>
+                </div>
+            </div>
+        </div>
+    }
+</div>

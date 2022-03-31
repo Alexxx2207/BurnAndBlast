@@ -16,5 +16,7 @@
         public TimeSpan Duration { get; set; }
 
         public bool IsDeleted { get; set; }
+
+        public int OrderInPage { get; set; }
     }
 }

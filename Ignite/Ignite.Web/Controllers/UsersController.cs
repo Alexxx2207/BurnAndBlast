@@ -8,14 +8,11 @@ namespace Ignite.Web.Controllers
 {
     public class UsersController : Controller
     {
-        private readonly ILogger<UsersController> _logger;
         private readonly IUsersService usersService;
 
         public UsersController(
-            ILogger<UsersController> logger,
             IUsersService usersService)
         {
-            _logger = logger;
             this.usersService = usersService;
         }
 

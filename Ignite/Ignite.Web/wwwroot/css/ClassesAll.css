@@ -15,9 +15,14 @@ a {
 .classesWidget {
     margin: 60px;
     padding: 40px;
-    background-color: #0000006a;
-    color: white;
+    background-color: white;
+    color: black;
     letter-spacing: 4px;
+    border-radius: 15px;
+}
+
+.startsDate{
+    margin-bottom: 40px;
 }
 
 .rowClasses {
@@ -31,7 +36,7 @@ a {
 }
 
 #duration {
-    border: 3px solid white;
+    border: 3px solid black;
     padding: 10px;
 }
 
@@ -41,12 +46,12 @@ a {
 }
 
 #peopleAttend {
-    border: 3px solid white;
+    border: 3px solid black;
     padding: 10px;
 }
 
 .buttonn {
-    font-size: 21px;
+    font-size: 23px;
     padding-top: 5px;
     letter-spacing: 3px;
     font-weight: 600;
@@ -58,17 +63,17 @@ a {
 }
 
 #duration {
-    border: 3px solid white;
+    border: 3px solid black;
     padding: 10px;
 }
 
 #allSeats {
-    border: 3px solid white;
+    border: 3px solid black;
     padding: 10px;
 }
 
 .moreInfo {
-    margin-top: 20px;
+    font-size: 21px;
 }
 
 #subscribedLabel {
@@ -77,9 +82,4 @@ a {
     border: 3px solid #1bde00;
     letter-spacing: 3px;
     font-weight: 600;
-}
-
-#price {
-    margin-top: 10px;
-    margin-right: 20px;
 }

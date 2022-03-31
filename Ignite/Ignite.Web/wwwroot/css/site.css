@@ -45,6 +45,10 @@ body {
     letter-spacing: 3px;
 }
 
+.navbarExtension {
+    background-color: rgb(40, 40, 40);
+}
+
 .navbar-nav {
     display: flex;
     justify-content: space-evenly;

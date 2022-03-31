@@ -9,6 +9,8 @@ using Ignite.Services.Users;
 using Ignite.Services.Events;
 using Ignite.Services.Classes;
 using Ignite.Services.Products;
+using Ignite.Services.Subscriptions;
+using Ignite.Services.CartProducts;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -36,6 +38,8 @@ builder.Services.AddTransient<IUsersService, UsersService>();
 builder.Services.AddTransient<IEventsService, EventsService>();
 builder.Services.AddTransient<IClassesService, ClassesService>();
 builder.Services.AddTransient<IProductsService, ProductsService>();
+builder.Services.AddTransient<ISubscriptionsService, SubscriptionsService>();
+builder.Services.AddTransient<ICartProductsService, CartProductsService>();
 
 var app = builder.Build();
 

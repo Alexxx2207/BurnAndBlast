@@ -4,7 +4,7 @@
     {
         public const int SubscriptionProductType = 0;
 
-        public const int ClassProductType = 0;
+        public const int ClassProductType = 1;
 
 
         public const int SubscriptionTypeDaily = 0;

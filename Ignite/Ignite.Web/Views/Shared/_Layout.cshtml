@@ -11,7 +11,7 @@
 </head>
 <body>
     <header>
-        <nav class="navbar autohide fixed-top navbar-expand-sm navbar-toggleable-sm navbar-dark box-shadow shadow-5-strong">
+        <nav class="navbar autohide fixed-top navbar-expand-sm navbar-toggleable-sm navbar-dark navbarExtension">
             <div class="container-fluid">
                 <a id="logoName" asp-area="" asp-controller="Home" asp-action="Index">
                      HOME
@@ -28,7 +28,7 @@
                         @if (User.Identity.IsAuthenticated)
                         {
                             <a class="flex-item" asp-area="" asp-controller="Classes" asp-action="All">CLASSES</a>
-                            <a class="flex-item" asp-area="" asp-controller="Events" asp-action="All">
+                            <a class="flex-item" asp-area="" asp-controller="Products" asp-action="CheckOut">
                                 <i class="fa-solid fa-cart-shopping fa-lg"></i>
                             </a>
                         }

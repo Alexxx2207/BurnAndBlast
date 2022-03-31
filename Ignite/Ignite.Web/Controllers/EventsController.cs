@@ -9,14 +9,11 @@ namespace Ignite.Web.Controllers
 {
     public class EventsController : Controller
     {
-        private readonly ILogger<EventsController> _logger;
         private readonly IEventsService eventsService;
 
         public EventsController(
-            ILogger<EventsController> logger,
             IEventsService eventsService)
         {
-            _logger = logger;
             this.eventsService = eventsService;
         }
 

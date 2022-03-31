@@ -1,34 +1,60 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using Ignite.Models.ViewModels.Subscriptions;
+using Ignite.Services.CartProducts;
+using Ignite.Services.Products;
+using Ignite.Services.Subscriptions;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace Ignite.Web.Controllers
 {
     public class SubscriptionsController : Controller
     {
-        private readonly ILogger<SubscriptionsController> _logger;
+        private readonly ISubscriptionsService subscriptionService;
+        private readonly ICartProductsService cartProductsService;
+        private readonly IProductsService productsService;
 
-        public SubscriptionsController(ILogger<SubscriptionsController> logger)
+        public SubscriptionsController(
+            ISubscriptionsService subscriptionService,
+            ICartProductsService cartProductsService,
+            IProductsService productsService)
         {
-            _logger = logger;
+            this.subscriptionService = subscriptionService;
+            this.cartProductsService = cartProductsService;
+            this.productsService = productsService;
         }
 
         public IActionResult All()
         {
-            return View();
+            var model = subscriptionService.GetAllSubscriptions()
+                            .OrderBy(s => s.OrderInPage)
+                            .ToList();
+
+            foreach (var sub in model)
+            {
+                sub.Price = productsService.GetProductByGUID(sub.Guid).Price;
+            }
+
+
+            return View(model);
         }
 
         //When clicking a button Purchase
         [Authorize]
-        public IActionResult Purchase(int subscriptionType)
+        public IActionResult Buy(string subId)
         {
-            //...
-            return Redirect("/Subscriptions/CheckOut");
-        }
+            try
+            {
+                cartProductsService.AddToCart(User.FindFirstValue(ClaimTypes.NameIdentifier),
+                                       Ignite.Models.Enums.ProductType.Subscription,
+                                       subId);
+            }
+            catch (Exception)
+            {
+                return Redirect("/Products/CheckOut");
+            }
 
-        [Authorize]
-        public IActionResult CheckOut()
-        {
-            return View();
+            return Redirect("/Products/CheckOut");
         }
     }
 }

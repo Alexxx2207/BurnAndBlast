@@ -21,5 +21,7 @@ namespace Ignite.Models
 
         public bool IsDeleted { get; set; }
 
+        public virtual ICollection<UserProduct> UsersProducts { get; set; }
+
     }
 }

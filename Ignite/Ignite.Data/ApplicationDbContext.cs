@@ -32,6 +32,8 @@ namespace Ignite.Data
 
         public DbSet<UserEvent> UsersEvents { get; set; }
 
+        public DbSet<UserSubscription> UsersSubscriptions { get; set; }
+
         public DbSet<UserProduct> UsersProducts { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
@@ -40,7 +42,6 @@ namespace Ignite.Data
 
             builder.Entity<UserClass>().HasKey(k => new { k.UserId, k.ClassId });
             builder.Entity<UserEvent>().HasKey(k => new { k.UserId, k.EventId });
-            builder.Entity<UserProduct>().HasKey(k => new { k.UserId, k.ProductId });
 
             builder.Entity<Product>()
                         .Property(p => p.Price)

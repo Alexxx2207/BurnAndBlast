@@ -3,10 +3,11 @@
 .fitnessWidget {
     margin: 50px;
     padding: 40px;
-    background-color: #0000006a;
-    color: white;
+    background-color: white;
+    color: black;
     margin-bottom: 40px;
     letter-spacing: 4px;
+    border-radius: 15px;
 }
 
 #map {

@@ -13,11 +13,11 @@ p{
 }
 
 #titlePart {
-    border-bottom: 2px solid white;
+    border-bottom: 2px solid black;
 }
 
 #descPart {
-    border-bottom: 2px solid white;
+    border-bottom: 2px solid black;
 }
 
 #date {
@@ -27,8 +27,8 @@ p{
 .eventsWidget {
     margin: 60px;
     padding: 40px;
-    background-color: #0000006a;
-    color: white;
+    background-color: white;
+    color: black;
 }
 
 #peopleAttendImage {
@@ -37,7 +37,7 @@ p{
 }
 
 #peopleAttend {
-    border: 3px solid white;
+    border: 3px solid black;
     padding: 10px;
 }
 
