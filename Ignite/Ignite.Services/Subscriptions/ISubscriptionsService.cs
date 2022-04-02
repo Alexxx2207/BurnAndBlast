@@ -12,11 +12,13 @@ namespace Ignite.Services.Subscriptions
     {
         Subscription GetSubscriptionByGUID(string subscriptionId);
 
-        List<AllSubscriptionsViewModel> GetAllSubscriptions();
+        List<AllSubscriptionsViewModel> GetAllSubscriptions(string userId);
 
         bool CheckSubscriptionExists(string subId);
 
         void AddSubscriptionToUser(string userId, string classId);
+
+        UserSubscription GetBestNotExpiredSubscription(string userId);
 
     }
 }

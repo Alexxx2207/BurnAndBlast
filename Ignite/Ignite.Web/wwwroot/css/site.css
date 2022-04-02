@@ -22,7 +22,7 @@ html {
 
 body {
     margin-bottom: 60px;
-    background-color: rgb(40, 40, 40)
+    background-color: black;
 }
 
 .scrolled-down {
@@ -46,7 +46,7 @@ body {
 }
 
 .navbarExtension {
-    background-color: rgb(40, 40, 40);
+    background-color: black;
 }
 
 .navbar-nav {

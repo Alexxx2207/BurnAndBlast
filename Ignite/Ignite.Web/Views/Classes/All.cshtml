@@ -3,6 +3,11 @@
 
 <link rel="stylesheet" href="~/css/ClassesAll.css" />
 
+@if (!Model.Any())
+{
+    <h1 id="AllClassesTitle">There are no classes right now!</h1>
+}
+
 @if (Model.Any(c => c.UserAttends))
 {
     <h1 id="AllClassesTitle">Take Part In *Paid*</h1>

@@ -14,6 +14,14 @@
         public const int SubscriptionTypePremium = 2;
 
         public const int SubscriptionTypeVIP = 3;
+        
+        public const int SubscriptionTypeDailyOrder = 0;
+
+        public const int SubscriptionTypeBasicOrder = 1;
+      
+        public const int SubscriptionTypePremiumOrder = 2;
+
+        public const int SubscriptionTypeVIPOrder = 3;
 
 
         public const decimal SubscriptionTypeDailyPrice = 5;

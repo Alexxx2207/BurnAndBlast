@@ -8,6 +8,7 @@ using System.Security.Claims;
 
 namespace Ignite.Web.Controllers
 {
+    [AutoValidateAntiforgeryToken]
     public class SubscriptionsController : Controller
     {
         private readonly ISubscriptionsService subscriptionService;
@@ -26,7 +27,8 @@ namespace Ignite.Web.Controllers
 
         public IActionResult All()
         {
-            var model = subscriptionService.GetAllSubscriptions()
+            var model = subscriptionService
+                            .GetAllSubscriptions(User.FindFirstValue(ClaimTypes.NameIdentifier))
                             .OrderBy(s => s.OrderInPage)
                             .ToList();
 

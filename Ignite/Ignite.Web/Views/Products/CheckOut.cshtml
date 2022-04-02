@@ -25,7 +25,14 @@
                 <h2>@product.ProductType.ToString() - @product.Name</h2>
                 <h2>$@product.Price.ToString("f2")</h2>
             </div>
-            <h4>Expire: @product.ExpirationDate</h4>
+            @if(@product.ExpirationDate != "Never")
+            {
+                <h4>Expires: After @product.ExpirationDate days</h4>
+            }
+            else
+            {
+                <br \>
+            }
             <div class="rowProducts">
                 <a class="btn btn-danger removeBtn" href="/Products/Remove?productId=@product.GUID">
                     REMOVE

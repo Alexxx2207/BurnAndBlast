@@ -5,7 +5,7 @@
 <div id="AddWidget" class="col-6">
     <h2 id="addTitle">Add Event</h2>
 
-    <form action="/Administration/AdminEvents/AddEvents" method="post">
+    <form action="/Administration/AdminEvents/AddEvents" method="post"  asp-antiforgery="true">
         <div asp-validation-summary="All" class="text-danger"></div>
 
         <label asp-for="AddEventInputModel.Name" class="form-label"></label>

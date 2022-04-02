@@ -15,28 +15,32 @@ namespace Ignite.Data.Seeding
                                         SubscriptionType.Daily.ToString(),
                                         SubscriptionType.Daily,
                                         GlobalConstants.GlobalConstants.SubscriptionTypeDailyPrice,
-                                        GlobalConstants.GlobalConstants.SubscriptionTypeDailyDurationInDays);
+                                        GlobalConstants.GlobalConstants.SubscriptionTypeDailyDurationInDays,
+                                        GlobalConstants.GlobalConstants.SubscriptionTypeDailyOrder);
             await SeedSubscriptionAsync(dbContext,
                                         SubscriptionType.Basic.ToString(),
                                         SubscriptionType.Basic,
                                         GlobalConstants.GlobalConstants.SubscriptionTypeBasicPrice,
-                                        GlobalConstants.GlobalConstants.SubscriptionTypeBasicDurationInDays);
+                                        GlobalConstants.GlobalConstants.SubscriptionTypeBasicDurationInDays,
+                                        GlobalConstants.GlobalConstants.SubscriptionTypeBasicOrder);
             await SeedSubscriptionAsync(dbContext,
                                         SubscriptionType.Premium.ToString(),
                                         SubscriptionType.Premium,
                                         GlobalConstants.GlobalConstants.SubscriptionTypePremiumPrice,
-                                        GlobalConstants.GlobalConstants.SubscriptionTypePremiumDurationInDays);
+                                        GlobalConstants.GlobalConstants.SubscriptionTypePremiumDurationInDays,
+                                        GlobalConstants.GlobalConstants.SubscriptionTypePremiumOrder);
             await SeedSubscriptionAsync(dbContext,
                                         SubscriptionType.VIP.ToString(),
                                         SubscriptionType.VIP,
                                         GlobalConstants.GlobalConstants.SubscriptionTypeVipPrice,
-                                        GlobalConstants.GlobalConstants.SubscriptionTypeVipDurationInDays);
+                                        GlobalConstants.GlobalConstants.SubscriptionTypeVipDurationInDays,
+                                        GlobalConstants.GlobalConstants.SubscriptionTypeVIPOrder);
 
             dbContext.SaveChanges();
         }
 
         private static async Task SeedSubscriptionAsync(
-            ApplicationDbContext dbContext, string subName, SubscriptionType type, decimal price, TimeSpan duration)
+            ApplicationDbContext dbContext, string subName, SubscriptionType type, decimal price, TimeSpan duration, int orderInPage)
         {
             var guid = Guid.NewGuid().ToString();
 
@@ -56,7 +60,8 @@ namespace Ignite.Data.Seeding
                     Guid = guid,
                     Name = subName, 
                     Duration = duration,
-                    Type = type
+                    Type = type,
+                    OrderInPage = orderInPage
                 });
             }
 

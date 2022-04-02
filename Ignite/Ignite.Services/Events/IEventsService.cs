@@ -15,7 +15,7 @@ namespace Ignite.Services.Events
 
         void AddEvent(AddEventInputModel model);
 
-        void RemoveEvent(string userId, string eventId);
+        void RemoveEvent(string eventId);
 
         bool CheckEventExists(string eventId);
 
@@ -25,7 +25,7 @@ namespace Ignite.Services.Events
 
         Event GetEventByGUID(string eventId);
 
-        void ChangeEvent(Models.InputModels.Events.ChangeEventInputModel model);
+        void ChangeEvent(ChangeEventInputModel model);
 
         ShowEventDetailsViewModel GetDetailsOfEvent(string userId, string eventId);
 

@@ -34,7 +34,6 @@ namespace Ignite.Services.Users
                 using (var stream = new FileStream("~/Profile Pics", FileMode.Create))
                 {
                     await file.CopyToAsync(stream);
-
                 }
             }
         }

@@ -107,6 +107,9 @@ namespace Ignite.Web.Areas.Identity.Pages.Account
             [Display(Name = "Confirm password")]
             [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
             public string ConfirmPassword { get; set; }
+
+            [Display(Name = "Remember me?")]
+            public bool RememberMe { get; set; }
         }
 
         public async Task<IActionResult> OnGetAsync(string returnUrl = null)
@@ -140,9 +143,11 @@ namespace Ignite.Web.Areas.Identity.Pages.Account
                 {
                     _logger.LogInformation("User created a new account with password.");
 
-                    if (returnUrl == "/")
+
+                    var resultLogin = await _signInManager.PasswordSignInAsync(Input.Email, Input.Password, Input.RememberMe, false);
+                    if (resultLogin.Succeeded)
                     { 
-                        return Redirect("/Identity/Account/Login");
+                        return Redirect("/");
                     }
 
                     var userId = await _userManager.GetUserIdAsync(user);
@@ -171,7 +176,7 @@ namespace Ignite.Web.Areas.Identity.Pages.Account
                 {
                     if (error.Code == "DuplicateUserName")
                     {
-                        error.Description = "Email 'qa@qa.qa' is already taken.";
+                        error.Description = $"Email {Input.Email} is already taken.";
                     }
 
                     ModelState.AddModelError(string.Empty, error.Description);

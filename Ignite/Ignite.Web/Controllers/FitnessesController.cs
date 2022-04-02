@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Ignite.Web.Controllers
 {
+    [AutoValidateAntiforgeryToken]
     public class FitnessesController : Controller
     {
         private readonly IFitnessService fitnessService;

@@ -2,6 +2,11 @@
 
 <link rel="stylesheet" href="~/css/ChangeEvent.css" />
 
+<div id="Info">
+    <h3>Start date can be left empty. <br \>That way it will not be changed.<br \>Description is not required by default for events.</h3>
+</div>
+
+
 <div class="ChangeWidget col-24">
     <div class="d-flex delimiter">
         <div>
@@ -12,7 +17,7 @@
         </div>
     </div>
 
-    <form action="/Administration/AdminEvents/ChangeEvent" method="post">
+    <form action="/Administration/AdminEvents/ChangeEvent" method="post" asp-antiforgery="true">
         <div asp-validation-summary="All" class="text-danger"></div>
 
         <input asp-for="InputModel.Guid" hidden value="@Model.ViewModel.Guid" />
@@ -20,7 +25,7 @@
         <div class="d-flex delimiter">
             <div class="col-5">
                 <label asp-for="InputModel.Name" class="form-label" hidden></label>
-                <input asp-for="InputModel.Name" class="form-control form-control1" aria-required="true" placeholder="Name" />
+                <input asp-for="InputModel.Name" class="form-control form-control1" aria-required="true" placeholder="Name" value="@Model.ViewModel.Name"/>
             </div>
             <div>
                 <h4>
@@ -33,7 +38,7 @@
         <div class="d-flex delimiter">
             <div class="col-5">
                 <label asp-for="InputModel.Address" class="form-label" hidden></label>
-                <input asp-for="InputModel.Address" class="form-control form-control1" aria-required="true" placeholder="Address" />
+                <input asp-for="InputModel.Address" class="form-control form-control1" aria-required="true" placeholder="Address" value="@Model.ViewModel.Address"/>
             </div>
             <div>
                 <h4>
@@ -63,7 +68,7 @@
         <div class="d-flex delimiter">
             <div class="col-5">
                 <label asp-for="InputModel.StartingDateTime" id="dateLabel" class="form-label">Start Date & Time</label>
-                <input asp-for="InputModel.StartingDateTime" class="form-control" id="picker" value=@DateTime.Now />
+                <input asp-for="InputModel.StartingDateTime" class="form-control" id="picker" />
             </div>
             <div>
                 <h4>

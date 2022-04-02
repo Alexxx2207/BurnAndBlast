@@ -11,6 +11,7 @@ using Ignite.Models.ViewModels.Events;
 
 namespace Ignite.Web.Areas.Administration.Controllers
 {
+    [AutoValidateAntiforgeryToken]
     [Authorize(Roles = "Administrator")]
     [Area("Administration")]
     public class AdminFitnessesController : Controller
@@ -37,6 +38,7 @@ namespace Ignite.Web.Areas.Administration.Controllers
         }
 
         [HttpPost]
+        [AutoValidateAntiforgeryToken]
         public IActionResult AddFitness(AllFitnessParentModel model)
         {
             if(!string.IsNullOrWhiteSpace(model.FitnessesInputModel.Name) && !fitnessService.IsNameAvailable(model.FitnessesInputModel.Name))

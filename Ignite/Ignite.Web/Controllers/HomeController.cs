@@ -10,6 +10,7 @@ using System.Security.Claims;
 
 namespace Ignite.Web.Controllers
 {
+    [AutoValidateAntiforgeryToken]
     public class HomeController : Controller
     {
         private readonly IEventsService eventsService;

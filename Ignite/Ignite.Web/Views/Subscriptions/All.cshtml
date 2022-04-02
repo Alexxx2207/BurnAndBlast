@@ -47,11 +47,23 @@
 
             <br \>
 
-            <div class="wrapper">
-                <div class="purchaseButton col-4">
-                    <a class="buttonn" href="Buy?subId=@sub.Guid">PURCHASE</a>
+            @if (sub.OrderInPage > sub.UserBestSubscriptionOrderInPage)
+            {
+                <div class="wrapper">
+                    <div class="purchaseButton col-4">
+                        <a class="buttonn" href="Buy?subId=@sub.Guid">PURCHASE</a>
+                    </div>
                 </div>
-            </div>
+            }
+            else if(sub.OrderInPage == sub.UserBestSubscriptionOrderInPage)
+            {
+                <h5 class="notBestSubscription">You already have this subscription!</h5>
+            }
+            else
+            {
+                <h5 class="notBestSubscription">You already have a better subscription!</h5>
+            }
+
         </div>
     }
 </div>

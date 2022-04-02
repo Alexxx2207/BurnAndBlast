@@ -15,8 +15,9 @@
 
 @foreach (var ev in Model.TopEvents)
 {
-    @(count++)
-
+    {
+        count++;
+    }
     <div class="eventsWidget" style="margin-left:@(80*count)px;">
         <div class="rowEvents">
             <h2>Event - @ev.Name</h2>
@@ -41,12 +42,12 @@
                 <img id="peopleAttendImage" src="~/Images/PeopleAttendIcon.png" \> <strong>@ev.UsersCount</strong>
             </div>
         </div>
-
-
     </div>
 }
 
-@(count=0)
+@{
+    count = 0;
+}
 
 @if (Model.TopClasses.Count > 0)
 {
@@ -55,7 +56,10 @@
 
 @foreach (var classs in Model.TopClasses)
 {
-    @(count++)
+    {
+        count++;
+    }
+
     <div class="classesWidget" style="margin-left:@(80*count)px;">
         <div class="rowClasses">
             <h2>Class - @classs.Name</h2>

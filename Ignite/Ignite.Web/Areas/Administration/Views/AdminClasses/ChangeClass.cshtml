@@ -2,8 +2,11 @@
 
 <link rel="stylesheet" href="~/css/ChangeClass.css" />
 
-<div class="ChangeWidget col-24">
+<div id="Info">
+    <h3>Start date and description can be left empty. <br \>That way they will not be changed.</h3>
+</div>
 
+<div class="ChangeWidget col-24">
     <div class="d-flex delimiter">
         <div>
             <h2 id="changeTitle">Change Class</h2>
@@ -13,7 +16,7 @@
         </div>
     </div>
 
-    <form action="/Administration/AdminClasses/ChangeClass" method="post">
+    <form action="/Administration/AdminClasses/ChangeClass" method="post" asp-antiforgery="true">
         <div asp-validation-summary="All" class="text-danger"></div>
 
         <input asp-for="InputModel.Guid" hidden value="@Model.ViewModel.Guid" />
@@ -21,7 +24,7 @@
         <div class="d-flex delimiter">
             <div class="col-5">
                 <label asp-for="InputModel.Name" class="form-label" hidden></label>
-                <input asp-for="InputModel.Name" class="form-control form-control1" aria-required="true" placeholder="Name" />
+                <input asp-for="InputModel.Name" class="form-control form-control1" aria-required="true" placeholder="Name" value="@Model.ViewModel.Name" />
             </div>
             <div>
                 <h4>
@@ -34,7 +37,7 @@
         <div class="d-flex delimiter">
             <div class="col-5">
                 <label asp-for="InputModel.Address" class="form-label" hidden></label>
-                <input asp-for="InputModel.Address" class="form-control form-control1" aria-required="true" placeholder="Address" />
+                <input asp-for="InputModel.Address" class="form-control form-control1" aria-required="true" placeholder="Address" value="@Model.ViewModel.Address" />
             </div>
             <div>
                 <h4>
@@ -64,7 +67,7 @@
         <div class="d-flex delimiter">
             <div class="col-5">
                 <label asp-for="InputModel.StartingDateTime" id="dateLabel" class="form-label">Start Date & Time</label>
-                <input asp-for="InputModel.StartingDateTime" class="form-control" id="picker" value=@DateTime.Now />
+                <input asp-for="InputModel.StartingDateTime" class="form-control" id="picker" />
             </div>
             <div>
                 <h4>
@@ -75,9 +78,9 @@
         </div>
         <br \>
         <div class="d-flex delimiter">
-             <div class="col-5">
+            <div class="col-5">
                 <label asp-for="InputModel.DurationInMinutes" class="form-label">Duration (in minutes)</label>
-                <input asp-for="InputModel.DurationInMinutes" class="form-control form-control1" aria-required="true" placeholder="Duration (in minutes)" />
+                <input asp-for="InputModel.DurationInMinutes" class="form-control form-control1" aria-required="true" placeholder="Duration (in minutes)" value="@Model.ViewModel.DurationInMinutes" />
             </div>
             <div>
                 <h4>
@@ -88,9 +91,9 @@
         </div>
 
         <div class="d-flex delimiter">
-             <div class="col-5">
+            <div class="col-5">
                 <label asp-for="InputModel.Price" class="form-label"></label>
-                <input asp-for="InputModel.Price" class="form-control form-control1" aria-required="true" placeholder="Price" />
+                <input asp-for="InputModel.Price" class="form-control form-control1" aria-required="true" placeholder="Price" value="@Model.ViewModel.Price" />
             </div>
             <div>
                 <h4>
@@ -101,9 +104,9 @@
         </div>
 
         <div class="d-flex delimiter">
-             <div class="col-5">
+            <div class="col-5">
                 <label asp-for="InputModel.AllSeats" class="form-label">All Seats</label>
-                <input asp-for="InputModel.AllSeats" class="form-control form-control1" aria-required="true" placeholder="All Seats" />
+                <input asp-for="InputModel.AllSeats" class="form-control form-control1" aria-required="true" placeholder="All Seats" value="@Model.ViewModel.AllSeats" />
             </div>
             <div>
                 <h4>

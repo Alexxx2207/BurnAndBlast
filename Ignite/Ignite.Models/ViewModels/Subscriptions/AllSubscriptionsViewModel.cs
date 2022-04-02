@@ -20,5 +20,7 @@ namespace Ignite.Models.ViewModels.Subscriptions
         public TimeSpan Duration { get; set; }
 
         public int OrderInPage { get; set; }
+
+        public int UserBestSubscriptionOrderInPage { get; set; }
     }
 }

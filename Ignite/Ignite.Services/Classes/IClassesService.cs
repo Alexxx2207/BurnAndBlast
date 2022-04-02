@@ -15,7 +15,7 @@ namespace Ignite.Services.Classes
 
         List<AllClassesViewModel> GetAllClasses(string userId);
 
-        void RemoveClass(string userId, string classId);
+        void RemoveClass(string classId);
 
         bool CheckClassExists(string classId);
 

@@ -57,3 +57,7 @@ ul {
 .wrapper {
     text-align: center;
 }
+
+#notBestSubscription{
+    font-weight: 700;
+}

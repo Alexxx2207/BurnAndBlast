@@ -21,8 +21,6 @@ namespace Ignite.Models
 
         public virtual Product Product { get; set; }
 
-        public DateTime? ExpirationDate { get; set; }
-
         public bool IsInCart { get; set; }
     }
 }

@@ -6,6 +6,7 @@ using static Ignite.Web.Areas.Identity.Pages.Account.Manage.IndexModel;
 
 namespace Ignite.Web.Controllers
 {
+    [AutoValidateAntiforgeryToken]
     public class UsersController : Controller
     {
         private readonly IUsersService usersService;
@@ -15,6 +16,7 @@ namespace Ignite.Web.Controllers
         {
             this.usersService = usersService;
         }
+
 
         public IActionResult Login()
         {

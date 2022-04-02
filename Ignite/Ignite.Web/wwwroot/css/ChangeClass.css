@@ -4,8 +4,22 @@
     overflow-x: clip;   
 }
 
+#Info {
+    margin-top: 100px;
+    margin-left: 50px;
+    margin-right: 50px;
+    text-align: center;
+    background-color: white;
+    letter-spacing: 2px;
+    color: black;
+    padding: 20px;
+}
+
 .ChangeWidget {
-    margin: 50px;
+    margin-top: 10px;
+    margin-left: 50px;
+    margin-bottom: 50px;
+    margin-right: 50px;
     background-color: #0000006a;
     padding: 40px;
 }

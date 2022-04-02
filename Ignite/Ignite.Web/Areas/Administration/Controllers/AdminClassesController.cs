@@ -36,6 +36,7 @@ namespace Ignite.Web.Areas.Administration.Controllers
         }
 
         [HttpPost]
+        [AutoValidateAntiforgeryToken]
         public IActionResult AddClass(AllClassesParentModel model)
         {
             ModelState.Remove("ShowClassesViewModel");
@@ -72,7 +73,7 @@ namespace Ignite.Web.Areas.Administration.Controllers
         public IActionResult RemoveClass(string classId)
         {
             if (classesService.CheckClassExists(classId))
-                classesService.RemoveClass(User.FindFirstValue(ClaimTypes.NameIdentifier), classId);
+                classesService.RemoveClass(classId);
 
             return Redirect("/Administration/AdminClasses/AllClasses");
         }
@@ -101,6 +102,7 @@ namespace Ignite.Web.Areas.Administration.Controllers
         }
 
         [HttpPost]
+        [AutoValidateAntiforgeryToken]
         public IActionResult ChangeClass(ChangeClassesParentModel model)
         {
             ModelState.Remove("ViewModel");
@@ -108,12 +110,7 @@ namespace Ignite.Web.Areas.Administration.Controllers
             if (!string.IsNullOrWhiteSpace(model.InputModel.Name) &&
                 !classesService.IsNameAvailable(model.InputModel.Name, model.InputModel.Guid))
             {
-                ModelState.AddModelError("nameExists", $"Event with name '{model.InputModel.Name}' already exists!");
-            }
-            if (model.InputModel.StartingDateTime == null)
-            {
-                ModelState.AddModelError("dateMissing", $"The Start Date & Time field is required.");
-                ModelState.Remove("InputModel.StartingDateTime");
+                ModelState.AddModelError("nameExists", $"Class with name '{model.InputModel.Name}' already exists!");
             }
 
             if (!ModelState.IsValid)

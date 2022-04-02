@@ -18,10 +18,8 @@ namespace Ignite.Models.InputModels.Classes
         [Required]
         public string? Address { get; set; }
 
-        [Required]
         public string? Description { get; set; }
 
-        [DateTimeValidation(ErrorMessage = "Date & Time must be today or in the future.")]
         public DateTime? StartingDateTime { get; set; }
 
         [Required(ErrorMessage = "The Duration field is required.")]

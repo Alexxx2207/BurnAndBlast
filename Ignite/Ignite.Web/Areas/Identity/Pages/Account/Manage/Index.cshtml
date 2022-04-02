@@ -41,6 +41,20 @@
         <button id="saveButton" type="submit" class="btn" hidden>SAVE</button>
         <input id="dismissButton" type="reset" class="btn" hidden onclick="HideSave()" value="DISMISS" \>
     </form>
+    <div id="subscriptionsPart">
+        <h4 id="SubscriptionsTitle">SUBSCRIPTION</h4>
+        <div class="subscriptionsWidget">
+            <div class="rowSubscriptions">
+                <h2>@Model.Input.Subscription.Name</h2>
+                <div class="rowSubscriptions">
+                    <a class="btn btn-primary moreInfo" href="/Subscriptions/All">
+                        MORE DETAILS
+                    </a>
+                </div>
+            </div>
+            <h4>Expires On: @Model.Input.Subscription.ExpirationDate.ToString("dd/MM/yyyy HH:mm")</h4>
+        </div>
+    </div>
 </div>
 
 <script>

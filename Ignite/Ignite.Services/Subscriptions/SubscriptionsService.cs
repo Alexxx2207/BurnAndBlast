@@ -2,6 +2,7 @@
 using Ignite.Models;
 using Ignite.Models.ViewModels.Subscriptions;
 using Ignite.Services.Subscriptions;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,11 +27,16 @@ namespace Ignite.Services.Subscriptions
                 throw new ArgumentException("Invalid data.");
             }
 
+            var sub = GetSubscriptionByGUID(subId);
+
+            DateTime expiration = DateTime.Now + sub.Duration;
+
             db.UsersSubscriptions.Add(new UserSubscription
             {
                 SubscriptionOrderId = Guid.NewGuid().ToString(),
                 UserId = userId,
-                SubscriptionId = subId
+                SubscriptionId = subId,
+                ExpirationDate = expiration
             });
 
             db.SaveChanges();
@@ -41,8 +47,14 @@ namespace Ignite.Services.Subscriptions
             return db.Subscriptions.Any(s => subId == s.Guid && !s.IsDeleted);
         }
 
-        public List<AllSubscriptionsViewModel> GetAllSubscriptions()
+        public List<AllSubscriptionsViewModel> GetAllSubscriptions(string userId)
         {
+            var bestUserSubscriptionOrderInPageObject = GetBestNotExpiredSubscription(userId)?
+                                                    .Subscription.OrderInPage;
+
+            int bestUserSubscriptionOrderInPage = bestUserSubscriptionOrderInPageObject == null ?
+                                                    -1 : bestUserSubscriptionOrderInPageObject.Value;
+
             return db.Subscriptions
                     .Where(s => !s.IsDeleted)
                     .Select(s => new AllSubscriptionsViewModel
@@ -51,9 +63,20 @@ namespace Ignite.Services.Subscriptions
                         Name = s.Name,
                         Duration = s.Duration,
                         Type = s.Type,
-                        OrderInPage = s.OrderInPage
+                        OrderInPage = s.OrderInPage,
+                        UserBestSubscriptionOrderInPage = bestUserSubscriptionOrderInPage
                     })
                     .ToList();
+        }
+
+        public UserSubscription GetBestNotExpiredSubscription(string userId)
+        {
+            return db.UsersSubscriptions
+                        .Where(us => us.UserId == userId &&
+                                us.ExpirationDate >= DateTime.Now)
+                        .Include(us => us.Subscription)
+                        .OrderByDescending(us => us.Subscription.OrderInPage)
+                        .FirstOrDefault();
         }
 
         public Subscription GetSubscriptionByGUID(string subscriptionId)

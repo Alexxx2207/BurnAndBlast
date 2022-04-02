@@ -74,9 +74,9 @@ namespace Ignite.Services.Events
                 .ToList();
         }
 
-        public void RemoveEvent(string userId, string eventId)
+        public void RemoveEvent(string eventId)
         {
-            var userEvents = db.UsersEvents.Where(ue => ue.UserId == userId && ue.EventId == eventId).ToList();
+            var userEvents = db.UsersEvents.Where(ue => ue.EventId == eventId).ToList();
 
             db.UsersEvents.RemoveRange(userEvents);
 
@@ -102,7 +102,8 @@ namespace Ignite.Services.Events
 
             ev.Name = model.Name;
             ev.Address = model.Address;
-            ev.StartingDateTime = model.StartingDateTime.Value;
+            if(model.StartingDateTime != null)
+                ev.StartingDateTime = model.StartingDateTime.Value;
             ev.Description = model.Description;
 
             db.SaveChanges();

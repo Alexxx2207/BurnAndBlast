@@ -27,6 +27,22 @@ namespace Ignite.Web.Controllers
             return View(model);
         }
 
+        public IActionResult Attend(string classId)
+        {
+            try
+            {
+                cartProductsService.AddToCart(User.FindFirstValue(ClaimTypes.NameIdentifier),
+                                       Ignite.Models.Enums.ProductType.Class,
+                                       classId);
+            }
+            catch (Exception)
+            {
+                return Redirect("/Products/CheckOut");
+            }
+
+            return Redirect("/Products/CheckOut");
+        }
+
         public IActionResult Details(string classId)
         {
             var model = classesService.GetDetailsOfClass(User.FindFirstValue(ClaimTypes.NameIdentifier), classId);

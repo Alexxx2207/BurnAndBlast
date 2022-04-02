@@ -7,6 +7,7 @@ using System.Security.Claims;
 namespace Ignite.Web.Controllers
 {
     [Authorize]
+    [AutoValidateAntiforgeryToken]
     public class ProductsController : Controller
     {
         private readonly ICartProductsService cartProductsService;
@@ -19,7 +20,7 @@ namespace Ignite.Web.Controllers
 
         public IActionResult CheckOut()
         {
-            var model = cartProductsService.GeAllProductsForTheUser(User.FindFirstValue(ClaimTypes.NameIdentifier));
+            var model = cartProductsService.GetAllProductsForTheUser(User.FindFirstValue(ClaimTypes.NameIdentifier));
             
             return View(model);
         }

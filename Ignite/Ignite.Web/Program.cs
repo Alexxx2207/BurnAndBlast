@@ -11,6 +11,7 @@ using Ignite.Services.Classes;
 using Ignite.Services.Products;
 using Ignite.Services.Subscriptions;
 using Ignite.Services.CartProducts;
+using Microsoft.AspNetCore.Mvc;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -32,6 +33,9 @@ builder.Services.Configure<RazorViewEngineOptions>(options =>
 });
 
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddMvc(options => 
+    options.Filters.Add(new AutoValidateAntiforgeryTokenAttribute()));
 
 builder.Services.AddTransient<IFitnessService, FitnessService>();
 builder.Services.AddTransient<IUsersService, UsersService>();

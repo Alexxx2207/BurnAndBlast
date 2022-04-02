@@ -40,28 +40,7 @@
                     <a class="flex-item" asp-area="" asp-controller="Fitnesses" asp-action="All">GYMS</a>
                     <a class="flex-item" asp-area="" asp-controller="Events" asp-action="All">EVENTS</a>
                     <a class="flex-item" asp-area="" asp-controller="Subscriptions" asp-action="All">PRICING</a>
-                    @if (User.Identity.IsAuthenticated)
-                    {
-                        <a class="flex-item" asp-area="" asp-controller="Classes" asp-action="All">CLASSES</a>
-                        <a class="flex-item" asp-area="" asp-controller="Events" asp-action="All">
-                            <i class="fa-solid fa-cart-shopping fa-lg"></i>
-                        </a>
-                    }
                 </ul>
-                @if (User.Identity.IsAuthenticated && User.IsInRole("Administrator"))
-                {
-                    <div class="dropdown">
-                        <a class="btn dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-                            ADMINISTRATION
-                        </a>
-
-                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                            <li><a class="dropdown-item" asp-area="Administration" asp-controller="Admins" asp-action="AddFitness">Gyms</a></li>
-                            <li><a class="dropdown-item" asp-area="Administration" asp-controller="Admins" asp-action="AddClass">Classes</a></li>
-                            <li><a class="dropdown-item" asp-area="Administration" asp-controller="Admins" asp-action="AddEvent">Events</a></li>
-                        </ul>
-                    </div>
-                }
                 <partial name="_LoginPartial" />
             </div>
         </div>

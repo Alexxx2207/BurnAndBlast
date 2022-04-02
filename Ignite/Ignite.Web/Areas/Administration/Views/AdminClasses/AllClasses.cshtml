@@ -5,7 +5,7 @@
 <div id="AddWidget" class="col-6">
     <h2 id="addTitle">Add Class</h2>
 
-    <form action="/Administration/AdminClasses/AddClass" method="post">
+    <form action="/Administration/AdminClasses/AddClass" method="post" asp-antiforgery="true">
         <div asp-validation-summary="All" class="text-danger"></div>
 
         <label asp-for="AddClassInputModel.Name" class="form-label"></label>

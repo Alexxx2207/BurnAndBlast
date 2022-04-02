@@ -7,6 +7,7 @@ using System.Security.Claims;
 
 namespace Ignite.Web.Controllers
 {
+    [AutoValidateAntiforgeryToken]
     public class EventsController : Controller
     {
         private readonly IEventsService eventsService;
@@ -27,7 +28,14 @@ namespace Ignite.Web.Controllers
         [Authorize]
         public IActionResult Attend(string eventId)
         {
-            eventsService.AddUserToEvent(User.FindFirstValue(ClaimTypes.NameIdentifier), eventId);
+            try
+            {
+                eventsService.AddUserToEvent(User.FindFirstValue(ClaimTypes.NameIdentifier), eventId);
+            }
+            catch (Exception)
+            {
+                return Redirect("/Events/All");
+            }
 
             return Redirect("/Events/All");
         }
@@ -37,7 +45,14 @@ namespace Ignite.Web.Controllers
         [Authorize]
         public IActionResult UnAttend(string eventId)
         {
-            eventsService.RemoveUserFromEvent(User.FindFirstValue(ClaimTypes.NameIdentifier), eventId);
+            try
+            {
+                eventsService.RemoveUserFromEvent(User.FindFirstValue(ClaimTypes.NameIdentifier), eventId);
+            }
+            catch (Exception)
+            {
+                return Redirect("/Events/All");
+            }
 
             return Redirect("/Events/All");
         }

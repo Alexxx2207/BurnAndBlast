@@ -8,6 +8,8 @@ using System.Text.Encodings.Web;
 using System.Threading.Tasks;
 using Ignite.Data;
 using Ignite.Models;
+using Ignite.Models.ViewModels.Subscriptions;
+using Ignite.Services.Subscriptions;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -22,18 +24,18 @@ namespace Ignite.Web.Areas.Identity.Pages.Account.Manage
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly ApplicationDbContext db;
-        private readonly IConfiguration config;
+        private readonly ISubscriptionsService subscriptionsService;
 
         public IndexModel(
             UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager,
             ApplicationDbContext db,
-            IConfiguration config)
+            ISubscriptionsService subscriptionsService)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             this.db = db;
-            this.config = config;
+            this.subscriptionsService = subscriptionsService;
         }
 
         /// <summary>
@@ -70,6 +72,8 @@ namespace Ignite.Web.Areas.Identity.Pages.Account.Manage
             /// </summary>
             public ApplicationUser ApplicationUser { get; set; }
 
+            public UserSubscriptionsViewModel Subscription { get; set; }
+
             public IFormFile Image { get; set; }
         }
 
@@ -81,6 +85,18 @@ namespace Ignite.Web.Areas.Identity.Pages.Account.Manage
             {
                 ApplicationUser = user
             };
+
+            var userSubscription = subscriptionsService
+                        .GetBestNotExpiredSubscription(user.Id);
+
+            if (userSubscription != null)
+            {
+                Input.Subscription = new UserSubscriptionsViewModel
+                {
+                    ExpirationDate = userSubscription.ExpirationDate,
+                    Name = userSubscription.Subscription.Name,
+                };
+            }
         }
 
         public async Task<IActionResult> OnGetAsync()
@@ -129,9 +145,6 @@ namespace Ignite.Web.Areas.Identity.Pages.Account.Manage
 
                 userDB.ProfilePicture = imageName;
                 db.SaveChanges();
-
-
-               
             }
             StatusMessage = "Your profile has been updated";
             return RedirectToPage();

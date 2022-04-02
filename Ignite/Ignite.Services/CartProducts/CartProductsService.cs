@@ -36,13 +36,22 @@ namespace Ignite.Services.CartProducts
                 throw new ArgumentException("Already in cart.");
             }
 
-            DateTime? expiration = null;
-
             if (productType == ProductType.Subscription)
             {
-                var sub = subscriptionsService.GetSubscriptionByGUID(productId);
+                var userbestSubscriptionOrderInPageObject = subscriptionsService
+                                .GetBestNotExpiredSubscription(userId)?
+                                .Subscription.OrderInPage;
 
-                expiration = DateTime.Now + sub.Duration;
+                int bestUserSubscriptionOrderInPage = userbestSubscriptionOrderInPageObject == null ?
+                                                        -1 : userbestSubscriptionOrderInPageObject.Value;
+
+                int productIdOrder = subscriptionsService
+                                        .GetSubscriptionByGUID(productId).OrderInPage;
+
+                if (bestUserSubscriptionOrderInPage >= productIdOrder)
+                { 
+                    throw new ArgumentException("Invalid data.");
+                }
             }
 
             db.UsersProducts.Add(new UserProduct
@@ -51,7 +60,6 @@ namespace Ignite.Services.CartProducts
                 UserId = userId,
                 ProductId = productId,
                 IsInCart = true,
-                ExpirationDate = expiration
             });
 
             db.SaveChanges();
@@ -88,21 +96,40 @@ namespace Ignite.Services.CartProducts
 
         }
 
-        public List<ProductInCartViewModel> GeAllProductsForTheUser(string userId)
+        public List<ProductInCartViewModel> GetAllProductsForTheUser(string userId)
         {
-            return db.UsersProducts
+            var userProducts = db.UsersProducts
                     .Where(up => up.UserId == userId && up.IsInCart)
-                    .Select(up => new ProductInCartViewModel
-                    {
-                        GUID = up.ProductId,
-                        Name = up.Product.Name,
-                        Price = up.Product.Price,
-                        ProductType = up.Product.ProductType,
-                        ExpirationDate = up.ExpirationDate == null ?
-                                          "Never" :
-                                          up.ExpirationDate.Value.ToString("dd/MM/yyyy HH:mm"),
-                    })
+                    .Include(up => up.Product)
                     .ToList();
+
+            var result = new List<ProductInCartViewModel>();
+
+            foreach (var userProduct in userProducts)
+            {
+                int expirationAfterDays = -1;
+
+                if (userProduct.Product.ProductType == ProductType.Subscription)
+                {
+                    expirationAfterDays = db.Subscriptions
+                            .First(x =>
+                                   x.Guid == userProduct.ProductId)
+                            .Duration.Days;
+                }
+                result.Add(new ProductInCartViewModel
+                {
+                    GUID = userProduct.ProductId,
+                    Name = userProduct.Product.Name,
+                    Price = userProduct.Product.Price,
+                    ProductType = userProduct.Product.ProductType,
+                    ExpirationDate = expirationAfterDays == -1 ?
+                                    "Never" 
+                                    :
+                                    expirationAfterDays.ToString(),
+                });
+            }
+
+            return result;
         }
         public void RemoveFromCart(string userId, string productId)
         {

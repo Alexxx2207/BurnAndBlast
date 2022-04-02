@@ -34,6 +34,7 @@ namespace Ignite.Web.Areas.Administration.Controllers
         }
 
         [HttpPost]
+        [AutoValidateAntiforgeryToken]
         public IActionResult AddEvents(AllEventsParentModel model)
         {
             ModelState.Remove("ShowEventsViewModel");
@@ -42,11 +43,6 @@ namespace Ignite.Web.Areas.Administration.Controllers
                 !eventsService.IsNameAvailable(model.AddEventInputModel.Name, null))
             {
                 ModelState.AddModelError("nameExists", $"Event with name '{model.AddEventInputModel.Name}' already exists!");
-            }
-            if (model.AddEventInputModel.StartingDateTime == null)
-            {
-                ModelState.AddModelError("dateMissing", $"The Start Date & Time field is required.");
-                ModelState.Remove("AddEventInputModel.StartingDateTime");
             }
 
             if (!ModelState.IsValid)
@@ -69,7 +65,7 @@ namespace Ignite.Web.Areas.Administration.Controllers
         public IActionResult RemoveEvent(string eventId)
         {
             if (eventsService.CheckEventExists(eventId))
-                eventsService.RemoveEvent(User.FindFirstValue(ClaimTypes.NameIdentifier), eventId);
+                eventsService.RemoveEvent(eventId);
 
             return Redirect("/Administration/AdminEvents/AllEvents");
         }
@@ -95,6 +91,7 @@ namespace Ignite.Web.Areas.Administration.Controllers
         }
 
         [HttpPost]
+        [AutoValidateAntiforgeryToken]
         public IActionResult ChangeEvent(ChangeEventsParentModel model)
         {
             ModelState.Remove("ViewModel");
@@ -103,10 +100,6 @@ namespace Ignite.Web.Areas.Administration.Controllers
                 !eventsService.IsNameAvailable(model.InputModel.Name, model.InputModel.Guid))
             {
                 ModelState.AddModelError("nameExists", $"Event with name '{model.InputModel.Name}' already exists!");
-            }
-            if (model.InputModel.StartingDateTime == null)
-            {
-                ModelState.AddModelError("dateMissing", $"A starting Date & Time is required.");
             }
 
             if(!ModelState.IsValid)

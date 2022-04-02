@@ -19,5 +19,7 @@ namespace Ignite.Models
         public string SubscriptionId { get; set; }
 
         public Subscription Subscription { get; set; }
+
+        public DateTime ExpirationDate { get; set; }
     }
 }

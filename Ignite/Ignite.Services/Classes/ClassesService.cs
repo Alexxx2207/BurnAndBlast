@@ -76,8 +76,10 @@ namespace Ignite.Services.Classes
 
             c.Name = model.Name;
             c.Address = model.Address;
-            c.StartingDateTime = model.StartingDateTime.Value;
-            c.Description = model.Description;
+            if(model.StartingDateTime != null)
+                c.StartingDateTime = model.StartingDateTime.Value;
+            if (model.Description != null)
+                c.Description = model.Description;
             c.DurationInMinutes = model.DurationInMinutes.Value;
             c.AllSeats = model.AllSeats.Value;
 
@@ -143,7 +145,7 @@ namespace Ignite.Services.Classes
             };
         }
 
-        public void RemoveClass(string userId, string classId)
+        public void RemoveClass(string classId)
         {
             var userClasses = db.UsersClasses.Where(ue => ue.ClassId == classId).ToList();
             var userProducts = db.UsersProducts.Where(up => up.ProductId == classId).ToList();

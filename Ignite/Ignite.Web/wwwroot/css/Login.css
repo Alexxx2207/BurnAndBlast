@@ -295,6 +295,11 @@ header {
     #login-submit {
         font-size: 21px;
     }
+
+    #rememberMe {
+        font-size: 18px;
+        letter-spacing: 2px;
+    }
 }
 
 @media (max-width: 700px) {
@@ -306,5 +311,10 @@ header {
 
     #login-submit {
         font-size: 16px;
+    }
+
+    #rememberMe {
+        font-size: 18px;
+        letter-spacing: 2px;
     }
 }

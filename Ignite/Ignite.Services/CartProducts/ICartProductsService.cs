@@ -18,7 +18,7 @@ namespace Ignite.Services.CartProducts
 
         bool CheckProductIsInCart(string userId, string productId);
 
-        List<ProductInCartViewModel> GeAllProductsForTheUser(string userId);
+        List<ProductInCartViewModel> GetAllProductsForTheUser(string userId);
 
     }
 }
