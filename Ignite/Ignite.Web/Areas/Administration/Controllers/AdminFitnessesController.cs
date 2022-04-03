@@ -41,7 +41,8 @@ namespace Ignite.Web.Areas.Administration.Controllers
         [AutoValidateAntiforgeryToken]
         public IActionResult AddFitness(AllFitnessParentModel model)
         {
-            if(!string.IsNullOrWhiteSpace(model.FitnessesInputModel.Name) && !fitnessService.IsNameAvailable(model.FitnessesInputModel.Name))
+            if(!string.IsNullOrWhiteSpace(model.FitnessesInputModel.Name) &&
+                !fitnessService.IsNameAvailable(model.FitnessesInputModel.Name))
             {
                 ModelState.AddModelError("nameExists", $"Fitness with name '{model.FitnessesInputModel.Name}' already exists!");
             }

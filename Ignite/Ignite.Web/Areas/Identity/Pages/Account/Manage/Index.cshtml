@@ -23,7 +23,7 @@
                     <img class="after" src="~/Images/Camera.jpg" \>
                 </div>
             </label>
-            <input id="imageInput" hidden asp-for="@Model.Input.Image" onclick="ShowSave()" />
+            <input id="imageInput" hidden accept="image/*" asp-for="@Model.Input.Image" onclick="ShowSave()" />
             <div id="name">
                 @Model.Input.ApplicationUser.FirstName @Model.Input.ApplicationUser.LastName
                 <div id="email">
@@ -44,15 +44,22 @@
     <div id="subscriptionsPart">
         <h4 id="SubscriptionsTitle">SUBSCRIPTION</h4>
         <div class="subscriptionsWidget">
-            <div class="rowSubscriptions">
-                <h2>@Model.Input.Subscription.Name</h2>
+            @if (Model.Input.Subscription != null)
+            {
                 <div class="rowSubscriptions">
-                    <a class="btn btn-primary moreInfo" href="/Subscriptions/All">
-                        MORE DETAILS
-                    </a>
+                    <h2>@Model.Input.Subscription.Name</h2>
+                    <div class="rowSubscriptions">
+                        <a class="btn btn-primary moreInfo" href="/Subscriptions/All">
+                            MORE DETAILS
+                        </a>
+                    </div>
                 </div>
-            </div>
-            <h4>Expires On: @Model.Input.Subscription.ExpirationDate.ToString("dd/MM/yyyy HH:mm")</h4>
+                <h4>Expires On: @Model.Input.Subscription.ExpirationDate.ToString("dd/MM/yyyy HH:mm")</h4>
+            }
+            else
+            {
+                <h2>You have no subscription!</h2>
+            }
         </div>
     </div>
 </div>

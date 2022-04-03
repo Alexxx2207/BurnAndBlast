@@ -17,7 +17,6 @@ namespace Ignite.Web.Controllers
             this.usersService = usersService;
         }
 
-
         public IActionResult Login()
         {
             if (User.Identity.IsAuthenticated)

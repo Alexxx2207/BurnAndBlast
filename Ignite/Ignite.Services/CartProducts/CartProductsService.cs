@@ -31,7 +31,8 @@ namespace Ignite.Services.CartProducts
 
         public void AddToCart(string userId, ProductType productType, string productId)
         {
-            if (CheckProductIsInCart(userId, productId))
+            if (CheckProductIsInCart(userId, productId) || 
+                (db.UsersClasses.Count(uc => uc.ClassId == productId) >= db.Classes.Find(productId).AllSeats && productType == ProductType.Class))
             {
                 throw new ArgumentException("Already in cart.");
             }

@@ -41,7 +41,6 @@ namespace Ignite.Web.Areas.Administration.Controllers
         {
             ModelState.Remove("ShowClassesViewModel");
 
-
             if (!string.IsNullOrWhiteSpace(model.AddClassInputModel.Name) &&
                 !classesService.IsNameAvailable(model.AddClassInputModel.Name, null))
             {
