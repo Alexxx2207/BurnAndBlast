@@ -1,0 +1,50 @@
+﻿@using Ignite.Models.ParentModels
+@model AllArticlesParentModel
+
+<link rel="stylesheet" href="~/css/AdminArticle.css" />
+
+<div id="AddWidget" class="col-6">
+    <h2 id="addTitle">Add Article</h2>
+
+    <form action="/Administration/AdminArticles/AddArticle" method="post"  asp-antiforgery="true">
+        <div asp-validation-summary="All" class="text-danger"></div>
+
+        <label asp-for="InputModel.Title" class="form-label"></label>
+        <input asp-for="InputModel.Title" class="form-control form-control1" aria-required="true" placeholder="Title" />
+
+        <br \>
+
+        <label asp-for="InputModel.Text" class="form-label"></label>
+        <br \>
+        <textarea asp-for="InputModel.Text" class="form-control form-control1"></textarea>
+        <br \>
+
+        <label asp-for="InputModel.Link" class="form-label"></label>
+        <input asp-for="InputModel.Link" class="form-control form-control1" aria-required="true" placeholder="Link" />
+
+
+        <button id="addButton" type="submit" class="w-100 btn btn-background-slide btn-lg btn-primary">ADD</button>
+    </form>
+</div>
+
+@foreach (var a in Model.ViewModel)
+{
+    <div class="articlesWidget col-10">
+        <div class="rowArticles">
+            <h2>Article - @a.Title</h2>
+            <div>
+                <a href="ChangeArticle?articleId=@a.Guid">
+                    <img id=changeButton src="~/Images/Wrench.png" />
+                </a>
+                <a href="RemoveArticle?articleId=@a.Guid">
+                    <img id=removeButton src="~/Images/RemoveRedCrossImage.jpg" />
+                </a>
+            </div>
+        </div>
+        <p>Text: @a.Text</p>
+        <h5>Link: @a.Link</h5>
+        <div class="sendBtnDiv">
+            <a class="sendButton" href="SendEmails?articleId=@a.Guid">SEND</a>
+        </div>
+    </div>
+}

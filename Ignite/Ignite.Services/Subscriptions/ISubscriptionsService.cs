@@ -20,5 +20,7 @@ namespace Ignite.Services.Subscriptions
 
         UserSubscription GetBestNotExpiredSubscription(string userId);
 
+        IEnumerable<string> GetAllPeopleEmailsWithPremiumAndVipSubs();
+
     }
 }

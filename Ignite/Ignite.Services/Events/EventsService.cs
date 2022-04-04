@@ -104,7 +104,8 @@ namespace Ignite.Services.Events
             ev.Address = model.Address;
             if(model.StartingDateTime != null)
                 ev.StartingDateTime = model.StartingDateTime.Value;
-            ev.Description = model.Description;
+            if (model.Description != null)
+                ev.Description = model.Description;
 
             db.SaveChanges();
         }

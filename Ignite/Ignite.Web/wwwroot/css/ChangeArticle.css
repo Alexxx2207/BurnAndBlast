@@ -1,0 +1,97 @@
+﻿body {
+    padding-bottom: 10px;
+    color: white;
+    overflow-x: clip;   
+}
+
+#Info {
+    margin-top: 100px;
+    margin-left: 50px;
+    margin-right: 50px;
+    text-align: center;
+    background-color: white;
+    letter-spacing: 2px;
+    color: black;
+    padding: 20px;
+}
+
+.ChangeWidget {
+    margin-top: 10px;
+    margin-left: 50px;
+    margin-bottom: 50px;
+    margin-right: 50px;
+    background-color: #0000006a;
+    padding: 40px;
+}
+
+.form-label {
+    color: white;
+}
+
+.form-control1 {
+    background-color: #00000001;
+    border: none;
+    border-bottom: 3px solid white;
+    color: white;
+    margin-bottom: 50px;
+}
+
+    .form-control1:focus {
+        background-color: #00000001;
+        border: 3px solid white;
+        transition: all 0.7s ease-in;
+        color: white;
+    }
+
+#dateLabel{
+    font-size: 20px;
+}
+
+#changeTitle {
+    color: white;
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+
+#OldTitle {
+    color: white;
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+
+#changeButton {
+    margin-top: 20px;
+    letter-spacing: 2px;
+    font-weight: 600;
+    font-size: 21px;
+}
+
+h4 {
+    color: white;
+}
+
+#descriptionOld {
+    margin-top: 23px;
+    height: 120px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    overflow-wrap: break-word;
+    border: 2px solid white;
+}
+
+.delimiter{
+    justify-content: space-between;
+}
+
+@media(max-width: 2000px) {
+    #descriptionOld {
+        width: 730px;
+    }
+}
+
+@media(max-width: 1500px) {
+
+    #descriptionOld {
+        width: 470px;
+    }
+}

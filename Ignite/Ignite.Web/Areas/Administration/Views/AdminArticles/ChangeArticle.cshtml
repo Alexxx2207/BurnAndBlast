@@ -1,0 +1,72 @@
+﻿@model Ignite.Models.ParentModels.ChangeArticleParentModel
+
+<link rel="stylesheet" href="~/css/ChangeArticle.css" />
+
+<div id="Info">
+    <h3>Text can be left empty. <br \>That way it will not be changed.</h3>
+</div>
+
+
+<div class="ChangeWidget col-24">
+    <div class="d-flex delimiter">
+        <div>
+            <h2 id="changeTitle">Change Article</h2>
+        </div>
+        <div>
+            <h2 id="OldTitle">Old Data</h2>
+        </div>
+    </div>
+
+    <form action="/Administration/AdminArticles/ChangeArticle" method="post" asp-antiforgery="true">
+        <div asp-validation-summary="All" class="text-danger"></div>
+
+        <input asp-for="InputModel.Guid" hidden value="@Model.ViewModel.Guid" />
+
+        <div class="d-flex delimiter">
+            <div class="col-5">
+                <label asp-for="InputModel.Title" class="form-label" hidden></label>
+                <input asp-for="InputModel.Title" class="form-control form-control1" aria-required="true" placeholder="Name" value="@Model.ViewModel.Title"/>
+            </div>
+            <div>
+                <h4>
+                    <strong>Title:</strong>
+                    @Model.ViewModel.Title
+                </h4>
+            </div>
+        </div>
+
+
+        <div class=" d-flex delimiter">
+            <div class="col-5">
+                <label asp-for="InputModel.Text" class="form-label"></label>
+                <textarea asp-for="InputModel.Text" class="form-control form-control1"></textarea>
+            </div>
+            <div>
+                <h4>
+                    <strong>Text:</strong>
+                </h4>
+                <div class="form-control1" id="descriptionOld">
+                    <p>
+                        @Model.ViewModel.Text
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="d-flex delimiter">
+            <div class="col-5">
+                <label asp-for="InputModel.Link" class="form-label" hidden></label>
+                <input asp-for="InputModel.Link" class="form-control form-control1" aria-required="true" placeholder="Address" value="@Model.ViewModel.Link"/>
+            </div>
+            <div>
+                <h4>
+                    <strong>Link:</strong>
+                    @Model.ViewModel.Link
+                </h4>
+            </div>
+        </div>
+
+        <button id="changeButton" type="submit" class="w-100 btn btn-background-slide btn-lg btn-success">Change</button>
+    </form>
+</div>
+

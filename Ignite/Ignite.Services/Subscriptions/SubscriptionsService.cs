@@ -1,5 +1,6 @@
 ﻿using Ignite.Data;
 using Ignite.Models;
+using Ignite.Models.Enums;
 using Ignite.Models.ViewModels.Subscriptions;
 using Ignite.Services.Subscriptions;
 using Microsoft.EntityFrameworkCore;
@@ -45,6 +46,18 @@ namespace Ignite.Services.Subscriptions
         public bool CheckSubscriptionExists(string subId)
         {
             return db.Subscriptions.Any(s => subId == s.Guid && !s.IsDeleted);
+        }
+
+        public IEnumerable<string> GetAllPeopleEmailsWithPremiumAndVipSubs()
+        {
+            return db.UsersSubscriptions
+                    .Include(us => us.Subscription)
+                    .Where(us => us.ExpirationDate >= DateTime.Now &&
+                    (us.Subscription.Type == SubscriptionType.Premium || us.Subscription.Type == SubscriptionType.VIP))
+                    .Include(us => us.User)
+                    .Select(us => us.User.Email)
+                    .ToList()
+                    .Distinct();
         }
 
         public List<AllSubscriptionsViewModel> GetAllSubscriptions(string userId)

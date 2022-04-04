@@ -2,10 +2,18 @@
 {
     public class GlobalConstants
     {
-        public const int SubscriptionProductType = 0;
+        public const int AdministratorsCount = 1;
 
+
+        public const string FromEmail = "ignite.fitness.chain@gmail.com";
+        public const string EmailSenderName = "Ignite Fitness";
+
+
+        public const int SubscriptionProductType = 0;
         public const int ClassProductType = 1;
 
+
+        public const int SubscriptionTypesCount = 4;
 
         public const int SubscriptionTypeDaily = 0;
 

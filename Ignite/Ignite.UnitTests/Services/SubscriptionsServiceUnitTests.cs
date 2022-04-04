@@ -197,6 +197,77 @@ namespace Ignite.UnitTests.Services
                 Assert.Equal(expectedCount, subscriptionService.GetAllSubscriptions(It.IsAny<string>()).Count());
             }
         }
+        
+        [Fact]
+        public void GetAllPeopleEmailsWithPremiumAndVipSubs_ShouldSucceed()
+        {
+            var options = new DbContextOptionsBuilder<ApplicationDbContext>()
+                 .UseInMemoryDatabase(databaseName: "GetAllPeopleEmailsWithPremiumAndVipSubs_ShouldSucceed")
+                 .Options;
+
+            var expectedCount = 2;
+
+            var user1 = Guid.NewGuid().ToString();
+            var user2 = Guid.NewGuid().ToString();
+            
+            var product1 = Guid.NewGuid().ToString();
+            var product2 = Guid.NewGuid().ToString();
+
+            using (var dbContext = new ApplicationDbContext(options))
+            {
+                dbContext.UsersSubscriptions.Add(new UserSubscription
+                {
+                    SubscriptionOrderId = Guid.NewGuid().ToString(),
+                    ExpirationDate = DateTime.Now.AddDays(6),
+                    SubscriptionId = product1,
+                    Subscription = new Subscription
+                    {
+                        Guid = product1,
+                        Name = "name",
+                        Duration = new TimeSpan(5),
+                        OrderInPage = 1,
+                        Type = Models.Enums.SubscriptionType.Premium
+                    },
+                    UserId = user1,
+                    User = new ApplicationUser
+                    { 
+                        Id = user1,
+                        FirstName = "FirstName",
+                        LastName = "lastName",
+                        Email = "email1"
+                    }
+                });
+
+                dbContext.UsersSubscriptions.Add(new UserSubscription
+                {
+                    SubscriptionOrderId = Guid.NewGuid().ToString(),
+                    ExpirationDate = DateTime.Now.AddDays(6),
+                    SubscriptionId = product2,
+                    Subscription = new Subscription
+                    {
+                        Guid = product2,
+                        Name = "name",
+                        Duration = new TimeSpan(5),
+                        OrderInPage = 1,
+                        Type = Models.Enums.SubscriptionType.VIP
+                    },
+                    UserId = user2,
+                    User = new ApplicationUser
+                    {
+                        Id = user2,
+                        FirstName = "FirstName",
+                        LastName = "lastName",
+                        Email = "email2"
+                    }
+                });
+
+                dbContext.SaveChanges();
+
+                var subscriptionService = new SubscriptionsService(dbContext);
+
+                Assert.Equal(expectedCount, subscriptionService.GetAllPeopleEmailsWithPremiumAndVipSubs().Count());
+            }
+        }
 
         [Fact]
         public void GetSubscriptionByGUID_ShouldFail()

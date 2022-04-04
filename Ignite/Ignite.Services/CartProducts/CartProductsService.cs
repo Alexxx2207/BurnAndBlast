@@ -31,10 +31,14 @@ namespace Ignite.Services.CartProducts
 
         public void AddToCart(string userId, ProductType productType, string productId)
         {
-            if (CheckProductIsInCart(userId, productId) || 
-                (db.UsersClasses.Count(uc => uc.ClassId == productId) >= db.Classes.Find(productId).AllSeats && productType == ProductType.Class))
+            if (CheckProductIsInCart(userId, productId))
             {
                 throw new ArgumentException("Already in cart.");
+            }
+
+            if (productType == ProductType.Class && db.UsersClasses.Count(uc => uc.ClassId == productId) >= db.Classes.Find(productId).AllSeats)
+            { 
+                throw new ArgumentException("No seats left.");
             }
 
             if (productType == ProductType.Subscription)

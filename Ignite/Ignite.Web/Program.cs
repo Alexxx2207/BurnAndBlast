@@ -12,6 +12,7 @@ using Ignite.Services.Products;
 using Ignite.Services.Subscriptions;
 using Ignite.Services.CartProducts;
 using Microsoft.AspNetCore.Mvc;
+using Ignite.Services.Articles;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -44,6 +45,7 @@ builder.Services.AddTransient<IClassesService, ClassesService>();
 builder.Services.AddTransient<IProductsService, ProductsService>();
 builder.Services.AddTransient<ISubscriptionsService, SubscriptionsService>();
 builder.Services.AddTransient<ICartProductsService, CartProductsService>();
+builder.Services.AddTransient<IActicleService, ArticleService>();
 
 var app = builder.Build();
 

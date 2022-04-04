@@ -56,6 +56,48 @@ namespace Ignite.UnitTests.Services
                 });
             }
         }
+        
+        [Fact]
+        public void AddToCart_NoMoreSeats_ShouldFail()
+        {
+            var options = new DbContextOptionsBuilder<ApplicationDbContext>()
+                .UseInMemoryDatabase(databaseName: "AddToCart_NoMoreSeats_ShouldFail")
+                .Options;
+
+            var userId = Guid.NewGuid().ToString();
+            var productId = Guid.NewGuid().ToString();
+            var productTypeClass = ProductType.Class;
+            var productTypeSubscription = ProductType.Subscription;
+
+            var classesServiceMock = new Mock<IClassesService>();
+            var subscriptionsServceMock = new Mock<ISubscriptionsService>();
+
+            using (var dbContext = new ApplicationDbContext(options))
+            {
+                dbContext.Classes.Add(new Class
+                {
+                    Guid = productId,
+                    Description = "description",
+                    Address = "address",
+                    Name = "name",
+                    DurationInMinutes = 60,
+                    StartingDateTime = DateTime.Now,
+                    AllSeats = 0
+                });
+
+                dbContext.SaveChanges();
+
+                var cartProductService = new CartProductsService(
+                    dbContext,
+                    classesServiceMock.Object,
+                    subscriptionsServceMock.Object);
+
+                Assert.Throws<ArgumentException>(() =>
+                {
+                    cartProductService.AddToCart(userId, productTypeClass, productId);
+                });
+            }
+        }
 
         [Fact]
         public void AddToCart_ShouldSucceed()
@@ -90,12 +132,23 @@ namespace Ignite.UnitTests.Services
 
             using (var dbContext = new ApplicationDbContext(options))
             {
+                dbContext.Classes.Add(new Class
+                {
+                    Guid = productIdForNewClass,
+                    Description = "description",
+                    Address = "address",
+                    Name = "name",
+                    DurationInMinutes = 60,
+                    StartingDateTime = DateTime.Now,
+                    AllSeats = 5
+                });
+
                 dbContext.UsersProducts.Add(new UserProduct
                 {
                     OrderItemId = Guid.NewGuid().ToString(),
                     UserId = userId,
                     ProductId = productId,
-                    IsInCart = true
+                    IsInCart = true,
                 });
 
                 dbContext.Subscriptions.Add(subscription);
@@ -435,6 +488,17 @@ namespace Ignite.UnitTests.Services
 
             using (var dbContext = new ApplicationDbContext(options))
             {
+                dbContext.Classes.Add(new Class 
+                {
+                    Guid = productIdForNewClass,
+                    Description = "description",
+                    Address = "address",
+                    Name = "name",
+                    DurationInMinutes = 60,
+                    StartingDateTime = DateTime.Now,
+                    AllSeats = 5
+                });
+
                 dbContext.Products.Add(
                     new Product
                     {
@@ -517,6 +581,17 @@ namespace Ignite.UnitTests.Services
 
             using (var dbContext = new ApplicationDbContext(options))
             {
+                dbContext.Classes.Add(new Class
+                {
+                    Guid = productIdForNewClass,
+                    Description = "description",
+                    Address = "address",
+                    Name = "name",
+                    DurationInMinutes = 60,
+                    StartingDateTime = DateTime.Now,
+                    AllSeats = 5
+                });
+
                 dbContext.Products.Add(
                     new Product
                     {
