@@ -1,45 +1,52 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
 
-  <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
-    <Nullable>enable</Nullable>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <UserSecretsId>aspnet-BurnAndBlast.Web-2866C528-3A09-43A8-8C01-72E5FDF4A359</UserSecretsId>
-  </PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="HtmlSanitizer" Version="7.1.488" />
-    <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="6.0.1" />
-    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="6.0.2" />
-    <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="6.0.2" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.2" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.2">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
-    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.2" />
-    <PackageReference Include="NETCore.MailKit" Version="2.0.3" />
-    <PackageReference Include="SendGrid" Version="9.27.0" />
-  </ItemGroup>
+	<PropertyGroup>
+		<TargetFramework>net6.0</TargetFramework>
+		<Nullable>enable</Nullable>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<UserSecretsId>aspnet-BurnAndBlast.Web-2866C528-3A09-43A8-8C01-72E5FDF4A359</UserSecretsId>
+		<ErrorOnDuplicatePublishOutputFiles>false</ErrorOnDuplicatePublishOutputFiles>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\Ignite.Data\Ignite.Data.csproj" />
-    <ProjectReference Include="..\Ignite.GlobalConstants\Ignite.GlobalConstants.csproj" />
-    <ProjectReference Include="..\Ignite.Models\Ignite.Models.csproj" />
-    <ProjectReference Include="..\Ignite.Services\Ignite.Services.csproj" />
-  </ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="Azure.Extensions.AspNetCore.Configuration.Secrets" Version="1.0.0" />
+		<PackageReference Include="Azure.Identity" Version="1.5.0" />
+		<PackageReference Include="Azure.Security.KeyVault.Secrets" Version="4.3.0" />
+		<PackageReference Include="HtmlSanitizer" Version="7.1.488" />
+		<PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="6.0.1" />
+		<PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="6.0.2" />
+		<PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="6.0.2" />
+		<PackageReference Include="Microsoft.Azure.Services.AppAuthentication" Version="1.6.2" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.2" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.2">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+		<PackageReference Include="Microsoft.Extensions.Azure" Version="1.1.1" />
+		<PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.2" />
+		<PackageReference Include="NETCore.MailKit" Version="2.0.3" />
+		<PackageReference Include="SendGrid" Version="9.27.0" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <Content Update="wwwroot\favicon.ico">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Update="wwwroot\Logo.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\Ignite.Data\Ignite.Data.csproj" />
+		<ProjectReference Include="..\Ignite.GlobalConstants\Ignite.GlobalConstants.csproj" />
+		<ProjectReference Include="..\Ignite.Models\Ignite.Models.csproj" />
+		<ProjectReference Include="..\Ignite.Services\Ignite.Services.csproj" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="wwwroot\Profile Pics\" />
-  </ItemGroup>
+	<ItemGroup>
+		<Content Update="wwwroot\favicon.ico">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Update="wwwroot\Logo.png">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+	</ItemGroup>
+
+	<ItemGroup>
+		<Folder Include="wwwroot\Profile Pics\" />
+	</ItemGroup>
 
 </Project>

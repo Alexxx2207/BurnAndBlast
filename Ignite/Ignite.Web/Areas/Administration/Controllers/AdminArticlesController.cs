@@ -136,7 +136,7 @@ namespace Ignite.Web.Areas.Administration.Controllers
                 @" <br /> " +
                 $"<h3>Link: {article.Link}<h3>";
 
-            var apiKey = config["SENDGRID_API_KEY"];
+            var apiKey = config["SENDGRIDAPIKEY"];
             var client = new SendGridClient(apiKey);
             var msg = new SendGridMessage()
             {
@@ -148,8 +148,8 @@ namespace Ignite.Web.Areas.Administration.Controllers
             foreach (var email in peopleMails)
             {
                 msg.AddTo(new EmailAddress($"{email}", "Customer"));
-                await client.SendEmailAsync(msg);
             }
+            await client.SendEmailAsync(msg);
 
             if (peopleMails.Count() > 0)
                 acticleService.RemoveArticle(article.Guid);

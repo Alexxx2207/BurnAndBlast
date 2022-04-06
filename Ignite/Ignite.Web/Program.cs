@@ -13,13 +13,37 @@ using Ignite.Services.Subscriptions;
 using Ignite.Services.CartProducts;
 using Microsoft.AspNetCore.Mvc;
 using Ignite.Services.Articles;
+using Azure.Identity;
+using Microsoft.Data.SqlClient;
+using Azure.Security.KeyVault.Secrets;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+
+SqlConnectionStringBuilder connectionString = null;
+
+if (builder.Environment.IsProduction())
+{
+    var keyVaultEndpoint = new Uri(Environment.GetEnvironmentVariable("VaultUri"));
+    builder.Configuration.AddAzureKeyVault(keyVaultEndpoint, new DefaultAzureCredential());
+
+    connectionString = new SqlConnectionStringBuilder(builder.Configuration.GetConnectionString("DefaultConnection"));
+
+    SecretClient _secretClient = new SecretClient(keyVaultEndpoint, new DefaultAzureCredential());
+
+    KeyVaultSecret keyValueSecret = await _secretClient.GetSecretAsync("ConnectionStringPasswordAzure");
+
+    connectionString.Password = keyValueSecret.Value;
+}
+else if (builder.Environment.IsDevelopment())
+{ 
+    connectionString = new SqlConnectionStringBuilder(builder.Configuration.GetConnectionString("LocalConnection"));
+}
+
+
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
-    options.UseSqlServer(connectionString));
+    options.UseSqlServer(connectionString.ConnectionString));
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
 builder.Services.AddDefaultIdentity<ApplicationUser>(IdentityOptionsProvider.GetIdentityOptions)
