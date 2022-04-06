@@ -143,14 +143,6 @@ namespace Ignite.UnitTests.Services
                     AllSeats = 5
                 });
 
-                dbContext.UsersProducts.Add(new UserProduct
-                {
-                    OrderItemId = Guid.NewGuid().ToString(),
-                    UserId = userId,
-                    ProductId = productId,
-                    IsInCart = true,
-                });
-
                 dbContext.Subscriptions.Add(subscription);
 
                 dbContext.SaveChanges();
@@ -170,7 +162,10 @@ namespace Ignite.UnitTests.Services
                 cartProductService.AddToCart(userIdForNewSubscription,
                                              productTypeSubscription,
                                              productIdForNewSubscription);
+
+                Assert.Equal(2, dbContext.UsersProducts.Count());
             }
+
         }
 
         [Fact]
