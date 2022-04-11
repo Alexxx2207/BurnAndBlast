@@ -14,7 +14,6 @@ using Ignite.Services.CartProducts;
 using Microsoft.AspNetCore.Mvc;
 using Ignite.Services.Articles;
 using Azure.Identity;
-using Microsoft.Data.SqlClient;
 using Azure.Security.KeyVault.Secrets;
 
 
