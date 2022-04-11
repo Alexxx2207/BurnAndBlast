@@ -20,30 +20,26 @@ using Azure.Security.KeyVault.Secrets;
 
 var builder = WebApplication.CreateBuilder(args);
 
-
-SqlConnectionStringBuilder connectionString = null;
+string connectionString = "";
 
 if (builder.Environment.IsProduction())
 {
     var keyVaultEndpoint = new Uri(Environment.GetEnvironmentVariable("VaultUri"));
     builder.Configuration.AddAzureKeyVault(keyVaultEndpoint, new DefaultAzureCredential());
 
-    connectionString = new SqlConnectionStringBuilder(builder.Configuration.GetConnectionString("DefaultConnection"));
-
     SecretClient _secretClient = new SecretClient(keyVaultEndpoint, new DefaultAzureCredential());
 
-    KeyVaultSecret keyValueSecret = await _secretClient.GetSecretAsync("ConnectionStringPasswordAzure");
-
-    connectionString.Password = keyValueSecret.Value;
+    KeyVaultSecret keyValueSecret = await _secretClient.GetSecretAsync("ConnectionStrings--DefaultConnection");
+    connectionString = keyValueSecret.Value;
 }
 else if (builder.Environment.IsDevelopment())
 { 
-    connectionString = new SqlConnectionStringBuilder(builder.Configuration.GetConnectionString("LocalConnection"));
+    connectionString = builder.Configuration.GetConnectionString("LocalConnection");
 }
 
 
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
-    options.UseSqlServer(connectionString.ConnectionString));
+    options.UseSqlServer(connectionString));
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
 builder.Services.AddDefaultIdentity<ApplicationUser>(IdentityOptionsProvider.GetIdentityOptions)
