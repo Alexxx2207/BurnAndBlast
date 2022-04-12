@@ -1,0 +1,4 @@
+﻿
+In this folder(Views) I will probably make tests on views.
+
+As I am writing this, I have 68% test coverage, but I want to cover views with tests.
