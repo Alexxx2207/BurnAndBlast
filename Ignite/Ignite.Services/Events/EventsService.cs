@@ -121,6 +121,7 @@ namespace Ignite.Services.Events
         public ShowEventDetailsViewModel GetDetailsOfEvent(string userId, string eventId)
         {
            var ev = db.Events
+                .Include(ev => ev.UsersEvents)
                .First(e => e.Guid == eventId);
 
                return  new ShowEventDetailsViewModel

@@ -133,7 +133,6 @@ namespace Ignite.Web.Areas.Administration.Controllers
             }
 
             var articleBody = $"<h3>{article.Text}</h3>" +
-                @" <br /> " +
                 $"<h3>Link: {article.Link}<h3>";
 
             var apiKey = config["SENDGRIDAPIKEY"];

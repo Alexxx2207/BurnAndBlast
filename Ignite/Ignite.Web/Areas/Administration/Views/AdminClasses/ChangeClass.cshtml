@@ -19,7 +19,7 @@
     <form action="/Administration/AdminClasses/ChangeClass" method="post" asp-antiforgery="true">
         <div asp-validation-summary="All" class="text-danger"></div>
 
-        <input asp-for="InputModel.Guid" hidden value="@Model.ViewModel.Guid" />
+        <input id="GuidInput" asp-for="InputModel.Guid" hidden value="@Model.ViewModel.Guid" />
 
         <div class="d-flex delimiter">
             <div class="col-5">
