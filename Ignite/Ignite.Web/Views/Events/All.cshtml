@@ -36,7 +36,7 @@
     </div>
 }
 
-@if (!User.Identity.IsAuthenticated && Model.Any())
+@if (!User.Identity.IsAuthenticated && Model.Any() || !Model.Any(e => e.UserAttends))
 {
     <h1 id="AllEventsTitle">All Events</h1>
 }

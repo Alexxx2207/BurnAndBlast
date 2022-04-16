@@ -41,8 +41,12 @@
         </div>
     </div>
 }
-
-@if (Model.Any(e => !e.UserAttends))
+@if (!Model.Any(e => e.UserAttends))
+{
+    <h1 id="AllClassesTitle">All Classes</h1>
+    
+}
+else if (Model.Any(e => !e.UserAttends))
 {
     <h1 id="AllClassesTitle">Other Classes</h1>
 }

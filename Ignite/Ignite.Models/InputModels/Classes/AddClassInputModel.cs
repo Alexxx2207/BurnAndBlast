@@ -24,7 +24,7 @@ namespace Ignite.Models.InputModels.Classes
         public DateTime? StartingDateTime { get; set; }
 
         [Required(ErrorMessage = "The Duration field is required.")]
-        [Range(5, GlobalConstants.GlobalConstants.ClassMaxSeats)]
+        [Range(GlobalConstants.GlobalConstants.ClassMinDuration, GlobalConstants.GlobalConstants.ClassMaxDuration)]
         public int? DurationInMinutes { get; set; }
 
         [Required(ErrorMessage = "The Price field is required.")]
@@ -33,9 +33,8 @@ namespace Ignite.Models.InputModels.Classes
 
 
         [Required(ErrorMessage = "The All Seats field is required.")]
-        [Range(GlobalConstants.GlobalConstants.ClassMinDuration, GlobalConstants.GlobalConstants.ClassMaxDuration)]
+        [Range(5, GlobalConstants.GlobalConstants.ClassMaxSeats)]
         public int? AllSeats { get; set; }
-
 
     }
 }

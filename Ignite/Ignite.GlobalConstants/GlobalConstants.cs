@@ -64,6 +64,6 @@
 
         public const int ClassMinDuration = 5;
 
-        public const int ClassMaxDuration = 120;
+        public const int ClassMaxDuration = 500;
     }
 }
