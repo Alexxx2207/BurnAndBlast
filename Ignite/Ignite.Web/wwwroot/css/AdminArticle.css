@@ -7,7 +7,9 @@ body {
 #AddWidget {
     margin: 50px;
     background-color: #0000006a;
-    padding: 40px
+    padding: 40px;
+    border: 3px solid white;
+    border-radius: 15px;
 }
 
 .form-label {
@@ -104,8 +106,9 @@ p {
         
     }
 
-.sendBtnDiv{
+.sendBtnDiv {
     margin-top: 40px;
+    width: 100px;
 }
 
 .sendButton {
@@ -123,6 +126,7 @@ p {
 }
 
     .sendButton:hover {
+        padding: 20px;
         text-decoration: none;
         color: white;
         letter-spacing: 4px;

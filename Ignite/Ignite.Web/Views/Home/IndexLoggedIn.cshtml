@@ -20,7 +20,7 @@
     }
     <div class="eventsWidget" style="margin-left:@(80*count)px;">
         <div class="rowEvents">
-            <h2>Event - @ev.Name</h2>
+            <h3>Event - @ev.Name</h3>
             @if (!ev.UserAttends)
             {
                 <a href="/Events/Attend?eventId=@ev.Guid" class="btn btn-success buttonn">SUBSCRIBE</a>
@@ -62,7 +62,7 @@
 
     <div class="classesWidget" style="margin-left:@(80*count)px;">
         <div class="rowClasses">
-            <h2>Class - @classs.Name</h2>
+            <h3>Class - @classs.Name</h3>
         </div>
         <h4>Address: @classs.Address</h4>
         <h4>Starts: @classs.StartingDateTime.ToString("dd/MM/yyyy HH:mm")</h4>

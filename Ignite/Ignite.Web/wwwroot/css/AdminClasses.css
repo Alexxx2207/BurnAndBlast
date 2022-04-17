@@ -7,7 +7,9 @@ body {
 #AddWidget {
     margin: 50px;
     background-color: #0000006a;
-    padding: 40px
+    padding: 40px;
+    border: 3px solid white;
+    border-radius: 15px;
 }
 
 .form-label {
@@ -85,11 +87,13 @@ a {
 #duration {
     border: 3px solid black;
     padding: 10px;
+    border-radius: 15px;
 }
 
 #allSeats {
     border: 3px solid black;
     padding: 10px;
+    border-radius: 15px;
 }
 
 #peopleAttendImage {
@@ -100,6 +104,7 @@ a {
 #peopleAttend {
     border: 3px solid black;
     padding: 10px;
+    border-radius: 15px;
 }
 
 span {

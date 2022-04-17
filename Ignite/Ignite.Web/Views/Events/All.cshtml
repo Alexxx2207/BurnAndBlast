@@ -17,7 +17,7 @@
 {
     <div class="eventsWidget">
         <div class="rowEvents">
-            <h2>Event - @ev.Name</h2>
+            <h3>Event - @ev.Name</h3>
             <a href="UnAttend?eventId=@ev.Guid" class="btn btn-danger buttonn">UNSUBSCRIBE</a>
         </div>
         <h4>Address: @ev.Address</h4>
@@ -49,7 +49,7 @@ else if (Model.Any(e => !e.UserAttends))
 {
     <div class="eventsWidget">
         <div class="rowEvents">
-            <h2>Event - @ev.Name</h2>
+            <h3>Event - @ev.Name</h3>
             <a href="Attend?eventId=@ev.Guid" class="btn btn-success buttonn">SUBSCRIBE</a>
         </div>
         <h4>Address: @ev.Address</h4>

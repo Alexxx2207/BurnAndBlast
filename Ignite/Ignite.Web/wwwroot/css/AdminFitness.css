@@ -6,7 +6,9 @@ body{
 #AddWidget {
     margin: 50px;
     background-color: #0000006a;
-    padding: 40px
+    padding: 40px;
+    border: 3px solid white;
+    border-radius: 15px;
 }
 
 .form-label {
@@ -60,7 +62,7 @@ img {
     width: 60px;
     height: 60px;
     border-radius: 40%;
-    border: 2px solid #bc1e2d;
+    border: 4px solid #bc1e2d;
 }
 
 span{
