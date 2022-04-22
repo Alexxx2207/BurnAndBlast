@@ -26,7 +26,6 @@ namespace Ignite.Infrastructure.CustomAttributes
 
             if ((DateTime)value < startDateTime)
             {
-               
                 return false;
             }
             return true;
