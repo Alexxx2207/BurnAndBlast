@@ -91,9 +91,9 @@ namespace Ignite.Web.Areas.Administration.Controllers
                     Name = ev.Name,
                     StartingDateTime = ev.StartingDateTime,
                     Description = ev.Description,
-                    AllSeats = ev.AllSeats, 
-                    DurationInMinutes = ev.DurationInMinutes,   
-                    Price = productsService.GetProductByGUID(classId).Price.ToString("f2")
+                    AllSeats = ev.AllSeats,
+                    DurationInMinutes = ev.DurationInMinutes,
+                    Price = productsService.GetProductByGUID(classId)?.Price.ToString("f2")
                 }
             };
 
@@ -123,9 +123,9 @@ namespace Ignite.Web.Areas.Administration.Controllers
                     Name = ev.Name,
                     StartingDateTime = ev.StartingDateTime,
                     Description = ev?.Description,
-                    AllSeats = ev.AllSeats, 
-                    DurationInMinutes= ev.DurationInMinutes,
-                    Price = productsService.GetProductByGUID(model.InputModel.Guid).Price.ToString("f2")
+                    AllSeats = ev.AllSeats,
+                    DurationInMinutes = ev.DurationInMinutes,
+                    Price = productsService.GetProductByGUID(model.InputModel.Guid)?.Price.ToString("f2")
                 };
 
                 return View("ChangeClass", model);
